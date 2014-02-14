@@ -2,12 +2,6 @@
   "name": "nightwatch-commands",
   "version": "0.0.1",
   "description": "A set of Mobify specific custom commands for Nightwatch.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": “npm test"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mobify/nightwatch-commands"
