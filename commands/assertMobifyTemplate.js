@@ -4,11 +4,9 @@ exports.command = function(expectedTemplate, callback) {
     // Uses the browser.execute to run code within the client browser,
     // access the Mobify object and test the template.
     this.execute(
+        // gets the mobify evaluatedDate object
         function() {
-            // gets the mobifiy evaluatedDate object
-            var evaluatedData = Mobify.evaluatedData;
-
-            return evaluatedData.bodyType;
+            return Mobify.evaluatedData.evaluatedData.bodyType;
         },
         [],
         function(result) {

@@ -1,0 +1,14 @@
+{
+  "port" : 10195,
+  "mocks" : [
+    {
+      "url" : "/wd/hub/session",
+      "postdata" : "{\"desiredCapabilities\":{\"browserName\":\"chrome\",\"javascriptEnabled\":true,\"acceptSslCerts\":true,\"platform\":\"ANY\"},\"sessionId\":null}",
+      "response" : "{\"status\": 0, \"sessionId\": \"1352110219202\", \"value\": { \"javascriptEnabled\": true, \"browserName\": \"chrome\"}, \"state\": null}",
+      "responseHeaders" : {
+      },
+      "statusCode" : 200,
+      "method": "POST"
+    }
+  ]
+}
