@@ -2,7 +2,8 @@ var async = require('async');
 
 exports.command = function(selectors) {
     var self = this,
-        url = '';
+        url = '', 
+        missing = [];
 
     if (!Array.isArray(selectors)) {
         selectors = Array.prototype.slice.call(arguments, 0);
@@ -24,10 +25,8 @@ exports.command = function(selectors) {
                         value = result.value.ELEMENT;
                     }
 
-                    if (value) {
-                        self.assertion(value !== null, value, true, 'Found the ' + selector + ' selector', false);
-                    } else {
-                        self.log('Missing the ' + selector + ' selector');
+                    if (!value) {
+                        missing.push(selector);
                     }
 
                     callback(null, 'done');
@@ -35,6 +34,8 @@ exports.command = function(selectors) {
             });
         }
     ]);
+
+    self.assertion(!missing.length, missing, true, 'All selectors found', false);
 
     return this;
 };
