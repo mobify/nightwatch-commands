@@ -10,5 +10,12 @@
   "bugs": {
     "url": "https://github.com/mobify/nightwatch-commands/issues"
   },
+  "devDependencies": {
+    "nightwatch": "git+https://github.com/mobify/nightwatch.git",
+    "nodeunit": "~0.8.4"
+  },
+  "scripts": {
+    "test": "node ./tests/run_tests.js"
+  },
   "homepage": "https://github.com/mobify/nightwatch-commands"
 }
