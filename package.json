@@ -17,5 +17,8 @@
   "scripts": {
     "test": "node ./tests/run_tests.js"
   },
-  "homepage": "https://github.com/mobify/nightwatch-commands"
+  "homepage": "https://github.com/mobify/nightwatch-commands",
+  "dependencies": {
+    "async": "~0.2.10"
+  }
 }
