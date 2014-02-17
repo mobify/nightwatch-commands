@@ -1,24 +1,40 @@
-var util = require('util'),
-    events = require('events');
+var async = require('async');
 
-function CommandAction() {
-  events.EventEmitter.call(this);
-  this.selectors = null;
-}
+exports.command = function(selectors) {
+    var self = this,
+        url = '';
 
-util.inherits(CommandAction, events.EventEmitter);
-CommandAction.prototype.command = function(selectors) {
-    var self = this;
+    if (!Array.isArray(selectors)) {
+        selectors = Array.prototype.slice.call(arguments, 0);
+    }
 
-    this.selectors.forEach(function(selector) {
-        self.element.call(self.client, 'css selector', selector, function(result) {
-            if (result.status === 0) {
-                console.log('success');
-            } else {
-                console.log('error');
-            }
-        });
-    });
+    async.series([
+        function(callback) {
+            self.url(function(result) {
+                url = result.value;
+                callback(null, result);
+            });
+        },
+        function(callback) {
+            selectors.forEach(function(selector) {
+                self.element.call(self.client, 'css selector', selector, function(result) {
+                    var value;
+
+                    if (result.status == 0) {
+                        value = result.value.ELEMENT;
+                    }
+
+                    if (value) {
+                        self.assertion(value !== null, value, true, 'Found the ' + selector + ' selector', false);
+                    } else {
+                        self.log('Missing the ' + selector + ' selector');
+                    }
+
+                    callback(null, 'done');
+                });
+            });
+        }
+    ]);
+
+    return this;
 };
-
-module.exports = CommandAction;
