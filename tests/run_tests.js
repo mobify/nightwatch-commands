@@ -23,7 +23,7 @@ catch(e) {
 process.chdir(__dirname);
 
 try {
-  var server = require('../node_modules/nightwatch/tests/node_modules/mockserver.js').init();
+  var server = require('mockserver').init();
   server.on('listening', function() {
     reporter.run(['src'], options, function() {
       server.close();
