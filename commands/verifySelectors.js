@@ -7,7 +7,7 @@ function CommandAction() {
 }
 
 util.inherits(CommandAction, events.EventEmitter);
-CommandAction.prototype.command  = function(selectors) {
+CommandAction.prototype.command = function(selectors) {
     var self = this;
 
     this.selectors.forEach(function(selector) {
