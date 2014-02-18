@@ -1,16 +1,14 @@
-exports.command = function(template, callback) {
+exports.command = function(callback) {
     var self = this;
     var start = new Date().getTime();
 
     // Checks the jQuery.active property to see if an ajax request is
     // completed.
     return this.execute_async(
-        function() {
-            return $.active
-        },
+        function() { return $.active; },
         [],
         function(result) {
-            var evaluatedData = result.value;
+            console.log('result', result)
             var now = new Date().getTime();
             var msg = 'AJAX call completed after ' +
                 (now - self.startTimer) + ' milliseconds.';

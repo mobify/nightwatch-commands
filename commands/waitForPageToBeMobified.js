@@ -15,10 +15,7 @@ exports.command = function(callback) {
                 (now - start) + ' milliseconds.';
 
             // Let the DOM settle down after Mobify has done its stuff.
-            // self.pause(2000);
-
-            // Assert that the evaluatedData object is present
-            self.assert.notEqual(evaluatedData, undefined, msg);
+            self.pause(2000);
 
             if (typeof callback === 'function') {
                 callback.call(self, result);

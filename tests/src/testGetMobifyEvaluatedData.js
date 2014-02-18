@@ -8,15 +8,15 @@ module.exports = {
   },
 
   testSuccess : function(test) {
-    this.client.getMobifyTemplate('home', function callback(result) {
-      test.equal(result, 'home');
+    this.client.getMobifyEvaluatedData('home', function callback(result) {
+      test.equal(result.bodyType, 'home');
       test.done();
     });
   },
 
   testFailure : function(test) {
-    this.client.getMobifyTemplate('pdp', function callback(result) {
-      test.notEqual(result, 'pdp');
+    this.client.getMobifyEvaluatedData('pdp', function callback(result) {
+      test.notEqual(result.bodyType, 'pdp');
       test.done();
     });
   },

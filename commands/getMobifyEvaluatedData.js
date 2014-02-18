@@ -5,7 +5,7 @@ exports.command = function(expectedTemplate, callback) {
     // access the Mobify object and test the template.
     return this.execute(
         // gets the mobify evaluatedDate object
-        function() { return Mobify.evaluatedData.bodyType; },
+        function() { return Mobify.evaluatedData; },
         [],
         function(result) {
             if (typeof callback === 'function') {
