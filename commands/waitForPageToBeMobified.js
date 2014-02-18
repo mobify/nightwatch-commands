@@ -14,12 +14,14 @@ exports.command = function(callback) {
                 (now - start) + ' milliseconds.';
 
             console.log(msg);
-            // Let the DOM settle down after Mobify has done its stuff.
-            client.pause(2000);
 
-            if (typeof callback === 'function') {
-                callback.call(client, result);
-            }
+            // Let the DOM settle down after Mobify has done its stuff.
+            client.pause(2000, function(){
+                if (typeof callback === 'function') {
+                    callback.call(client, result);
+                }
+            });
+
         }
     );
 
