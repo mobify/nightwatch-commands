@@ -2,8 +2,6 @@
 // access the Mobify object and test the template.
 
 exports.command = function(url, callback) {
-    var self = this;
-
     this
         .url(url)
         .waitForPageToBeMobified();

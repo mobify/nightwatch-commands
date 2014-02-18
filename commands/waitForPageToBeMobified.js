@@ -1,10 +1,10 @@
 exports.command = function(callback) {
-    var self = this;
+    var client = this;
     var start = new Date().getTime();
 
     // Uses the browser.execute to run code within the client browser,
     // access the Mobify object and test the template.
-    return this.execute_async(
+    return client.execute_async(
         // gets the Mobify evaluatedDate object
         function() { return Mobify.evaluatedData; },
         [],
@@ -15,10 +15,10 @@ exports.command = function(callback) {
                 (now - start) + ' milliseconds.';
 
             // Let the DOM settle down after Mobify has done its stuff.
-            self.pause(2000);
+            client.pause(2000);
 
             if (typeof callback === 'function') {
-                callback.call(self, result);
+                callback.call(client, result);
             }
         }
     );
