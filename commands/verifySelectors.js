@@ -1,10 +1,10 @@
 var async = require('async');
 
-exports.command = function(selectors) {
+exports.command = function() {
     var client = this,
         missing = [];
 
-    selectors = Array.prototype.slice.call(arguments, 0);
+    var selectors = Array.prototype.slice.call(arguments, 0);
 
     async.each(selectors,
         function(selector, cb) {
