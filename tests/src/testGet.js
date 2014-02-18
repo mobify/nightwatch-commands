@@ -7,7 +7,7 @@ module.exports = {
     callback();
   },
 
-  testWaitForPageToBeMobified: function(test) {
+  testSuccess: function(test) {
     this.client.waitForPageToBeMobified(function callback(result) {
       test.ok(result.value !== false);
       test.done();

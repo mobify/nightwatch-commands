@@ -5,15 +5,11 @@ exports.command = function(expectedTemplate, callback) {
     // access the Mobify object and test the template.
     return this.execute(
         // gets the mobify evaluatedDate object
-        function() {return Mobify.evaluatedData.bodyType;},
+        function() { return Mobify.evaluatedData.bodyType; },
         [],
         function(result) {
-            var template = result.value;
-            self.assert.equal(template, expectedTemplate,
-                'template is ' + expectedTemplate);
-
             if (typeof callback === 'function') {
-                callback.call(self, result);
+                callback.call(self, result.value);
             }
         }
     );

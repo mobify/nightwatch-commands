@@ -17,7 +17,7 @@
     },
     {
       "url" : "/wd/hub/session/1352110219202/execute",
-      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () {return Mobify.evaluatedData.bodyType;}.apply(window, passedArgs);\",\"args\":[]}",
+      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () { return Mobify.evaluatedData.bodyType; }.apply(window, passedArgs);\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":\"home\"}",
       "statusCode" : 200,
       "method": "POST"
@@ -26,6 +26,11 @@
       "url" : "/wd/hub/session/1352110219202/execute_async",
       "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () { return Mobify.evaluatedData; }.apply(window, passedArgs);\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":true}"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/execute_async",
+      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () { return $.active; }.apply(window, passedArgs);\",\"args\":[]}",
+      "response" : "{\"status\":0,\"value\":0}"
     }
   ]
 }
