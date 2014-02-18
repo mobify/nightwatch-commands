@@ -2,9 +2,13 @@
 // access the Mobify object and test the template.
 
 exports.command = function(url, callback) {
-    this
-        .url(url)
-        .waitForPageToBeMobified();
+    var client = this;
 
-    return this; // allows the command to be chained.
+    return client.url(url)
+        .waitForPageToBeMobified(function(){
+            if (typeof callback === 'function') {
+                callback.call(client, result);
+            }
+        });
+
 };

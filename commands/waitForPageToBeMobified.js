@@ -9,17 +9,19 @@ exports.command = function(callback) {
         function() { return Mobify.evaluatedData; },
         [],
         function(result) {
-            var evaluatedData = result.value;
             var now = new Date().getTime();
             var msg = 'Page was Mobified after ' +
                 (now - start) + ' milliseconds.';
 
-            // Let the DOM settle down after Mobify has done its stuff.
-            client.pause(2000);
+            console.log(msg);
 
-            if (typeof callback === 'function') {
-                callback.call(client, result);
-            }
+            // Let the DOM settle down after Mobify has done its stuff.
+            client.pause(2000, function(){
+                if (typeof callback === 'function') {
+                    callback.call(client, result);
+                }
+            });
+
         }
     );
 
