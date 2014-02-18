@@ -25,11 +25,11 @@ Assertion.prototype.command = function command() {
         },
         function(err) {
             if (!err) {
-                self.client.assertion(!missing.length, missing.join(', ') + ' missing from page.', 'all elements found', 'Locating required elements on page.', false);
+                self.client.assertion(!missing.length, missing.join(', ') + ' missing from page.', 'all elements found', 'Locating required elements on page.', self.abortOnFailure);
             }
         });
 
-    return this;
+    return this.client;
 };
 
 module.exports = Assertion;
