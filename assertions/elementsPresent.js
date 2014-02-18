@@ -31,3 +31,5 @@ Assertion.prototype.command = function command() {
 
     return this;
 };
+
+module.exports = Assertion;
