@@ -23,12 +23,9 @@ exports.command = function(selectors) {
             });
         },
         function(err) {
-            if (err) {
-                client.info('An error occurred while verifying selectors');
-            } else {
-                client.assert(!missing.length, 'The following selectors are missing: ' + missing.join(', '));
+            if (!err) {
+                client.assertion(!missing.length, missing.join(', ') + ' missing from page.', 'all selectors found', 'Locating required selectors on page.', false);
             }
-
         });
 
     return this;
