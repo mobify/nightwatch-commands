@@ -9,11 +9,11 @@ exports.command = function(callback) {
         function() { return Mobify.evaluatedData; },
         [],
         function(result) {
-            var evaluatedData = result.value;
             var now = new Date().getTime();
             var msg = 'Page was Mobified after ' +
                 (now - start) + ' milliseconds.';
 
+            console.log(msg);
             // Let the DOM settle down after Mobify has done its stuff.
             client.pause(2000);
 
