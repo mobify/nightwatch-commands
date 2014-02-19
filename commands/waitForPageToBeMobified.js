@@ -1,49 +1,52 @@
-exports.command = function(timeout, callback) {
-    var client = this;
-    var start = new Date().getTime();
-    var timeout = timeout || 10000;
+var Protocol = require('nightwatch/lib/selenium/protocol.js'),
+    util = require('util'),
+    events = require('events');
 
-    if (arguments.length === 1 && arguments[0] === 'function') {
-        callback = arguments[0];
-    }
+function CommandAction() {
+  events.EventEmitter.call(this);
+};
 
-    // Attempts to get Mobify.evaluatedData. If null, it attempts again
-    // until the timeout is reached.
-    function returnEvaluatedData(result) {
-        var now = new Date().getTime();
+util.inherits(CommandAction, events.EventEmitter);
+CommandAction.prototype.command = function(timeout, callback) {
+  var self = this;
+  var start = new Date().getTime();
+  var timeout = 10000;
 
-        if (result.status === 0 && result.value){
+  if (arguments.length === 1 && arguments[0] === 'function') {
+      console.log(callback)
+      callback = arguments[0];
+  }
+
+  (function checkIfMobified(){
+      var now = new Date().getTime();
+
+      Protocol.actions.execute.call(self, 'return Mobify.evaluatedData', function(result){
+        if (result.status === 0 && !!result.value){
+          var timer = setTimeout(function() {
             var msg = 'Page was Mobified after ' +
-                (now - start) + ' milliseconds.';
+              (now - start) + ' milliseconds.';
 
             // Returns the timing message
-            client.assertion(true, !!result.value, false, msg, true);
+            self.assertion(true, !!result.value, false, msg, true);
 
-            // Let the DOM settle down after Mobify has done its stuff.
-            client.pause(2000, function(){
-                if (typeof callback === 'function') {
-                    callback.call(client, result.value);
-                }
-            });
+            if (callback) {
+              callback.call(self.client, result.value);
+            }
+
+            self.emit('complete');
+          }, 2000);
         } else if (now - start < timeout) {
             setTimeout(function(){
-                console.log('Waiting for client Mobify object.')
-                getEvaluatedData();
+              checkIfMobified();
             }, 500)
-        } else {
+          } else {
             var msg = "Timed out while waiting for page to be Mobified after "
-                + timeout + " milliseconds.";
-        }
-    }
+              + timeout + " milliseconds.";
+          }
+      });
+    })();
 
-    function getEvaluatedData(){
-        return client.execute(
-            // gets the Mobify evaluatedData object
-            function() { return Mobify.evaluatedData; },
-            [],
-            returnEvaluatedData
-        );
-    }
+  return this;
+}
 
-    return getEvaluatedData();
-};
+module.exports = CommandAction;
