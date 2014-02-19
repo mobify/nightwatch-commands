@@ -1,4 +1,4 @@
-exports.command = function(expectedTemplate, callback) {
+exports.command = function(callback) {
     var client = this;
 
     // Uses the browser.execute to run code within the client browser,
