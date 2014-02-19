@@ -10,7 +10,7 @@ util.inherits(CommandAction, events.EventEmitter);
 CommandAction.prototype.command = function(timeout, callback) {
   var self = this;
   var start = new Date().getTime();
-  var timeout = 10000;
+  var timeout = timeout || 10000;
 
   if (arguments.length === 1 && arguments[0] === 'function') {
       console.log(callback)
@@ -18,10 +18,10 @@ CommandAction.prototype.command = function(timeout, callback) {
   }
 
   (function checkIfMobified(){
-      var now = new Date().getTime();
 
       Protocol.actions.execute.call(self, 'return Mobify.evaluatedData', function(result){
         if (result.status === 0 && !!result.value){
+          var now = new Date().getTime();
           var timer = setTimeout(function() {
             var msg = 'Page was Mobified after ' +
               (now - start) + ' milliseconds.';
