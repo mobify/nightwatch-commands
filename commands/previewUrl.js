@@ -5,7 +5,7 @@ exports.command = function(siteUrl, bundleUrl, callback) {
     console.log('Previewing ' + siteUrl + ' using ' + bundleUrl);
 
     return client.url('http://preview.mobify.com')
-        .verify.elementPresent('#id_url')
+        .waitForElementPresent('#id_url', 10000)
         .setValue('#id_url', siteUrl, function(){
             this.clearValue('#id_site_folder', function(){
                 this.setValue('#id_site_folder', bundleUrl, function(){

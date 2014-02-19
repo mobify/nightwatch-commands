@@ -11,6 +11,14 @@
       "method": "POST"
     },
     {
+      "url" : "/wd/hub/session/1352110219202",
+      "method": "DELETE"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/url",
+      "postdata" : "{\"url\":\"http://localhost\"}" 
+    },
+    {
       "url" : "/wd/hub/session/1352110219202/element",
       "postdata" : "{\"using\":\"css selector\",\"value\":\"#weblogin\"}",
       "response" : "{\"sessionId\":\"1352110219202\",\"status\":0,\"value\":{\"ELEMENT\":\"0\"},\"class\":\"org.openqa.selenium.remote.Response\",\"hCode\":604376696}"
@@ -21,9 +29,14 @@
       "response" : "{\"status\":0,\"value\":{\"bodyType\":\"home\"}}"
     },
     {
-      "url" : "/wd/hub/session/1352110219202/execute_async",
-      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () { return Mobify.evaluatedData; }.apply(window, passedArgs);\",\"args\":[]}",
+      "url" : "/wd/hub/session/1352110219202/execute",
+      "postdata" : "{\"script\":\"return Mobify.evaluatedData;\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":true}"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/execute_async",
+      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () { return $.active; }.apply(window, passedArgs);\",\"args\":[]}",
+      "response" : "{\"status\":0,\"value\":0}"
     },
     {
       "url" : "/wd/hub/session/1352110219202/execute_async",
