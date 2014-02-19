@@ -12,8 +12,7 @@ CommandAction.prototype.command = function(timeout, callback) {
   var start = new Date().getTime();
   var timeout = timeout || 10000;
 
-  if (arguments.length === 1 && arguments[0] === 'function') {
-      console.log(callback)
+  if (arguments.length === 1 && typeof arguments[0] === 'function') {
       callback = arguments[0];
   }
 
@@ -30,7 +29,7 @@ CommandAction.prototype.command = function(timeout, callback) {
             self.assertion(true, !!result.value, false, msg, true);
 
             if (callback) {
-              callback.call(self.client, result.value);
+              callback.call(self, result.value);
             }
 
             self.emit('complete');
