@@ -1,14 +1,23 @@
-// Uses the browser.execute to run code within the client browser,
-// access the Mobify object and test the template.
+exports.command = function(siteUrl, bundleUrl, callback) {
+    var client = this;
+    var bundleUrl = bundleUrl || 'http://localhost:8080';
 
-exports.command = function(url, bundleUrl, callback) {
-    this
-        .url('http://preview.mobify.com')
-            .setValue('input[name="url"]', url)
-            .setValue('input[type="site_folder"]', bundleUrl)
-            .click()
-        .url(url)
-        .waitForPageToBeMobified();
+    console.log('Previewing ' + siteUrl + ' using ' + bundleUrl);
 
-    return this; // allows the command to be chained.
+    return client.url('http://preview.mobify.com')
+        .verify.elementPresent('#id_url')
+        .setValue('#id_url', siteUrl, function(){
+            this.clearValue('#id_site_folder', function(){
+                this.setValue('#id_site_folder', bundleUrl, function(){
+                    this.click('#authorize').pause(5000, function(){
+                        client.waitForPageToBeMobified(function(result){
+                            if (typeof callback === 'function') {
+                                callback.call(client);
+                            }
+                        });
+                    });
+                });
+            });
+        });
+
 };
