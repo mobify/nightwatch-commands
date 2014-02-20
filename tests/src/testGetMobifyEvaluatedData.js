@@ -9,7 +9,7 @@ module.exports = {
 
   testSuccess : function(test) {
     this.client.getMobifyEvaluatedData(function callback(result) {
-      test.equal(!!result, true);
+      test.equal(true, result);
       test.done();
     });
   },

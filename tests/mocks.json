@@ -19,14 +19,46 @@
       "postdata" : "{\"url\":\"http://localhost\"}" 
     },
     {
+      "url" : "/wd/hub/test",
+      "response" : "{\"status\":0}"
+    },
+    {
+      "url" : "/wd/hub/test_error",
+      "response" : "{\"status\":7,\"value\":{\"screen\":\"screenshot_data\"}}",
+      "statusCode" : 500
+    },
+    {
       "url" : "/wd/hub/session/1352110219202/element",
       "postdata" : "{\"using\":\"css selector\",\"value\":\"#weblogin\"}",
       "response" : "{\"sessionId\":\"1352110219202\",\"status\":0,\"value\":{\"ELEMENT\":\"0\"},\"class\":\"org.openqa.selenium.remote.Response\",\"hCode\":604376696}"
     },
     {
+      "url" : "/wd/hub/session/1352110219202/buttondown",
+      "postdata" : "{\"button\":0}",
+      "response" : "{\"sessionId\":\"1352110219202\",\"status\":0,\"class\":\"org.openqa.selenium.remote.Response\",\"hCode\":604376696}"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/window",
+      "method": "DELETE"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/window",
+      "method": "POST"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/buttondown",
+      "postdata" : "{\"button\":1}",
+      "response" : "{\"sessionId\":\"1352110219202\",\"status\":0,\"class\":\"org.openqa.selenium.remote.Response\",\"hCode\":604376696}"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/buttonup",
+      "postdata" : "{\"button\":2}",
+      "response" : "{\"sessionId\":\"1352110219202\",\"status\":0,\"class\":\"org.openqa.selenium.remote.Response\",\"hCode\":604376696}"
+    },
+    {
       "url" : "/wd/hub/session/1352110219202/execute",
-      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () { return Mobify.evaluatedData; }.apply(window, passedArgs);\",\"args\":[]}",
-      "response" : "{\"status\":0,\"value\":{\"bodyType\":\"home\"}}"
+      "postdata" : "{\"script\":\"return true;\",\"args\":[]}",
+      "response" : "{\"status\":0,\"value\":true}"
     },
     {
       "url" : "/wd/hub/session/1352110219202/execute",
@@ -34,13 +66,8 @@
       "response" : "{\"status\":0,\"value\":true}"
     },
     {
-      "url" : "/wd/hub/session/1352110219202/execute_async",
-      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () { return $.active; }.apply(window, passedArgs);\",\"args\":[]}",
-      "response" : "{\"status\":0,\"value\":0}"
-    },
-    {
-      "url" : "/wd/hub/session/1352110219202/execute_async",
-      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () { return $.active; }.apply(window, passedArgs);\",\"args\":[]}",
+      "url" : "/wd/hub/session/1352110219202/execute",
+      "postdata" : "{\"script\":\"return $.active;\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":0}"
     }
   ]

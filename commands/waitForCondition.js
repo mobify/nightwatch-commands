@@ -11,14 +11,23 @@ function CommandAction() {
 };
 
 util.inherits(CommandAction, events.EventEmitter);
-CommandAction.prototype.command = function(milliseconds, callback) {
+
+CommandAction.prototype.command = function(condition, milliseconds, timeout, callback) {
   if (milliseconds && typeof milliseconds != 'number') {
-    throw new Error('waitForPageToBeMobified expects first parameter to be number; ' +
+    throw new Error('waitForCondition expects second parameter to be number; ' +
       typeof (milliseconds) + ' given')
   }
+
+  var lastArgument = Array.prototype.slice.call(arguments, 0).pop();
+  if (typeof (lastArgument) === 'function') {
+    callback = lastArgument;
+  }
+
   this.startTimer = new Date().getTime();
   this.cb = callback || function() {};
   this.ms = milliseconds || 1000;
+  this.timeout = timeout && typeof (timeout) !== 'function' ? timeout : 0;
+  this.condition = condition;
   this.check();
   return this;
 }
@@ -26,24 +35,23 @@ CommandAction.prototype.command = function(milliseconds, callback) {
 CommandAction.prototype.check = function() {
   var self = this;
 
-  Protocol.actions.execute.call(this.client, 'return Mobify.evaluatedData;', function(result) {
+  Protocol.actions.execute.call(this.client, this.condition, function(result) {
     var now = new Date().getTime();
-    var timeout = 1000;
 
-    if (result.status === 0 && !!result.value) {
+    if (result.status === 0) {
       setTimeout(function() {
         self.cb(result.value);
-        var msg = 'Page was Mobified after ' + (now - self.startTimer) + ' milliseconds.';
+        var msg = "Condition was satisfied after " + (now - self.startTimer) + " milliseconds.";
         self.client.assertion(true, !!result.value, false, msg, true);
         return self.emit('complete');
-      }, timeout);
+      }, self.timeout);
     } else if (now - self.startTimer < self.ms) {
       setTimeout(function() {
         self.check();
       }, 500);
     } else {
       self.cb(false);
-      var msg = 'Timed out while waiting for page to be Mobified after ' + self.ms + ' milliseconds.';
+      var msg = msg || "Timed out while waiting for condition after " + self.ms + " milliseconds.";
       self.client.assertion(false, false, false, msg, true);
       return self.emit('complete');
     }
