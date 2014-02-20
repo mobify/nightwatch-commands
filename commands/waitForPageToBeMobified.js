@@ -25,16 +25,16 @@ CommandAction.prototype.command = function(milliseconds, callback) {
 
 CommandAction.prototype.check = function() {
   var self = this;
-  var msg = "Timed out while waiting for page to be Mobified after " + self.ms + " milliseconds.";
+  var msg = 'Timed out while waiting for page to be Mobified after ' + self.ms + ' milliseconds.';
 
   Protocol.actions.execute.call(this.client, 'return Mobify.evaluatedData', function(result) {
     var now = new Date().getTime();
     var timeout = 1000;
 
-    if (result.status === 0) {
+    if (result.status === 0 && !!result.value) {
       setTimeout(function() {
         self.cb(result.value);
-        var msg = "Page was Mobified after " + (now - self.startTimer) + " milliseconds.";
+        var msg = 'Page was Mobified after ' + (now - self.startTimer) + ' milliseconds.';
         self.client.assertion(true, !!result.value, false, msg, true);
         return self.emit('complete');
       }, timeout);

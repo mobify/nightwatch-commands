@@ -9,8 +9,8 @@ exports.command = function(siteUrl, bundleUrl, callback) {
         .setValue('#id_url', siteUrl, function(){
             this.clearValue('#id_site_folder', function(){
                 this.setValue('#id_site_folder', bundleUrl, function(){
-                    this.click('#authorize').pause(5000, function(){
-                        client.waitForPageToBeMobified(function(result){
+                    this.click('#authorize', function(){
+                        client.waitForPageToBeMobified(10000, function(result){
                             if (typeof callback === 'function') {
                                 callback.call(client);
                             }
