@@ -4,48 +4,51 @@ var Protocol = require('nightwatch/lib/selenium/protocol.js'),
 
 function CommandAction() {
   events.EventEmitter.call(this);
+  this.startTimer = null;
+  this.cb = null;
+  this.ms = null;
+  this.selector = null;
 };
 
 util.inherits(CommandAction, events.EventEmitter);
-CommandAction.prototype.command = function(timeout, callback) {
-  var self = this;
-  var start = new Date().getTime();
-  var timeout = timeout || 10000;
-
-  if (arguments.length === 1 && arguments[0] === 'function') {
-      console.log(callback)
-      callback = arguments[0];
+CommandAction.prototype.command = function(milliseconds, callback) {
+  if (milliseconds && typeof milliseconds != 'number') {
+    throw new Error('waitForPageToBeMobified expects first parameter to be number; ' +
+      typeof (milliseconds) + ' given')
   }
-
-  (function checkIfComplete(){
-
-      Protocol.actions.execute.call(self, 'return Mobify.evaluatedData', function(result){
-        if (result.status === 0 && !!result.value){
-          var now = new Date().getTime();
-          var msg = 'AJAX call completed after ' +
-            (now - start) + ' milliseconds.';
-
-          // Returns the timing message
-          self.client.assertion(true, result.value, 0, msg, true);
-
-          if (callback) {
-            callback.call(self.client, result.value);
-          }
-
-          self.emit('complete');
-
-        } else if (now - start < timeout) {
-            setTimeout(function(){
-              checkIfComplete();
-            }, 500)
-          } else {
-            var msg = "Timed out while waiting for page to be Mobified after "
-              + timeout + " milliseconds.";
-          }
-      });
-    })();
-
+  this.startTimer = new Date().getTime();
+  this.cb = callback || function() {};
+  this.ms = milliseconds || 1000;
+  this.check();
   return this;
 }
+
+CommandAction.prototype.check = function() {
+  var self = this;
+  var msg = "Timed out while waiting for page to be Mobified after " + self.ms + " milliseconds.";
+
+  Protocol.actions.execute.call(this.client, 'return $.active', function(result) {
+    var now = new Date().getTime();
+    var timeout = 1000;
+
+    if (result.status === 0) {
+      setTimeout(function() {
+        self.cb(result.value);
+        var msg = 'AJAX call completed after ' +
+            (now - start) + ' milliseconds.';
+        self.client.assertion(true, !!result.value, false, msg, true);
+        return self.emit('complete');
+      }, timeout);
+    } else if (now - self.startTimer < self.ms) {
+      setTimeout(function() {
+        self.check();
+      }, 500);
+    } else {
+      self.cb(false);
+      self.client.assertion(false, false, false, msg, true);
+      return self.emit('complete');
+    }
+  });
+};
 
 module.exports = CommandAction;

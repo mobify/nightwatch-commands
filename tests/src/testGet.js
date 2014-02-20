@@ -7,12 +7,13 @@ module.exports = {
     callback();
   },
 
-  // testSuccess: function(test) {
-  //   this.client.waitForPageToBeMobified(function callback(result) {
-  //     test.ok(result.value !== false);
-  //     test.done();
-  //   });
-  // },
+  testSuccess: function(test) {
+    this.client.get('http://localhost', function callback(result) {
+      console.log(result)
+      // test.ok(result.value !== false);
+      test.done();
+    });
+  },
 
   // testFailure : function(test) {
   //   this.client.waitForPageToBeMobified(function callback(result) {
