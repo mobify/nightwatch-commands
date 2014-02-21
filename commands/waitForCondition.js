@@ -12,22 +12,33 @@ function CommandAction() {
 
 util.inherits(CommandAction, events.EventEmitter);
 
-CommandAction.prototype.command = function(condition, milliseconds, timeout, callback) {
+CommandAction.prototype.command = function(condition, milliseconds, timeout, messages, callback) {
+  
   if (milliseconds && typeof milliseconds != 'number') {
     throw new Error('waitForCondition expects second parameter to be number; ' +
       typeof (milliseconds) + ' given')
   }
-
+  
   var lastArgument = Array.prototype.slice.call(arguments, 0).pop();
   if (typeof (lastArgument) === 'function') {
     callback = lastArgument;
   }
 
+  if (!messages || typeof messages !== 'object'){
+    messages = {
+      success: 'Condition was satisfied after ',
+      timeout: 'Timed out while waiting for condition after '
+    }
+  }
+
+  timeout = timeout && typeof (timeout) !== 'function' && typeof (timeout) !== 'object' ? timeout : 0;
+
   this.startTimer = new Date().getTime();
   this.cb = callback || function() {};
   this.ms = milliseconds || 1000;
-  this.timeout = timeout && typeof (timeout) !== 'function' ? timeout : 0;
+  this.timeout = timeout;
   this.condition = condition;
+  this.messages = messages;
   this.check();
   return this;
 }
@@ -41,7 +52,7 @@ CommandAction.prototype.check = function() {
     if (result.status === 0) {
       setTimeout(function() {
         self.cb(result.value);
-        var msg = "Condition was satisfied after " + (now - self.startTimer) + " milliseconds.";
+        var msg = self.messages.success + (now - self.startTimer) + " milliseconds.";
         self.client.assertion(true, !!result.value, false, msg, true);
         return self.emit('complete');
       }, self.timeout);
@@ -51,7 +62,7 @@ CommandAction.prototype.check = function() {
       }, 500);
     } else {
       self.cb(false);
-      var msg = msg || "Timed out while waiting for condition after " + self.ms + " milliseconds.";
+      var msg = self.messages.timeout + self.ms + " milliseconds.";
       self.client.assertion(false, false, false, msg, true);
       return self.emit('complete');
     }
