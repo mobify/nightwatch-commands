@@ -12,10 +12,14 @@ exports.command = function(milliseconds, callback) {
 
     // Uses waitForCondition to run code within the client browser
     //
-    return client.waitForCondition('return Mobify.evaluatedData;', milliseconds, 2000, messages, function(result){
-        if (typeof callback === 'function') {
-            callback.call(client, result);
-        }
+    client.waitForCondition('return Mobify.evaluatedData;', milliseconds, 2000, messages, function(result){
+        client.waitForElementPresent('body', 8000, function(){
+            if (typeof callback === 'function') {
+                callback.call(client, result);
+            }
+        })
     });
+
+    return this;
 
 };
