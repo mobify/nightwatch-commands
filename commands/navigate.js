@@ -5,7 +5,7 @@ exports.command = function(selector, callback) {
     // to be mobified before continuing the chain.
     //
     client
-        .click()
+        .click(selector)
         .waitForPageToBeMobified(8000, function() {
             if (typeof callback === 'function') {
                 callback.call(client, result);
