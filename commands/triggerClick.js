@@ -11,7 +11,7 @@ exports.command = function(selector, callback) {
                 'bubbles': true,
                 'cancelable': true
             });
-            var el = document.querySelector(selector); 
+            var el = document.querySelector(selector);
             el.dispatchEvent(event);
         })();
         return true;
@@ -23,4 +23,3 @@ exports.command = function(selector, callback) {
 
     return this;
 };
-
