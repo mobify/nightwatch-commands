@@ -6,11 +6,11 @@ exports.command = function(selector, callback) {
     //
     client
         .click()
-        .waitForPageToBeMobified(){
+        .waitForPageToBeMobified(8000, function() {
             if (typeof callback === 'function') {
                 callback.call(client, result);
             }
-        }
+        });
 
     return this;
 };
