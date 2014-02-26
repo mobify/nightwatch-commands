@@ -1,5 +1,5 @@
 var path = require('path');
-var site = require(path.join(path.resolve('./'), '/tests/integration/nightwatch_site.json'));
+var site = require(path.join(path.resolve('./'), '/tests/integration/site.json'));
 
 exports.command = function(callback) {
   var client = this;
