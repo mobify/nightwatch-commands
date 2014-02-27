@@ -20,11 +20,10 @@ Assertion.prototype.command = function(selectors, callbackOrAbort) {
 
   this.startTimer = new Date().getTime();
 
-  if (typeof arguments[2] == 'boolean') {
-    this.abortOnFailure = arguments[2];
-    this.cb = arguments[3] || function() {};
+  if (typeof callback == 'boolean') {
+    this.cb = function() {};
   } else {
-    this.cb = callbackOrAbort || function() {};
+    this.cb = callback;
   }
 
   this.selectors = Array.prototype.slice.call(arguments, 0);
