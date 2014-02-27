@@ -51,11 +51,13 @@ Assertion.prototype.checkElements = function() {
         if (self.selectors.length){
             self.checkElements();
         } else {
-          var errorMsg = missing.join(', ') + ' missing from page.';
-          var successMsg = 'Locating required elements on page.';
+            var errorMsg = missing.join(', ') + ' missing from page.';
+            var successMsg = 'Locating required elements on page.';
+            var result = missing.length > 0;
 
-          self.client.assertion(!missing.length, errorMsg, 'all elements found', successMsg, false);
-          self.emit('complete');
+            self.client.assertion(!missing.length, errorMsg, 'all elements found', successMsg, false);
+            self.cb(result);
+            self.emit('complete');
         }
     });
 
