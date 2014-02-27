@@ -13,16 +13,18 @@ function Assertion() {
 util.inherits(Assertion, events.EventEmitter);
 
 Assertion.prototype.command = function(selectors, callback) {
-  var lastArgument = Array.prototype.slice.call(arguments, 0).pop();
+  var args = Array.prototype.slice.call(arguments, 0);
+  var lastArgument = args[args.length - 1];
+
   if (typeof (lastArgument) === 'function') {
-    callback = lastArgument;
+    callback = args.pop();
   } else {
     callback = function() {};
   }
 
   this.startTimer = new Date().getTime();
   this.cb = callback;
-  this.selectors = Array.prototype.slice.call(arguments, 0);
+  this.selectors = args.slice(0);
   this.checkElements();
   return this;
 };
