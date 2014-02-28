@@ -53,11 +53,14 @@ Assertion.prototype.checkElements = function() {
               var msg = 'Located all required elements on page.';
               var result = true;
             } else {
-              var msg = self.missing.join(', ') + ' missing from page.';
+              var missing = self.missing.map(function(el){
+                return '<' + el + '>';
+              })
+              var msg = missing.join(', ') + ' missing from page.';
               var result = false;
             }
 
-            self.client.assertion(result, errorMsg, 'all elements found', msg, false);
+            self.client.assertion(true, result, false, msg, false);
             self.cb(result);
             self.emit('complete');
         }
