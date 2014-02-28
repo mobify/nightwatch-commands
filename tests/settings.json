@@ -1,8 +1,8 @@
 {
     "src_folders": ["./tests"],
     "output_folder": "./reports",
-    "custom_commands_path": "../node_modules/nightwatch-commands/commands",
-    "custom_assertions_path": "../node_modules/nightwatch-commands/assertions",
+    "custom_commands_path": "../commands",
+    "custom_assertions_path": "../assertions",
 
     "selenium": {
         "start_process": false,

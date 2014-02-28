@@ -7,6 +7,7 @@ module.exports = {
       //   browserName: 'chrome'
       // },
       custom_commands_path: '../commands',
+      custom_assertions_path: '../assertions',
       selenium_port : 10195,
       silent : true,
       output : false

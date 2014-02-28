@@ -25,13 +25,13 @@ Assertion.prototype.command = function(selectors, callback) {
   this.startTimer = new Date().getTime();
   this.cb = callback;
   this.selectors = args.slice(0);
+  this.missing = [];
   this.checkElements();
   return this;
 };
 
 Assertion.prototype.checkElements = function() {
     var self = this;
-    var missing = [];
     var selector = this.selectors.shift();
 
     this.client.element.call(self, 'css selector', selector, function(result) {
@@ -42,17 +42,22 @@ Assertion.prototype.checkElements = function() {
         }
 
         if (!value) {
-            missing.push(selector);
+            self.missing.push(selector);
         }
 
         if (self.selectors.length){
             self.checkElements();
         } else {
-            var errorMsg = missing.join(', ') + ' missing from page.';
-            var successMsg = 'Locating required elements on page.';
-            var result = missing.length > 0;
+            var errorMsg = self.missing.join(', ') + ' missing from page.';
+            if (self.missing.length === 0) {
+              var msg = 'Located all required elements on page.';
+              var result = true;
+            } else {
+              var msg = self.missing.join(', ') + ' missing from page.';
+              var result = false;
+            }
 
-            self.client.assertion(!missing.length, errorMsg, 'all elements found', successMsg, false);
+            self.client.assertion(result, errorMsg, 'all elements found', msg, false);
             self.cb(result);
             self.emit('complete');
         }
