@@ -3,7 +3,7 @@ module.exports = {
     callback();
   },
 
-  "attributeEquals assertion passed" : function(test) {
+  'Mobify template name is correct' : function(test) {
     var Assertion = require('../../assertions/templateName.js');
     var client = {
       getEvaluatedData : function(callback) {
