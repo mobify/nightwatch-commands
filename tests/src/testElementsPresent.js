@@ -1,3 +1,6 @@
+// These are command style tests, as this assertion is somewhere between an
+// assertion and a command.
+
 var MockServer = require('mockserver');
 
 module.exports = {
