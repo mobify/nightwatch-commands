@@ -1,4 +1,5 @@
 var util = require('util'),
+    async = require('async'),
     events = require('events');
 
 function Assertion() {
@@ -25,53 +26,57 @@ Assertion.prototype.command = function(selectors, callback) {
     this.startTimer = new Date().getTime();
     this.cb = callback;
     this.selectors = args.slice(0);
-    this.missing = [];
-    this.found = [];
     this.checkElements();
     return this;
 };
 
 Assertion.prototype.checkElements = function() {
     var self = this;
-    var selector = this.selectors.shift();
+    var missing = [];
+    var found = [];
+    var selectors = this.selectors;
 
-    this.client.element.call(self, 'css selector', selector, function(result) {
-        var value;
+    function checkElement(selector, cb) {
+        self.client.element.call(self, 'css selector', selector, function(result) {
+            var value;
 
-        if (result.status === 0) {
-            value = result.value.ELEMENT;
-        }
+            if (result.status == 0) {
+                value = result.value.ELEMENT;
+            }
 
-        if (value) {
-            self.found.push(selector);
-        } else {
-            self.missing.push(selector);
-        }
+            if (value) {
+                found.push(selector);
+            } else {
+                missing.push(selector);
+            }
 
-        if (self.selectors.length){
-            self.checkElements();
-            return;
-        }
+            cb();
+        });
+    }
 
-        if (self.missing.length === 0) {
-            var found = self.found.map(function(el){
+    function returnResults(err) {
+        var result = missing.length;
+
+        if (result === 0) {
+            var foundMsg = found.map(function(el){
                 return '<' + el + '>';
             });
-            var msg = found.join(', ') + ' located on page.';
-            var result = true;
+            var msg = foundMsg.join(', ') + ' located on page.';
+            var passed = true;
         } else {
-            var missing = self.missing.map(function(el){
+            var missingMsg = missing.map(function(el){
                 return '<' + el + '>';
             });
-            var msg = missing.join(', ') + ' missing from page.';
-            var result = false;
+            var msg = missingMsg.join(', ') + ' missing from page.';
+            var passed = false;
         }
 
-        self.client.assertion(true, result, false, msg, false);
+        self.client.assertion(passed, result, 0, msg, false);
         self.cb(result);
         self.emit('complete');
+    }
 
-    });
+    async.each(selectors, checkElement, returnResults);
 
 };
 
