@@ -1,9 +1,11 @@
 exports.command = function(selector, type, callback) {
     var client = this;
 
-    // Selenium's click doesn't always register
-    // We should expand this to bind and trigger more events
-    //
+    var lastArgument = Array.prototype.slice.call(arguments, 0).pop();
+    if (typeof (lastArgument) === 'function') {
+        callback = lastArgument;
+    }
+    
     client.execute(function(sel, t) {
         var event = new MouseEvent(t || 'click', {
             'view': window,
@@ -15,7 +17,7 @@ exports.command = function(selector, type, callback) {
         return true;
     }, [selector, type], function(result){
         if (typeof callback === 'function') {
-            callback.call(client, result);
+            callback.call(client, result.value);
         }
     });
 
