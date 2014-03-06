@@ -16,7 +16,8 @@ module.exports = {
             },
             assertion : function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, true);
-                test.equals(result, true);
+                test.equals(result, 0);
+                test.equals(expected, 0);
                 test.equals(msg, '<body> located on page.');
                 test.equals(abortOnFailure, false);
                 delete Assertion;
@@ -43,8 +44,9 @@ module.exports = {
                 });
             },
             assertion : function(passed, result, expected, msg, abortOnFailure) {
-                test.equals(passed, true);
-                test.equals(result, false);
+                test.equals(passed, false);
+                test.equals(result, 1);
+                test.equals(expected, 0);
                 test.equals(msg, '<.notfound> missing from page.');
                 test.equals(abortOnFailure, false);
                 delete Assertion;
