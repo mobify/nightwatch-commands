@@ -54,6 +54,16 @@
     },
     {
       "url" : "/wd/hub/session/1352110219202/execute",
+      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function (sel, t) {        var event = new MouseEvent(t || 'click', {            'view': window,            'bubbles': true,            'cancelable': true        });        var el = document.querySelector(sel);        el.dispatchEvent(event);        return true;    }.apply(window, passedArgs);\",\"args\":[\".clickMe\",null]}",
+      "response" : "{\"status\":0,\"value\":true}"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/execute",
+      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function (sel, t) {        var event = new MouseEvent(t || 'click', {            'view': window,            'bubbles': true,            'cancelable': true        });        var el = document.querySelector(sel);        el.dispatchEvent(event);        return true;    }.apply(window, passedArgs);\",\"args\":[\".clickMe\",\"click\"]}",
+      "response" : "{\"status\":0,\"value\":true}"
+    },
+    {
+      "url" : "/wd/hub/session/1352110219202/execute",
       "postdata" : "{\"script\":\"return $.active;\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":0}"
     }
