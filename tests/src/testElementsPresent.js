@@ -12,14 +12,14 @@ module.exports = {
 
   testFindOneElement : function(test) {
     this.client.verify.elementsPresent('#weblogin', function callback(result) {
-      test.equal(true, result);
+      test.equal(0, result);
       test.done();
     });
   },
 
   testFindTwoElements : function(test) {
     this.client.verify.elementsPresent('#weblogin', 'body', function callback(result) {
-      test.equal(true, result);
+      test.equal(0, result);
       test.done();
     });
   },
@@ -27,7 +27,7 @@ module.exports = {
   // Should return false if the element is not founf
   testMissingElement : function(test) {
     this.client.verify.elementsPresent('#notFound', function callback(result) {
-      test.equal(false, result);
+      test.notEqual(0, result);
       test.done();
     });
   },
@@ -35,7 +35,7 @@ module.exports = {
   // Should return false if the element is not founf
   testOneMissingElement : function(test) {
     this.client.verify.elementsPresent('#notFound', 'body', function callback(result) {
-      test.equal(false, result);
+      test.notEqual(0, result);
       test.done();
     });
   },
@@ -43,7 +43,7 @@ module.exports = {
   // Should return false if the element is not founf
   testTwoMissingElements : function(test) {
     this.client.verify.elementsPresent('#notFound', 'body', '.notFound', function callback(result) {
-      test.equal(false, result);
+      test.notEqual(0, result);
       test.done();
     });
   },
