@@ -7,18 +7,18 @@ exports.command = function(callback) {
 
   return browser.url('http://preview.mobify.com')
     .waitForElementPresent('#id_url', 10000, function(){
-        browser.setValue('#id_url', site.siteUrl, function() {
-          this.clearValue('#id_site_folder', function() {
-            this.setValue('#id_site_folder', bundleUrl, function() {
-              this.click('#authorize', function() {
-                browser.waitForPageToBeMobified(10000, function(result) {
-                  if (typeof callback === 'function') {
-                    callback.call(browser, result);
-                  }
+        this.setValue('#id_url', site.siteUrl, function() {
+            this.clearValue('#id_site_folder', function() {
+                this.setValue('#id_site_folder', bundleUrl, function() {
+                    this.click('#authorize', function() {
+                        browser.waitForPageToBeMobified(10000, function(result) {
+                            if (typeof callback === 'function') {
+                                callback.call(browser, result);
+                            }
+                        });
+                    });
                 });
-              });
             });
-          });
         });
     });
 };
