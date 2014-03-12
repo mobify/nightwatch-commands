@@ -1,4 +1,3 @@
-
 function Assertion() {}
 Assertion.prototype.command = function command(cssSelector, expectedCount, message) {
     var self = this;
