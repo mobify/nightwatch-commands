@@ -52,7 +52,7 @@ CommandAction.prototype.check = function() {
         if (result.status === 0) {
             setTimeout(function() {
                 var msg = self.messages.success + (now - self.startTimer) + " milliseconds.";
-                self.cb(result.value);
+                self.cb.call(self.client, result.value);
                 self.client.assertion(true, !!result.value, false, msg, true);
                 return self.emit('complete');
             }, self.timeout);
@@ -62,7 +62,7 @@ CommandAction.prototype.check = function() {
             }, 500);
         } else {
             var msg = self.messages.timeout + self.ms + " milliseconds.";
-            self.cb(false);
+            self.cb.call(self.client, false);
             self.client.assertion(false, false, false, msg, true);
             return self.emit('complete');
         }
