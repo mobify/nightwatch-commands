@@ -1,9 +1,6 @@
 exports.command = function(selector, type, callback) {
     var client = this;
 
-    // Selenium's click doesn't always register
-    // We should expand this to bind and trigger more events
-    //
     client.execute(function(sel, t) {
         var event = new MouseEvent(t || 'click', {
             'view': window,
