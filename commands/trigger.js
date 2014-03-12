@@ -1,6 +1,8 @@
 exports.command = function(selector, type, callback) {
     var client = this;
 
+    }
+    
     client.execute(function(sel, t) {
         var event = new MouseEvent(t || 'click', {
             'view': window,
@@ -12,7 +14,7 @@ exports.command = function(selector, type, callback) {
         return true;
     }, [selector, type], function(result){
         if (typeof callback === 'function') {
-            callback.call(client, result);
+            callback.call(client, result.value);
         }
     });
 

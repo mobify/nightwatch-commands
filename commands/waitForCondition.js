@@ -3,11 +3,11 @@ var Protocol = require('nightwatch/lib/selenium/protocol.js'),
     events = require('events');
 
 function CommandAction() {
-  events.EventEmitter.call(this);
-  this.startTimer = null;
-  this.cb = null;
-  this.ms = null;
-  this.selector = null;
+    events.EventEmitter.call(this);
+    this.startTimer = null;
+    this.cb = null;
+    this.ms = null;
+    this.selector = null;
 };
 
 util.inherits(CommandAction, events.EventEmitter);
@@ -44,29 +44,29 @@ CommandAction.prototype.command = function(condition, milliseconds, timeout, mes
 }
 
 CommandAction.prototype.check = function() {
-  var self = this;
+    var self = this;
 
-  Protocol.actions.execute.call(this.client, this.condition, function(result) {
-    var now = new Date().getTime();
+    Protocol.actions.execute.call(this.client, this.condition, function(result) {
+        var now = new Date().getTime();
 
-    if (result.status === 0) {
-        setTimeout(function() {
-            var msg = self.messages.success + (now - self.startTimer) + " milliseconds.";
-            self.cb(result.value);
-            self.client.assertion(true, !!result.value, false, msg, true);
+        if (result.status === 0) {
+            setTimeout(function() {
+                var msg = self.messages.success + (now - self.startTimer) + " milliseconds.";
+                self.cb(result.value);
+                self.client.assertion(true, !!result.value, false, msg, true);
+                return self.emit('complete');
+            }, self.timeout);
+        } else if (now - self.startTimer < self.ms) {
+            setTimeout(function() {
+              self.check();
+            }, 500);
+        } else {
+            var msg = self.messages.timeout + self.ms + " milliseconds.";
+            self.cb(false);
+            self.client.assertion(false, false, false, msg, true);
             return self.emit('complete');
-        }, self.timeout);
-    } else if (now - self.startTimer < self.ms) {
-        setTimeout(function() {
-          self.check();
-        }, 500);
-    } else {
-        var msg = self.messages.timeout + self.ms + " milliseconds.";
-        self.cb(false);
-        self.client.assertion(false, false, false, msg, true);
-        return self.emit('complete');
-    }
-  });
+        }
+    });
 };
 
 module.exports = CommandAction;
