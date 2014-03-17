@@ -8,7 +8,8 @@ module.exports = {
   },
 
   testSuccess: function(test) {
-    this.client.waitForPageToBeMobified(100, function callback(result) {
+    var client = this.client.api;
+    client.waitForPageToBeMobified(100, function callback(result) {
       test.equal(true, result);
       test.done();
     });
@@ -19,4 +20,4 @@ module.exports = {
     // clean up
     callback();
   }
-}
+};

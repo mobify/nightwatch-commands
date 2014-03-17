@@ -8,7 +8,9 @@ module.exports = {
   },
 
   testSuccess : function(test) {
-    this.client.get('http://localhost', function callback(result) {
+    var client = this.client.api;
+
+    client.get('http://localhost', function callback(result) {
       test.equal(true, result);
       test.done();
     });
@@ -19,4 +21,4 @@ module.exports = {
     // clean up
     callback();
   }
-}
+};

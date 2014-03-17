@@ -8,7 +8,8 @@ module.exports = {
   },
 
   testSuccess : function(test) {
-    this.client.getMobifyEvaluatedData(function callback(result) {
+    var client = this.client.api;
+    client.getMobifyEvaluatedData(function callback(result) {
       test.equal(true, result);
       test.done();
     });

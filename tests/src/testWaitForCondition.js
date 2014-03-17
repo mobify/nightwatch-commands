@@ -8,14 +8,16 @@ module.exports = {
   },
 
   testSuccess : function(test) {
-    this.client.waitForCondition('return true;', 100, 0, function callback(result) {
+    var client = this.client.api;
+    client.waitForCondition('return true;', 100, 0, function callback(result) {
       test.equal(result, true);
       test.done();
     });
   },
 
   testFailure : function(test) {
-    this.client.waitForCondition('return false', 600, 0, function callback(result) {
+    var client = this.client.api;
+    client.waitForCondition('return false', 600, 0, function callback(result) {
       test.equal(result, false);
       test.done();
     });
@@ -26,4 +28,4 @@ module.exports = {
     // clean up
     callback();
   }
-}
+};
