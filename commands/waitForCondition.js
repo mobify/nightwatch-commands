@@ -49,7 +49,7 @@ CommandAction.prototype.check = function() {
     Protocol.actions.execute.call(this.client, this.condition, function(result) {
         var now = new Date().getTime();
 
-        if (result.status === 0) {
+        if (result.status === 0 && result.value) {
             setTimeout(function() {
                 var msg = self.messages.success + (now - self.startTimer) + " milliseconds.";
                 self.cb.call(self.client, result.value);
