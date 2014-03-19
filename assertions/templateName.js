@@ -1,13 +1,52 @@
+/**
+ * Checks if the given selector is present the expected number of times.
+ *
+ * ```
+ *    this.demoTest = function (client) {
+ *      browser.assert.elementsCount('#x-root', 1);
+ *    };
+ * ```
+ *
+ * @method attributeEquals
+ * @param {string} selector The selector (CSS / Xpath) used to locate the element.
+ * @param {string} attribute The attribute name
+ * @param {string} expected The expected value of the attribute to check.
+ * @param {string} [message] Optional log message to display in the output. If missing, one is displayed by default.
+ * @api assertions
+ */
 
-function Assertion() {}
-Assertion.prototype.command = function(expected, msg) {
-    var self = this;
+var util = require('util');
+exports.assertion = function(expected, msg) {
 
-    return this.client.getEvaluatedData(function(result) {
-        var passed = result.value.content.templateName === expected;
-        msg = msg || ('Testing if the page template equals <' + expected + '>.');
-        self.client.assertion(passed, result.value, expected, msg, self.abortOnFailure);
-    });
+    var MSG_ELEMENT_NOT_FOUND = 'Testing if the page template is <%s>. ' +
+        'Template was not found.';
+
+    this.message = msg || util.format('Testing if the page template is <%s>.', expected);
+
+    this.expected = function() {
+        return expected;
+    };
+
+    this.pass = function(value) {
+        return value === expected;
+    };
+
+    this.failure = function(result) {
+        var failed = result === false || result && result.status === -1;
+        if (failed) {
+            this.message = msg || util.format(MSG_ELEMENT_NOT_FOUND, expected);
+        }
+        return failed;
+    };
+
+    this.value = function(data) {
+        // Checks for the mobify 1.1 style data or the adaptive.js style
+        var result = data.templateName || data.content.templateName;
+        return result;
+    };
+
+    this.command = function(callback) {
+        return this.api.getMobifyEvaluatedData(callback);
+    };
+
 };
-
-module.exports = Assertion;
