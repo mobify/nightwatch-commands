@@ -1,97 +1,55 @@
 /**
- * Checks if the given selectors are present and returns a list of missing selectors.
+ * Checks if the given template name is correct.
  *
  * ```
  *    this.demoTest = function (client) {
- *      browser.assert.elementsCount('#x-root', 1);
+ *      browser.assert.templateName('home');
  *    };
  * ```
  *
  * @method attributeEquals
- * @param {string} selectors The selectors (CSS / Xpath) used to locate the elements, separated by commas.
+ * @param {string} selector The selector (CSS / Xpath) used to locate the element.
+ * @param {string} attribute The attribute name
  * @param {string} expected The expected value of the attribute to check.
  * @param {string} [message] Optional log message to display in the output. If missing, one is displayed by default.
  * @api assertions
  */
 
-var async = require('async'),
-    util = require('util'),
+var util = require('util'),
     events = require('events');
 
 function Assertion() {
     events.EventEmitter.call(this);
     this.cb = null;
     this.abortOnFailure = true;
-    this.selector = null;
+    this.expected = null;
 }
 
 util.inherits(Assertion, events.EventEmitter);
 
-Assertion.prototype.command = function(selectors, callback) {
-    var args = Array.prototype.slice.call(arguments, 0);
-    var lastArgument = args[args.length - 1];
+Assertion.prototype.command = function(expected, msg) {
+    this.expected = expected;
+    this.checkTemplateName();
+    this.msg = msg
 
-    if (typeof (lastArgument) === 'function') {
-        callback = args.pop();
-    } else {
-        callback = function() {};
-    }
-
-  this.cb = callback;
-  this.selectors = args.slice(0);
-  this.checkElements();
-
-  return this;
+    return this;
 };
 
-Assertion.prototype.checkElements = function() {
+Assertion.prototype.checkTemplateName = function() {
     var self = this;
-    var missing = [];
-    var found = [];
-    var selectors = this.selectors;
+    var expected = this.expected;
+    var msg = this.msg;
 
-    function checkElement(selector, cb) {
-        self.api.element.call(self, self.client.locateStrategy, selector, function(result) {
-            var value;
-
-            if (result.status === 0) {
-                value = result.value.ELEMENT;
-            }
-
-            if (value) {
-                found.push(selector);
-            } else {
-                missing.push(selector);
-            }
-
-            cb();
-        });
-    }
-
-    function returnResults(err) {
-        var result = missing.length;
-        var msg, passed;
-
-        if (result === 0) {
-            var foundMsg = found.map(function(el){
-              return '<' + el + '>';
-            });
-            msg = foundMsg.join(', ') + ' located on page.';
-            passed = true;
+    this.api.getMobifyEvaluatedData(function(result) {
+        if (result) {
+            var passed = result.templateName === expected || result.content.templateName === expected;
+            msg = msg || ('Testing if the page template equals <' + expected + '>.');
+            self.client.assertion(passed, result.value, expected, msg, self.abortOnFailure);
+            self.emit('complete');
         } else {
-            var missingMsg = missing.map(function(el){
-                return '<' + el + '>';
-            });
-            msg = missingMsg.join(', ') + ' missing from page.';
-            passed = false;
+            self.checkTemplateName();
         }
-
-        self.client.assertion(passed, result, 0, msg, false);
-        self.cb(result);
-        self.emit('complete');
-    }
-
-    async.each(selectors, checkElement, returnResults);
+    });
 };
 
 module.exports = Assertion;
