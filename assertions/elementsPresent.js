@@ -3,7 +3,7 @@
  *
  * ```
  *    this.demoTest = function (client) {
- *      browser.assert.elementsPresent('#x-root', '#x-head');
+ *        browser.assert.elementsPresent('#x-root', '#x-head');
  *    };
  * ```
  *
