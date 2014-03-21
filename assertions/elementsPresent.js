@@ -9,65 +9,89 @@
  *
  * @method attributeEquals
  * @param {string} selectors The selectors (CSS / Xpath) used to locate the elements, separated by commas.
+ * @param {string} expected The expected value of the attribute to check.
  * @param {string} [message] Optional log message to display in the output. If missing, one is displayed by default.
  * @api assertions
  */
 
-var util = require('util'),
-    async = require('async');
-exports.assertion = function(selectors, msg) {
+var async = require('async'),
+    util = require('util'),
+    events = require('events');
 
+function Assertion() {
+    events.EventEmitter.call(this);
+    this.cb = null;
+    this.abortOnFailure = true;
+    this.selector = null;
+}
+
+util.inherits(Assertion, events.EventEmitter);
+
+Assertion.prototype.command = function(selectors, callback) {
+    var args = Array.prototype.slice.call(arguments, 0);
+    var lastArgument = args[args.length - 1];
+
+    if (typeof (lastArgument) === 'function') {
+        callback = args.pop();
+    } else {
+        callback = function() {};
+    }
+
+    this.cb = callback;
+    this.selectors = args.slice(0);
+    this.checkElements();
+
+    return this;
+};
+
+Assertion.prototype.checkElements = function() {
     var self = this;
     var missing = [];
     var found = [];
+    var selectors = this.selectors;
 
-    this.message = msg || util.format('Testing if the elements are present <%s>.', selectors);
+    function checkElement(selector, cb) {
+        self.api.element.call(self, self.client.locateStrategy, selector, function(result) {
+            var value;
 
-    this.expected = function() {
-        return selectors.split(',').length + ' elements';
-    };
-
-    this.pass = function(value) {
-        return value === selectors.split(',').length;
-    };
-
-    this.value = function(result) {
-        return parseInt(result);
-    };
-
-    this.command = function(callback) {
-
-        async.each(selectors.split(','), checkElement, showResults);
-
-        function showResults(err){
-            if (missing.length){
-                self.message = util.format('%s missing from page', missing.map(function(el){
-                    return '<' + el + '>';
-                }));
+            if (result.status === 0) {
+                value = result.value.ELEMENT;
             }
-            console.log('done', +new Date());
-            return callback.call(self, found.length);
-        }
 
-        function checkElement(selector, cb) {
-            selector = selector.trim();
+            if (value) {
+                found.push(selector);
+            } else {
+                missing.push(selector);
+            }
 
-            self.api.element.call(self, self.client.locateStrategy, selector, function(result) {
-                var value;
+            cb();
+        });
+    }
 
-                if (result.status === 0) {
-                    value = result.value.ELEMENT;
-                }
+    function returnResults(err) {
+        var result = missing.length;
+        var msg, passed;
 
-                if (value) {
-                    found.push(selector);
-                } else {
-                    missing.push(selector);
-                }
-                console.log(selector, +new Date());
-                cb();
+        if (result === 0) {
+            var foundMsg = found.map(function(el){
+              return '<' + el + '>';
             });
+            msg = foundMsg.join(', ') + ' located on page.';
+            passed = true;
+        } else {
+            var missingMsg = missing.map(function(el){
+                return '<' + el + '>';
+            });
+            msg = missingMsg.join(', ') + ' missing from page.';
+            passed = false;
         }
-    };
 
+        self.client.assertion(passed, result, 0, msg, false);
+        self.cb(result);
+        self.emit('complete');
+    }
+
+    async.each(selectors, checkElement, returnResults);
 };
+
+module.exports = Assertion;

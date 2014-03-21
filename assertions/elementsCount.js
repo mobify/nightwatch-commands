@@ -18,8 +18,7 @@
 var util = require('util');
 exports.assertion = function(selector, expected, msg) {
 
-    var MSG_ELEMENT_NOT_FOUND = 'Testing if the count for the element <%s> is %s. ' +
-        'Element could not be located.';
+    var MSG_ELEMENT_NOT_FOUND = 'Testing if the count for the element <%s> is %s. ';
 
     this.message = msg || util.format('Testing if the count for the element <%s> is %s.', selector, expected);
 

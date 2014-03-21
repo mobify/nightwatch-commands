@@ -11,7 +11,7 @@
     "url": "https://github.com/mobify/nightwatch-commands/issues"
   },
   "devDependencies": {
-    "nightwatch": "git+https://github.com/beatfactor/nightwatch.git#2ec6f240bf2dd4ad8e92a48b9d69d832543bc03b",
+    "nightwatch": "git+https://github.com/beatfactor/nightwatch.git#master",
     "nodeunit": "~0.8.4"
   },
   "scripts": {

@@ -10,7 +10,7 @@ module.exports = {
     testSuccess: function(test) {
         var client = this.client.api;
         client.waitForAjaxCompleted(function callback(result) {
-          test.strictEqual(0, result);
+          test.equal(0, result);
           test.done();
         });
     },
