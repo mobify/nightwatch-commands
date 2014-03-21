@@ -7,7 +7,7 @@ module.exports = {
 
     'Elements Count items found message is correct' : function(test) {
         var assertionFn = require('../../assertions/elementsCount.js');
-        console.log(assertionFn)
+
         var client = {
             options : {},
             api: {

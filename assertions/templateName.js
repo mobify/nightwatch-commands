@@ -30,7 +30,7 @@ util.inherits(Assertion, events.EventEmitter);
 Assertion.prototype.command = function(expected, msg) {
     this.expected = expected;
     this.checkTemplateName();
-    this.msg = msg
+    this.msg = msg;
 
     return this;
 };
@@ -44,7 +44,7 @@ Assertion.prototype.checkTemplateName = function() {
         if (result) {
             var passed = result.templateName === expected || result.content.templateName === expected;
             msg = msg || ('Testing if the page template equals <' + expected + '>.');
-            self.client.assertion(passed, result.value, expected, msg, self.abortOnFailure);
+            self.client.assertion(passed, result, expected, msg, self.abortOnFailure);
             self.emit('complete');
         } else {
             self.checkTemplateName();
