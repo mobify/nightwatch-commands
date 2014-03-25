@@ -6,14 +6,14 @@ module.exports = {
     'Mobify template name is correct' : function(test) {
         var Assertion = require('../../assertions/templateName.js');
         var client = {
-            getEvaluatedData : function(callback) {
-                callback({
-                    value : {
+            api: {
+                getMobifyEvaluatedData: function(callback) {
+                    callback({
                         content: {
                             templateName: 'home'
                         }
-                    }
-                });
+                    });
+                }
             },
             assertion : function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, true);
@@ -29,6 +29,7 @@ module.exports = {
         var m = new Assertion();
         m.abortOnFailure = true;
         m.client = client;
+        m.api = client.api;
 
         m.command('home');
     },
@@ -36,14 +37,14 @@ module.exports = {
     'Mobify template name is incorrect' : function(test) {
         var Assertion = require('../../assertions/templateName.js');
         var client = {
-            getEvaluatedData : function(callback) {
-                callback({
-                    value : {
+            api: {
+                getMobifyEvaluatedData : function(callback) {
+                    callback({
                         content: {
                             templateName: 'main'
                         }
-                    }
-                });
+                    });
+                }
             },
             assertion : function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, false);
@@ -59,6 +60,7 @@ module.exports = {
         var m = new Assertion();
         m.abortOnFailure = true;
         m.client = client;
+        m.api = client.api;
 
         m.command('home');
     },
@@ -66,4 +68,4 @@ module.exports = {
     tearDown : function(callback) {
         callback();
     }
-}
+};

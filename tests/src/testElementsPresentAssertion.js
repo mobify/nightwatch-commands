@@ -1,3 +1,5 @@
+var Api = require('../../node_modules/nightwatch/lib/api.js');
+
 module.exports = {
     setUp: function (callback) {
         callback();
@@ -5,14 +7,18 @@ module.exports = {
 
     'Elements Present found messaging is correct' : function(test) {
         var Assertion = require('../../assertions/elementsPresent.js');
+
         var client = {
-            element : function(using, selector, callback) {
-                callback({
-                    status: 0,
-                    value : {
-                        ELEMENT: 'body'
-                    }
-                });
+            options: {},
+            api: {
+                element: function(using, selector, callback) {
+                    callback({
+                        status: 0,
+                        value : {
+                            ELEMENT: 'body'
+                        }
+                    });
+                }
             },
             assertion : function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, true);
@@ -28,20 +34,23 @@ module.exports = {
         var m = new Assertion();
         m.abortOnFailure = true;
         m.client = client;
-
+        m.api = client.api;
         m.command('body');
     },
 
     'Elements Present not found messaging is correct' : function(test) {
         var Assertion = require('../../assertions/elementsPresent.js');
         var client = {
-            element : function(using, selector, callback) {
-                callback({
-                    status: -1,
-                    value : {
-                        ELEMENT: ''
-                    }
-                });
+            options: {},
+            api: {
+                element : function(using, selector, callback) {
+                    callback({
+                        status: -1,
+                        value : {
+                            ELEMENT: ''
+                        }
+                    });
+                }
             },
             assertion : function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, false);
@@ -57,6 +66,7 @@ module.exports = {
         var m = new Assertion();
         m.abortOnFailure = true;
         m.client = client;
+        m.api = client.api;
 
         m.command('.notfound');
     },
@@ -64,4 +74,4 @@ module.exports = {
     tearDown : function(callback) {
         callback();
     }
-}
+};

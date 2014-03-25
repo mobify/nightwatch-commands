@@ -8,14 +8,16 @@ module.exports = {
     },
 
     testSuccessClick : function(test) {
-        this.client.trigger('.clickMe', 'click', function callback(result) {
+        var client = this.client.api;
+        client.trigger('.clickMe', 'click', function callback(result) {
             test.equal(true, result);
             test.done();
         });
     },
 
     testSuccessDefaultEvent : function(test) {
-        this.client.trigger('.clickMe', function callback(result) {
+        var client = this.client.api;
+        client.trigger('.clickMe', function callback(result) {
             test.equal(true, result);
             test.done();
         });
@@ -26,4 +28,4 @@ module.exports = {
         // clean up
         callback();
     }
-}
+};

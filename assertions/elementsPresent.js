@@ -1,12 +1,26 @@
-var util = require('util'),
-    async = require('async'),
+/**
+ * Checks if the given selectors are present and returns a list of missing selectors.
+ *
+ * ```
+ *    this.demoTest = function (client) {
+ *        browser.assert.elementsPresent('#x-root', '#x-head');
+ *    };
+ * ```
+ *
+ * @method attributeEquals
+ * @param {string} selectors The selectors (CSS / Xpath) used to locate the elements, separated by commas.
+ * @param {string} expected The expected value of the attribute to check.
+ * @param {string} [message] Optional log message to display in the output. If missing, one is displayed by default.
+ * @api assertions
+ */
+
+var async = require('async'),
+    util = require('util'),
     events = require('events');
 
 function Assertion() {
     events.EventEmitter.call(this);
-    this.startTimer = null;
     this.cb = null;
-    this.ms = null;
     this.abortOnFailure = true;
     this.selector = null;
 }
@@ -23,10 +37,10 @@ Assertion.prototype.command = function(selectors, callback) {
         callback = function() {};
     }
 
-    this.startTimer = new Date().getTime();
     this.cb = callback;
     this.selectors = args.slice(0);
     this.checkElements();
+
     return this;
 };
 
@@ -37,10 +51,10 @@ Assertion.prototype.checkElements = function() {
     var selectors = this.selectors;
 
     function checkElement(selector, cb) {
-        self.client.element.call(self, 'css selector', selector, function(result) {
+        self.api.element.call(self, self.client.locateStrategy, selector, function(result) {
             var value;
 
-            if (result.status == 0) {
+            if (result.status === 0) {
                 value = result.value.ELEMENT;
             }
 
@@ -56,19 +70,20 @@ Assertion.prototype.checkElements = function() {
 
     function returnResults(err) {
         var result = missing.length;
+        var msg, passed;
 
         if (result === 0) {
             var foundMsg = found.map(function(el){
-                return '<' + el + '>';
+              return '<' + el + '>';
             });
-            var msg = foundMsg.join(', ') + ' located on page.';
-            var passed = true;
+            msg = foundMsg.join(', ') + ' located on page.';
+            passed = true;
         } else {
             var missingMsg = missing.map(function(el){
                 return '<' + el + '>';
             });
-            var msg = missingMsg.join(', ') + ' missing from page.';
-            var passed = false;
+            msg = missingMsg.join(', ') + ' missing from page.';
+            passed = false;
         }
 
         self.client.assertion(passed, result, 0, msg, false);
@@ -77,7 +92,6 @@ Assertion.prototype.checkElements = function() {
     }
 
     async.each(selectors, checkElement, returnResults);
-
 };
 
 module.exports = Assertion;

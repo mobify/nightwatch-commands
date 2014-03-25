@@ -1,5 +1,4 @@
-var Protocol = require('nightwatch/lib/selenium/protocol.js'),
-    util = require('util'),
+var util = require('util'),
     events = require('events');
 
 function CommandAction() {
@@ -16,7 +15,7 @@ CommandAction.prototype.command = function(condition, milliseconds, timeout, mes
 
     if (milliseconds && typeof milliseconds != 'number') {
         throw new Error('waitForCondition expects second parameter to be number; ' +
-            typeof (milliseconds) + ' given')
+          typeof (milliseconds) + ' given')
     }
 
     var lastArgument = Array.prototype.slice.call(arguments, 0).pop();
@@ -45,8 +44,9 @@ CommandAction.prototype.command = function(condition, milliseconds, timeout, mes
 
 CommandAction.prototype.check = function() {
     var self = this;
+    this.protocol = require('nightwatch/lib/selenium/protocol.js')(this.client);
 
-    Protocol.actions.execute.call(this.client, this.condition, function(result) {
+    this.protocol.execute.call(this.client, this.condition, function(result) {
         var now = new Date().getTime();
 
         if (result.status === 0 && result.value) {
@@ -58,7 +58,7 @@ CommandAction.prototype.check = function() {
             }, self.timeout);
         } else if (now - self.startTimer < self.ms) {
             setTimeout(function() {
-              self.check();
+                self.check();
             }, 500);
         } else {
             var msg = self.messages.timeout + self.ms + " milliseconds.";

@@ -1,12 +1,54 @@
+/**
+ * Checks if the given template name is correct.
+ *
+ * ```
+ *    this.demoTest = function (client) {
+ *      browser.assert.templateName('home');
+ *    };
+ * ```
+ *
+ * @method attributeEquals
+ * @param {string} selector The selector (CSS / Xpath) used to locate the element.
+ * @param {string} attribute The attribute name
+ * @param {string} expected The expected value of the attribute to check.
+ * @param {string} [message] Optional log message to display in the output. If missing, one is displayed by default.
+ * @api assertions
+ */
 
-function Assertion() {}
+var util = require('util'),
+    events = require('events');
+
+function Assertion() {
+    events.EventEmitter.call(this);
+    this.cb = null;
+    this.abortOnFailure = true;
+    this.expected = null;
+}
+
+util.inherits(Assertion, events.EventEmitter);
+
 Assertion.prototype.command = function(expected, msg) {
-    var self = this;
+    this.expected = expected;
+    this.checkTemplateName();
+    this.msg = msg;
 
-    return this.client.getEvaluatedData(function(result) {
-        var passed = result.value.content.templateName === expected;
-        msg = msg || ('Testing if the page template equals <' + expected + '>.');
-        self.client.assertion(passed, result.value, expected, msg, self.abortOnFailure);
+    return this;
+};
+
+Assertion.prototype.checkTemplateName = function() {
+    var self = this;
+    var expected = this.expected;
+    var msg = this.msg;
+
+    this.api.getMobifyEvaluatedData(function(result) {
+        if (result) {
+            var passed = result.templateName === expected || result.content.templateName === expected;
+            msg = msg || ('Testing if the page template equals <' + expected + '>.');
+            self.client.assertion(passed, result, expected, msg, self.abortOnFailure);
+            self.emit('complete');
+        } else {
+            self.checkTemplateName();
+        }
     });
 };
 
