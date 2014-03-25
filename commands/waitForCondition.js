@@ -7,6 +7,7 @@ function CommandAction() {
     this.cb = null;
     this.ms = null;
     this.selector = null;
+    this.protocol = require('nightwatch/lib/selenium/protocol.js')(this.client);
 };
 
 util.inherits(CommandAction, events.EventEmitter);
@@ -44,15 +45,14 @@ CommandAction.prototype.command = function(condition, milliseconds, timeout, mes
 
 CommandAction.prototype.check = function() {
     var self = this;
-    this.protocol = require('nightwatch/lib/selenium/protocol.js')(this.client);
 
     this.protocol.execute.call(this.client, this.condition, function(result) {
         var now = new Date().getTime();
 
-        if (result.status === 0 && result.value) {
+        if (result.status === 0 && result.value !== 'undefined') {
             setTimeout(function() {
                 var msg = self.messages.success + (now - self.startTimer) + " milliseconds.";
-                self.cb.call(self.client, result.value);
+                self.cb.call(self.client.api, result.value);
                 self.client.assertion(true, !!result.value, false, msg, true);
                 return self.emit('complete');
             }, self.timeout);
@@ -62,7 +62,7 @@ CommandAction.prototype.check = function() {
             }, 500);
         } else {
             var msg = self.messages.timeout + self.ms + " milliseconds.";
-            self.cb.call(self.client, false);
+            self.cb.call(self.client.api, false);
             self.client.assertion(false, false, false, msg, true);
             return self.emit('complete');
         }
