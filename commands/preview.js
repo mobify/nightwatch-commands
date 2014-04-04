@@ -32,7 +32,7 @@ var qs = require('querystring');
 exports.command = function(url, callback) {
     var browser = this;
 
-    if (typeof url !== 'function'){
+    if (typeof url === 'function'){
         callback = url;
         url = site.siteUrl;
     }
