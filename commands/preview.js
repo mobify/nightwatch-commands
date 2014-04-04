@@ -1,9 +1,9 @@
 /**
- * Preview will use mobify.preview.com to open a website and allow you to preview
+ * Preview will use preview.mobify.com to open a website and allow you to preview
  * a given bundle. The bundle and base URL will need to be set in the the
  * `tests/integration/site.json` file. Additionally, you can pass a URL as an
  * argument when you call preview(). Upon completion, waitForPageToBeMobified
- * is called, to be sure that the adaptation is complete. 
+ * is called, to be sure that the adaptation is complete.
  *
  * ```
  *    this.demoTest = function (client) {
@@ -32,12 +32,8 @@ var qs = require('querystring');
 exports.command = function(url, callback) {
     var browser = this;
 
-    var lastArgument = Array.prototype.slice.call(arguments, 0).pop();
-    if (typeof (lastArgument) === 'function') {
-        callback = lastArgument;
-    }
-
-    if (typeof url !== 'string'){
+    if (typeof url !== 'function'){
+        callback = url;
         url = site.siteUrl;
     }
 
