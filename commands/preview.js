@@ -37,6 +37,8 @@ exports.command = function(url, callback) {
         url = site.siteUrl;
     }
 
+    url = url || site.siteUrl;
+
     var bundleUrl = site.bundleUrl || 'http://localhost:8080';
 
     var params = qs.stringify({ url: url, site_folder: bundleUrl });
