@@ -37,7 +37,20 @@ exports.command = function(url, callback) {
         url = site.siteUrl;
     }
 
+    // First checks for the URL, otherwise uses the site.siteURL, then makes sure
+    // that there is an http prefix. The preveiw function doesn't need this, but
+    // the browser.get() method does.
     url = url || site.siteUrl;
+    url = url.match(/^http/) ? url : 'http://' + url;
+
+    // If the production flag is set, just runs a `get()` on the URL.
+    if (site.production) {
+        return browser.url(url, function(result){
+            if (typeof callback === 'function') {
+                callback.call(browser, result);
+            }
+        });
+    }
 
     var bundleUrl = site.bundleUrl || 'http://localhost:8080';
 
@@ -53,4 +66,5 @@ exports.command = function(url, callback) {
                 });
             });
         });
+
 };
