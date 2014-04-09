@@ -1,7 +1,8 @@
-var Api = require('../../node_modules/nightwatch/lib/api.js');
 
 module.exports = {
     setUp: function (callback) {
+        this.client = require('../../nightwatch.js').init();
+
         callback();
     },
 
@@ -38,8 +39,7 @@ module.exports = {
             }
         };
 
-        Api.init(client);
-        var m = Api.createAssertion('elementsCount', assertionFn, true, client);
+        var m = Api.createAssertion('elementsCount', assertionFn, true, this.client);
         m._commandFn('.some-parent .with-children', 6);
     },
 
@@ -68,8 +68,7 @@ module.exports = {
             }
         };
 
-        Api.init(client);
-        var m = Api.createAssertion('elementsCount', assertionFn, true, client);
+        var m = Api.createAssertion('elementsCount', assertionFn, true, this.client);
         m._commandFn('.notfound', 0);
     },
 
