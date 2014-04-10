@@ -9,7 +9,7 @@ module.exports = {
 
     testSuccess: function(test) {
         var client = this.client.api;
-        client.waitForPageToBeMobified(100, function callback(result) {
+        client.waitUntilMobified(100, function callback(result) {
             test.equal(true, result);
             test.done();
         });

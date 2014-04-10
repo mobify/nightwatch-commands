@@ -1,6 +1,6 @@
 exports.command = function(milliseconds, callback) {
     if (milliseconds && typeof milliseconds != 'number') {
-      throw new Error('waitForPageToBeMobified expects first parameter to be number; ' +
+      throw new Error('waitUntilMobified expects first parameter to be number; ' +
         typeof (milliseconds) + ' given');
     }
 
