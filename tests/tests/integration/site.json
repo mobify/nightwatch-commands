@@ -1,4 +1,9 @@
 {
-    "siteUrl": "",
-    "bundleUrl": ""
+    "activeProfile": "default",
+    "profiles": {
+        "default": {
+            "bundleUrl": "",
+            "siteUrl": ""
+        }
+    }
 }

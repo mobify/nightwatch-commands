@@ -1,4 +1,3 @@
-var Api = require('../../node_modules/nightwatch/lib/api.js');
 
 module.exports = {
     setUp: function (callback) {
