@@ -43,7 +43,10 @@ exports.command = function(url, callback) {
     // that there is an http prefix. The preveiw function doesn't need this, but
     // the browser.get() method does.
     url = url || site.siteUrl;
-    url = url.match(/^http/) ? url : 'http://' + url;
+    
+    if (!url.match(/^http/)) {
+        throw new Error('Site URL must be correctly formatted');
+    }
 
     // If the production flag is set, just runs a `get()` on the URL.
     if (site.production) {
