@@ -6,7 +6,7 @@ exports.command = function(selector, callback) {
     //
     client
         .click(selector)
-        .waitForPageToBeMobified(8000, function() {
+        .waitUntilMobified(8000, function() {
             if (typeof callback === 'function') {
                 callback.call(client, result);
             }
