@@ -1,4 +1,4 @@
-var Api = require('../../node_modules/nightwatch/lib/api.js');
+var Api = require('../../node_modules/nightwatch/lib/core/api.js');
 
 module.exports = {
     setUp: function (callback) {
