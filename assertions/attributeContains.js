@@ -1,5 +1,5 @@
 /**
- * Checks if the given attribute of an element has the expected value.
+ * Checks if the given attribute of an element contains the expected value.
  *
  * ```
  *    this.demoTest = function (client) {
@@ -18,10 +18,10 @@
 var util = require('util');
 exports.assertion = function(selector, attribute, expected, msg) {
 
-  var MSG_ELEMENT_NOT_FOUND = 'Testing if element <%s> has attribute %s. ' +
+  var MSG_ELEMENT_NOT_FOUND = 'Testing if element <%s> contains attribute %s. ' +
     'Element or attribute could not be located.';
 
-  this.message = msg || util.format('Testing if element <%s> has attribute: %s = "%s".', selector, attribute, expected);
+  this.message = msg || util.format('Testing if element <%s> contains attribute: %s = "%s".', selector, attribute, expected);
 
   this.expected = function() {
     return expected;
