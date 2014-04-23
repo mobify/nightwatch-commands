@@ -3,7 +3,7 @@
  *
  * ```
  *    this.demoTest = function (client) {
- *      browser.assert.attributeContains('body', 'data-attr', 'some value');
+ *      browser.assert.attributeContains('#someElement', 'href', 'google.com');
  *    };
  * ```
  *
@@ -28,7 +28,7 @@ exports.assertion = function(selector, attribute, expected, msg) {
   };
 
   this.pass = function(value) {
-    return value.indexOf(expected) > 0;
+    return value.toLowerCase().indexOf(expected.toLowerCase()) > -1;
   };
 
   this.failure = function(result) {
