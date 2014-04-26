@@ -24,6 +24,20 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.registerTask('test', function () {
+        var callback = this.async();
+
+        grunt.util.spawn({
+                cmd: 'node',
+                args: ['./tests/run_tests.js'],
+                opts: {stdio: 'inherit'}
+            },
+            function() {
+                callback();
+            });
+    });
+
+
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-jscs-checker');
 
