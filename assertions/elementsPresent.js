@@ -34,7 +34,8 @@ Assertion.prototype.command = function(selectors, callback) {
     if (typeof (lastArgument) === 'function') {
         callback = args.pop();
     } else {
-        callback = function() {};
+        callback = function() {
+        };
     }
 
     this.cb = callback;
@@ -73,13 +74,13 @@ Assertion.prototype.checkElements = function() {
         var msg, passed;
 
         if (result === 0) {
-            var foundMsg = found.map(function(el){
-              return '<' + el + '>';
+            var foundMsg = found.map(function(el) {
+                return '<' + el + '>';
             });
             msg = foundMsg.join(', ') + ' located on page.';
             passed = true;
         } else {
-            var missingMsg = missing.map(function(el){
+            var missingMsg = missing.map(function(el) {
                 return '<' + el + '>';
             });
             msg = missingMsg.join(', ') + ' missing from page.';

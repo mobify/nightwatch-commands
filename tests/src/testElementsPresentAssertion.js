@@ -1,10 +1,9 @@
-
 module.exports = {
-    setUp: function (callback) {
+    setUp: function(callback) {
         callback();
     },
 
-    'Elements Present found messaging is correct' : function(test) {
+    'Elements Present found messaging is correct': function(test) {
         var Assertion = require('../../assertions/elementsPresent.js');
 
         var client = {
@@ -13,13 +12,13 @@ module.exports = {
                 element: function(using, selector, callback) {
                     callback({
                         status: 0,
-                        value : {
+                        value: {
                             ELEMENT: 'body'
                         }
                     });
                 }
             },
-            assertion : function(passed, result, expected, msg, abortOnFailure) {
+            assertion: function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, true);
                 test.equals(result, 0);
                 test.equals(expected, 0);
@@ -37,21 +36,21 @@ module.exports = {
         m.command('body');
     },
 
-    'Elements Present not found messaging is correct' : function(test) {
+    'Elements Present not found messaging is correct': function(test) {
         var Assertion = require('../../assertions/elementsPresent.js');
         var client = {
             options: {},
             api: {
-                element : function(using, selector, callback) {
+                element: function(using, selector, callback) {
                     callback({
                         status: -1,
-                        value : {
+                        value: {
                             ELEMENT: ''
                         }
                     });
                 }
             },
-            assertion : function(passed, result, expected, msg, abortOnFailure) {
+            assertion: function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, false);
                 test.equals(result, 1);
                 test.equals(expected, 0);
@@ -70,7 +69,7 @@ module.exports = {
         m.command('.notfound');
     },
 
-    tearDown : function(callback) {
+    tearDown: function(callback) {
         callback();
     }
 };

@@ -13,14 +13,19 @@ module.exports = function(grunt) {
         },
         jscs: {
             options: {
-                config: '.jscsrc'
+                config: '.jscsrc',
+                excludeFiles: [
+                    'tests/nightwatch.js',
+                    'tests/run_tests.js',
+                    'tests/node_modules/**'
+                ]
             },
             src: targets
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks("grunt-jscs-checker");
+    grunt.loadNpmTasks('grunt-jscs-checker');
 
     grunt.registerTask('default', ['jshint:files', 'jscs:src']);
 

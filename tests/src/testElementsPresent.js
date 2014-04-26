@@ -4,13 +4,13 @@
 var MockServer = require('mockserver');
 
 module.exports = {
-    setUp: function (callback) {
+    setUp: function(callback) {
         this.client = require('../nightwatch.js').init();
 
         callback();
     },
 
-    testFindOneElement : function(test) {
+    testFindOneElement: function(test) {
         var client = this.client.api;
         client.verify.elementsPresent('#weblogin', function callback(result) {
             test.equal(0, result);
@@ -18,7 +18,7 @@ module.exports = {
         });
     },
 
-    testFindTwoElements : function(test) {
+    testFindTwoElements: function(test) {
         var client = this.client.api;
         client.verify.elementsPresent('#weblogin', 'body', function callback(result) {
             test.equal(0, result);
@@ -27,7 +27,7 @@ module.exports = {
     },
 
     // Should return false if the element is not founf
-    testMissingElement : function(test) {
+    testMissingElement: function(test) {
         var client = this.client.api;
         client.verify.elementsPresent('#notFound', function callback(result) {
             test.notEqual(0, result);
@@ -36,7 +36,7 @@ module.exports = {
     },
 
     // Should return false if the element is not founf
-    testOneMissingElement : function(test) {
+    testOneMissingElement: function(test) {
         var client = this.client.api;
         client.verify.elementsPresent('#notFound', 'body', function callback(result) {
             test.notEqual(0, result);
@@ -45,7 +45,7 @@ module.exports = {
     },
 
     // Should return false if the element is not founf
-    testTwoMissingElements : function(test) {
+    testTwoMissingElements: function(test) {
         var client = this.client.api;
         client.verify.elementsPresent('#notFound', 'body', '.notFound', function callback(result) {
             test.notEqual(0, result);
@@ -53,7 +53,7 @@ module.exports = {
         });
     },
 
-    tearDown : function(callback) {
+    tearDown: function(callback) {
         this.client = null;
         // clean up
         callback();

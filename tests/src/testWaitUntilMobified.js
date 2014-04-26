@@ -1,7 +1,7 @@
 var MockServer = require('mockserver');
 
 module.exports = {
-    setUp: function (callback) {
+    setUp: function(callback) {
         this.client = require('../nightwatch.js').init();
 
         callback();

@@ -1,18 +1,17 @@
-
 module.exports = {
-    setUp: function (callback) {
+    setUp: function(callback) {
         this.client = require('../nightwatch.js').init();
 
         callback();
     },
 
-    testCommand : function(test) {
+    testCommand: function(test) {
         this.client.api.waitForAnimation(200, function() {
             test.done();
         });
     },
 
-    tearDown : function(callback) {
+    tearDown: function(callback) {
         this.client = null;
 
         callback();

@@ -34,7 +34,7 @@ site = site.profiles[site.activeProfile];
 exports.command = function(url, callback) {
     var browser = this;
 
-    if (typeof url === 'function'){
+    if (typeof url === 'function') {
         callback = url;
         url = site.siteUrl;
     }
@@ -43,14 +43,14 @@ exports.command = function(url, callback) {
     // that there is an http prefix. The preveiw function doesn't need this, but
     // the browser.get() method does.
     url = url || site.siteUrl;
-    
+
     if (!url.match(/^http/)) {
         throw new Error('Site URL must be correctly formatted');
     }
 
     // If the production flag is set, just runs a `get()` on the URL.
     if (site.production) {
-        return browser.url(url, function(result){
+        return browser.url(url, function(result) {
             if (typeof callback === 'function') {
                 callback.call(browser, result);
             }
@@ -59,7 +59,7 @@ exports.command = function(url, callback) {
 
     var bundleUrl = site.bundleUrl || 'http://localhost:8080';
 
-    var params = qs.stringify({ url: url, site_folder: bundleUrl });
+    var params = qs.stringify({ 'url': url, 'site_folder': bundleUrl });
 
     return browser.url('http://preview.mobify.com?' + params)
         .waitForElementPresent('#authorize', 10000, function() {
