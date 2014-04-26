@@ -10,7 +10,6 @@ module.exports = {
         this.client.api.waitForAnimation(200, function() {
             test.done();
         });
-
     },
 
     tearDown : function(callback) {
@@ -18,4 +17,4 @@ module.exports = {
 
         callback();
     }
-}
+};

@@ -21,7 +21,7 @@ module.exports = {
                 test.equals(expected, 'home');
                 test.equals(msg, 'Testing if the page template equals <home>.');
                 test.equals(abortOnFailure, true);
-                delete Assertion;
+                Assertion = null;
                 test.done();
             }
         };
@@ -52,7 +52,7 @@ module.exports = {
                 test.equals(expected, 'home');
                 test.equals(msg, 'Testing if the page template equals <home>.');
                 test.equals(abortOnFailure, true);
-                delete Assertion;
+                Assertion = null;
                 test.done();
             }
         };

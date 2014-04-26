@@ -11,8 +11,11 @@
     "url": "https://github.com/mobify/nightwatch-commands/issues"
   },
   "devDependencies": {
-    "nightwatch": "git+https://github.com/beatfactor/nightwatch.git#master",
-    "nodeunit": "~0.8.4"
+    "nightwatch": "0.4.14",
+    "nodeunit": "~0.8.4",
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-jscs-checker": "^0.4.1"
   },
   "scripts": {
     "test": "node ./tests/run_tests.js"

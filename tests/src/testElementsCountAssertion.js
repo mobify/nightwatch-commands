@@ -33,7 +33,6 @@ module.exports = {
                 test.equals(expected, 6);
                 test.equals(msg, 'Testing if the count for the element <.some-parent .with-children> is 6.');
                 test.equals(abortOnFailure, true);
-                delete Assertion;
                 test.done();
             }
         };
@@ -63,7 +62,6 @@ module.exports = {
                 test.equals(expected(), 0);
                 test.equals(msg, 'Testing if the count for the element <.notfound> is 0. ');
                 test.equals(abortOnFailure, true);
-                delete Assertion;
                 test.done();
             }
         };

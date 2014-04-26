@@ -25,7 +25,7 @@ module.exports = {
                 test.equals(expected, 0);
                 test.equals(msg, '<body> located on page.');
                 test.equals(abortOnFailure, false);
-                delete Assertion;
+                Assertion = null;
                 test.done();
             }
         };
@@ -57,7 +57,7 @@ module.exports = {
                 test.equals(expected, 0);
                 test.equals(msg, '<.notfound> missing from page.');
                 test.equals(abortOnFailure, false);
-                delete Assertion;
+                Assertion = null;
                 test.done();
             }
         };
