@@ -73,16 +73,13 @@ Assertion.prototype.checkElements = function() {
         var msg, passed;
 
         if (result === 0) {
-            var foundMsg = found.map(function(el){
-              return '<' + el + '>';
-            });
-            msg = foundMsg.join(', ') + ' located on page.';
+            msg = util.format('Page contained %s expected element%s.', found.length, found.length > 1 ? 's' : '');
             passed = true;
         } else {
             var missingMsg = missing.map(function(el){
                 return '<' + el + '>';
             });
-            msg = missingMsg.join(', ') + ' missing from page.';
+            msg = util.format('Page missing the following elements: %s.', missingMsg.join(', '));
             passed = false;
         }
 
