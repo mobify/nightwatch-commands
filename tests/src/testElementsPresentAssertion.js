@@ -3,7 +3,7 @@ module.exports = {
         callback();
     },
 
-    'Elements Present found messaging is correct': function(test) {
+    'Elements Present found messaging is correct for one element' : function(test) {
         var Assertion = require('../../assertions/elementsPresent.js');
 
         var client = {
@@ -22,7 +22,7 @@ module.exports = {
                 test.equals(passed, true);
                 test.equals(result, 0);
                 test.equals(expected, 0);
-                test.equals(msg, '<body> located on page.');
+                test.equals(msg, 'Page contained 1 expected element.');
                 test.equals(abortOnFailure, false);
                 Assertion = null;
                 test.done();
@@ -34,6 +34,40 @@ module.exports = {
         m.client = client;
         m.api = client.api;
         m.command('body');
+    },
+
+    'Elements Present found messaging is correct for multiple elements' : function(test) {
+        var Assertion = require('../../assertions/elementsPresent.js');
+
+        var client = {
+            options: {},
+            api: {
+                element: function(using, selector, callback) {
+                    callback({
+                        status: 0,
+                        value : {
+                            ELEMENT: 'body',
+                            ELEMENT: '.element'
+                        }
+                    });
+                }
+            },
+            assertion : function(passed, result, expected, msg, abortOnFailure) {
+                test.equals(passed, true);
+                test.equals(result, 0);
+                test.equals(expected, 0);
+                test.equals(msg, 'Page contained 2 expected elements.');
+                test.equals(abortOnFailure, false);
+                delete Assertion;
+                test.done();
+            }
+        };
+
+        var m = new Assertion();
+        m.abortOnFailure = true;
+        m.client = client;
+        m.api = client.api;
+        m.command('body', '.element');
     },
 
     'Elements Present not found messaging is correct': function(test) {
@@ -54,7 +88,7 @@ module.exports = {
                 test.equals(passed, false);
                 test.equals(result, 1);
                 test.equals(expected, 0);
-                test.equals(msg, '<.notfound> missing from page.');
+                test.equals(msg, 'Page missing the following elements: <.notfound>.');
                 test.equals(abortOnFailure, false);
                 Assertion = null;
                 test.done();

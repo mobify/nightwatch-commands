@@ -50,7 +50,7 @@ exports.command = function(url, callback) {
 
     // If the production flag is set, just runs a `get()` on the URL.
     if (site.production) {
-        return browser.url(url, function(result) {
+        return browser.get(url, function(result) {
             if (typeof callback === 'function') {
                 callback.call(browser, result);
             }
