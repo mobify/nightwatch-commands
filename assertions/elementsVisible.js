@@ -1,9 +1,9 @@
 /**
- * Checks if the given selectors are present and returns a list of missing selectors.
+ * Checks if the given selectors are visible and returns a list of selectors that are not visible on the page.
  *
  * ```
  *    this.demoTest = function (client) {
- *        browser.assert.elementsPresent('#x-root', '#x-head');
+ *        browser.assert.elementsVisible('#x-root', '#x-head');
  *    };
  * ```
  *
