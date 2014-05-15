@@ -14,7 +14,7 @@ util.inherits(CommandAction, events.EventEmitter);
 
 CommandAction.prototype.command = function(condition, milliseconds, timeout, messages, callback) {
 
-    if (milliseconds && typeof milliseconds != 'number') {
+    if (milliseconds && typeof milliseconds !== 'number') {
         throw new Error('waitForCondition expects second parameter to be number; ' + typeof (milliseconds) + ' given');
     }
 

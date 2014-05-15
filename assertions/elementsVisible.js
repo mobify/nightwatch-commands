@@ -76,7 +76,7 @@ Assertion.prototype.checkElements = function() {
             msg = util.format('Page contained %s visible element%s.', found.length, found.length > 1 ? 's' : '');
             passed = true;
         } else {
-            var missingMsg = missing.map(function(el){
+            var missingMsg = missing.map(function(el) {
                 return '<' + el + '>';
             });
             msg = util.format('The following elements were not visible on the page: %s', missingMsg.join(', '));

@@ -3,44 +3,52 @@ module.exports = function(grunt) {
         'Gruntfile.js',
         'assertions/**/*.js',
         'commands/**/*.js',
-        'tests/**/*.js'
+        'tests/src/*.js',
+        '!tests/nightwatch.js',
+        '!tests/run_tests.js',
+        '!tests/node_modules/**'
     ];
+
+    var excludes = [
+
+    ];
+
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-jscs-checker');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            files: targets
+            all: {
+                src: grunt.option('file') || targets,
+                options: {
+                    force: true,
+                    ignores: excludes,
+                    jshintrc: 'node_modules/mobify-code-style/javascript/.jshintrc'
+                }
+            }
         },
         jscs: {
             options: {
-                config: '.jscsrc',
-                excludeFiles: [
-                    'tests/nightwatch.js',
-                    'tests/run_tests.js',
-                    'tests/node_modules/**'
-                ]
+                config: 'node_modules/mobify-code-style/javascript/.jscsrc',
+                excludeFiles: excludes
             },
             src: targets
         }
     });
 
-    grunt.registerTask('test', function () {
+    grunt.registerTask('test', function() {
         var callback = this.async();
 
         grunt.util.spawn({
-                cmd: 'node',
-                args: ['./tests/run_tests.js'],
-                opts: {stdio: 'inherit'}
-            },
-            function() {
-                callback();
-            });
+            cmd: 'node',
+            args: ['./tests/run_tests.js'],
+            opts: {stdio: 'inherit'}
+        },
+        function() {
+            callback();
+        });
     });
 
-
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-jscs-checker');
-
-    grunt.registerTask('default', ['jshint:files', 'jscs:src']);
-
+    grunt.registerTask('lint', ['jshint:all', 'jscs:src']);
 };

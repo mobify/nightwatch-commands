@@ -15,7 +15,8 @@
     "nodeunit": "~0.8.4",
     "grunt": "^0.4.4",
     "grunt-contrib-jshint": "^0.10.0",
-    "grunt-jscs-checker": "^0.4.1"
+    "grunt-jscs-checker": "^0.4.1",
+    "mobify-code-style": "0.0.3"
   },
   "scripts": {
     "test": "node ./tests/run_tests.js"
