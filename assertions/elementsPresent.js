@@ -34,7 +34,8 @@ Assertion.prototype.command = function(selectors, callback) {
     if (typeof (lastArgument) === 'function') {
         callback = args.pop();
     } else {
-        callback = function() {};
+        callback = function() {
+        };
     }
 
     this.cb = callback;
@@ -76,7 +77,7 @@ Assertion.prototype.checkElements = function() {
             msg = util.format('Page contained %s expected element%s.', found.length, found.length > 1 ? 's' : '');
             passed = true;
         } else {
-            var missingMsg = missing.map(function(el){
+            var missingMsg = missing.map(function(el) {
                 return '<' + el + '>';
             });
             msg = util.format('Page missing the following elements: %s.', missingMsg.join(', '));

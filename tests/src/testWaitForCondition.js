@@ -1,13 +1,13 @@
-var MockServer  = require('mockserver');
+var MockServer = require('mockserver');
 
 module.exports = {
-    setUp: function (callback) {
+    setUp: function(callback) {
         this.client = require('../nightwatch.js').init();
 
         callback();
     },
 
-    testSuccess : function(test) {
+    testSuccess: function(test) {
         var client = this.client.api;
         client.waitForCondition('return true;', 100, 0, function callback(result) {
             test.equal(result, true);
@@ -15,7 +15,7 @@ module.exports = {
         });
     },
 
-    testFailure : function(test) {
+    testFailure: function(test) {
         var client = this.client.api;
         client.waitForCondition('return false', 600, 0, function callback(result) {
             test.equal(result, false);
@@ -23,7 +23,7 @@ module.exports = {
         });
     },
 
-    tearDown : function(callback) {
+    tearDown: function(callback) {
         this.client = null;
         // clean up
         callback();

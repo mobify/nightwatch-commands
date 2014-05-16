@@ -5,7 +5,7 @@ exports.command = function(url, callback) {
     var client = this;
 
     return client.url(url)
-        .waitUntilMobified(10000, function(result){
+        .waitUntilMobified(10000, function(result) {
             if (typeof callback === 'function') {
                 callback.call(client, result);
             }

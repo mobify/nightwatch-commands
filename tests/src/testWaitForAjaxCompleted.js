@@ -1,7 +1,7 @@
 var MockServer = require('mockserver');
 
 module.exports = {
-      setUp: function (callback) {
+    setUp: function(callback) {
         this.client = require('../nightwatch.js').init();
 
         callback();
@@ -10,8 +10,8 @@ module.exports = {
     testSuccess: function(test) {
         var client = this.client.api;
         client.waitForAjaxCompleted(function callback(result) {
-          test.equal(0, result);
-          test.done();
+            test.equal(0, result);
+            test.done();
         });
     },
 

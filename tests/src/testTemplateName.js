@@ -1,9 +1,9 @@
 module.exports = {
-    setUp: function (callback) {
+    setUp: function(callback) {
         callback();
     },
 
-    'Mobify template name is correct' : function(test) {
+    'Mobify template name is correct': function(test) {
         var Assertion = require('../../assertions/templateName.js');
         var client = {
             api: {
@@ -15,13 +15,13 @@ module.exports = {
                     });
                 }
             },
-            assertion : function(passed, result, expected, msg, abortOnFailure) {
+            assertion: function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, true);
                 test.equals(result.content.templateName, 'home');
                 test.equals(expected, 'home');
                 test.equals(msg, 'Testing if the page template equals <home>.');
                 test.equals(abortOnFailure, true);
-                delete Assertion;
+                Assertion = null;
                 test.done();
             }
         };
@@ -34,11 +34,11 @@ module.exports = {
         m.command('home');
     },
 
-    'Mobify template name is incorrect' : function(test) {
+    'Mobify template name is incorrect': function(test) {
         var Assertion = require('../../assertions/templateName.js');
         var client = {
             api: {
-                getMobifyEvaluatedData : function(callback) {
+                getMobifyEvaluatedData: function(callback) {
                     callback({
                         content: {
                             templateName: 'main'
@@ -46,13 +46,13 @@ module.exports = {
                     });
                 }
             },
-            assertion : function(passed, result, expected, msg, abortOnFailure) {
+            assertion: function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, false);
                 test.equals(result.content.templateName, 'main');
                 test.equals(expected, 'home');
                 test.equals(msg, 'Testing if the page template equals <home>.');
                 test.equals(abortOnFailure, true);
-                delete Assertion;
+                Assertion = null;
                 test.done();
             }
         };
@@ -65,7 +65,7 @@ module.exports = {
         m.command('home');
     },
 
-    tearDown : function(callback) {
+    tearDown: function(callback) {
         callback();
     }
 };

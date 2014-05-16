@@ -13,7 +13,7 @@ exports.command = function(selector, type, callback) {
         var el = document.querySelector(sel);
         el.dispatchEvent(event);
         return true;
-    }, [selector, type], function(result){
+    }, [selector, type], function(result) {
         if (typeof callback === 'function') {
             callback.call(client, result);
         }

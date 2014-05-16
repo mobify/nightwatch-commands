@@ -1,13 +1,13 @@
 var MockServer = require('mockserver');
 
 module.exports = {
-    setUp: function (callback) {
+    setUp: function(callback) {
         this.client = require('../nightwatch.js').init();
 
         callback();
     },
 
-    testSuccess : function(test) {
+    testSuccess: function(test) {
         var client = this.client.api;
 
         client.get('http://localhost', function callback(result) {
@@ -16,7 +16,7 @@ module.exports = {
         });
     },
 
-    tearDown : function(callback) {
+    tearDown: function(callback) {
         this.client = null;
         // clean up
         callback();
