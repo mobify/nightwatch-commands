@@ -14,14 +14,17 @@
  * @param {function} [callback] Optional callback function to be called when the command finishes.
  * @api commands
  */
- var log = function(message, callback) {
-    message && console.log(message);
+var chalk = require('chalk');
+var infoSymbol = String.fromCharCode('9432');
+
+var log = function(message, callback) {
+    message && console.log(chalk.blue.bold(infoSymbol) + '  ' + message);
 
     if (typeof callback === 'function') {
         callback.call(this);
     }
 
     return this;
- };
+};
 
- exports.command = log;
+exports.command = log;
