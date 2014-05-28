@@ -42,8 +42,9 @@ Assertion.prototype.checkTemplateName = function() {
 
     this.api.getMobifyEvaluatedData(function(result) {
         if (result) {
-            var passed = result.templateName === expected || result.content.templateName === expected;
-            msg = msg || ('Testing if the page template equals <' + expected + '>.');
+            var actual = result.templateName || result.content.templateName;
+            var passed = actual === expected;
+            msg = msg || ('Testing if the actual page template <' + actual + '> equals the expected <' + expected + '>.');
             self.client.assertion(passed, result, expected, msg, self.abortOnFailure);
             self.emit('complete');
         } else {
