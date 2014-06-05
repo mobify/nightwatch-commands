@@ -19,7 +19,7 @@ module.exports = {
                 test.equals(passed, true);
                 test.equals(result.content.templateName, 'home');
                 test.equals(expected, 'home');
-                test.equals(msg, 'Testing if the page template equals <home>.');
+                test.equals(msg, 'Testing if the actual page template <home> equals the expected <home>.');
                 test.equals(abortOnFailure, true);
                 Assertion = null;
                 test.done();
@@ -50,7 +50,7 @@ module.exports = {
                 test.equals(passed, false);
                 test.equals(result.content.templateName, 'main');
                 test.equals(expected, 'home');
-                test.equals(msg, 'Testing if the page template equals <home>.');
+                test.equals(msg, 'Testing if the actual page template <main> equals the expected <home>.');
                 test.equals(abortOnFailure, true);
                 Assertion = null;
                 test.done();
