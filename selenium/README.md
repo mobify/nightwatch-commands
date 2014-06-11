@@ -1,11 +1,11 @@
 Selenium Server
 ================
 
-#Current version number
+###Current version number
 
 2.39.0
 
-#Directions
+###Directions
 
 Please ensure you update the version number in this file when you upgrade selenium server. The server
 is always updated using the same filename, so we aren't required to update our projects.
