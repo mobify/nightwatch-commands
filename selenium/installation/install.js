@@ -12,7 +12,8 @@ async.series([
 
 function setup(cb) {
   async.series([
-    rimraf.bind(null, path.join(__dirname, '.selenium')),
+    rimraf.bind(null, conf.selenium.path),
+    rimraf.bind(null, path.dirname(conf.chromeDr.path)),
     mkdirp.bind(null, path.dirname(conf.selenium.path)),
     mkdirp.bind(null, path.dirname(conf.chromeDr.path))
   ], cb);

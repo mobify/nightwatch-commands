@@ -5,11 +5,11 @@ var version = '2.42.0';
 
 module.exports = {
   selenium: {
-    path: path.join(__dirname, 'selenium', 'selenium-server.jar'),
+    path: path.join(__dirname, '..', 'selenium-server.jar'),
     v: version
   },
   chromeDr: {
-    path: path.join(__dirname, 'selenium', 'drivers', 'chromedriver'),
+    path: path.join(__dirname, '..', 'drivers', 'chromedriver'),
     // see http://chromedriver.storage.googleapis.com/index.html
     v: '2.9'
   }
