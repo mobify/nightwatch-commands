@@ -7,22 +7,22 @@ var path = require('path');
 async.series([
   setup,
   download,
-  chmodChromeDr.bind(null, conf.chromeDr.path)
+  chmodChromeDr.bind(null, conf.chromeDriver.path)
 ], end);
 
 function setup(cb) {
   async.series([
     rimraf.bind(null, conf.selenium.path),
-    rimraf.bind(null, path.dirname(conf.chromeDr.path)),
+    rimraf.bind(null, path.dirname(conf.chromeDriver.path)),
     mkdirp.bind(null, path.dirname(conf.selenium.path)),
-    mkdirp.bind(null, path.dirname(conf.chromeDr.path))
+    mkdirp.bind(null, path.dirname(conf.chromeDriver.path))
   ], cb);
 }
 
 function download(cb) {
   async.parallel([
-    installChromeDr.bind(null, conf.chromeDr.path, conf.chromeDr.v),
-    installSelenium.bind(null, conf.selenium.path, conf.selenium.v)
+    installChromeDr.bind(null, conf.chromeDriver.path, conf.chromeDriver.version),
+    installSelenium.bind(null, conf.selenium.path, conf.selenium.version)
   ], cb)
 }
 
@@ -37,11 +37,11 @@ function installSelenium(to, version, cb) {
   var seleniumStandaloneUrl =
     'http://selenium-release.storage.googleapis.com/%s/selenium-server-standalone-%s.jar';
 
-  var dl = require('util').format(seleniumStandaloneUrl,
+  var url = require('util').format(seleniumStandaloneUrl,
     version.slice(0, version.lastIndexOf('.')),
     version);
 
-  getDownloadStream(dl, function(err, stream) {
+  getDownloadStream(url, function(err, stream) {
     if (err) {
       return cb(err);
     }
