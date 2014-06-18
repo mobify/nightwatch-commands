@@ -4,3 +4,5 @@ node_modules
 *.idea
 npm-debug.log
 *.orig
+/selenium/drivers
+/selenium/selenium-server.jar
