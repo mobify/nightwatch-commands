@@ -19,11 +19,15 @@
     "mobify-code-style": "0.0.3"
   },
   "scripts": {
+    "install": "node selenium/installation/install.js",
     "test": "node ./tests/run_tests.js"
   },
   "homepage": "https://github.com/mobify/nightwatch-commands",
   "dependencies": {
     "async": "^0.2.10",
-    "chalk": "^0.4.0"
+    "chalk": "^0.4.0",
+    "mkdirp": "^0.5.0",
+    "unzip": "^0.1.9",
+    "rimraf": "^2.2.8"
   }
 }
