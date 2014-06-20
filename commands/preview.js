@@ -26,7 +26,7 @@
 
 
 var path = require('path');
-var site = require(path.join(path.resolve('./'), '/tests/integration/site.json'));
+var site = require(path.join(path.resolve('./'), '/tests/system/site.json'));
 var qs = require('querystring');
 
 site = site.profiles[site.activeProfile];
