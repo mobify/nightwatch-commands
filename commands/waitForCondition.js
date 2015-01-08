@@ -7,7 +7,7 @@ function CommandAction() {
     this.cb = null;
     this.ms = null;
     this.selector = null;
-    this.protocol = require('nightwatch/lib/selenium/protocol.js')(this.client);
+    this.protocol = require('nightwatch/lib/api/protocol.js')(this.client);
 }
 
 util.inherits(CommandAction, events.EventEmitter);
