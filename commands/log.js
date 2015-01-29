@@ -18,9 +18,9 @@ var chalk = require('chalk');
 var infoSymbol = String.fromCharCode('9432');
 
 var log = function(message, callback) {
-	var browser = this;
+    var browser = this;
 
-    browser.perform(function(){
+    browser.perform(function() {
         console.log(chalk.blue.bold(infoSymbol) + '  ' + message);
     });
 

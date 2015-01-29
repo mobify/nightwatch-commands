@@ -59,7 +59,7 @@ exports.command = function(url, callback) {
 
     var bundleUrl = site.bundleUrl || 'http://localhost:8080';
 
-    var params = qs.stringify({ 'url': url, 'site_folder': bundleUrl });
+    var params = qs.stringify({'url': url, 'site_folder': bundleUrl});
 
     return browser.url('http://preview.mobify.com?' + params)
         .waitForElementPresent('#authorize', 10000, function() {
