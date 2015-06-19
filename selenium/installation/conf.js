@@ -4,7 +4,7 @@ var path = require('path');
 var seleniumVersion = '2.45.0';
 
 // see http://chromedriver.storage.googleapis.com/index.html
-var chromeDriverVersion = '2.15';
+var chromeDriverVersion = '2.12';
 
 module.exports = {
   selenium: {
