@@ -1,7 +1,6 @@
 
 var fs = require('fs');
 var mkdirp = require('mkdirp');
-// possibly require library to check for proper naming format ('.html', etc)
 
 var mkdirpSync = function(path) {
     try {
@@ -16,10 +15,10 @@ exports.command = function(fileName, callback) {
         throw new Error('htmlCapture expects first parameter to be string; ' + typeof (fileName) + ' given');
     }
 
-    var htmlCheck = /^[0-9a-zA-Z]\.html\b/;
+    var htmlCheck = /^\w+\.html$/;
 
-    if (htmlCheck.test(fileName)){
-        throw new Error('htmlCapture expects first parameter to be camelCased string ending with ".html"');
+    if (!htmlCheck.test(fileName)){
+        throw new Error('htmlCapture expects first parameter to be camelCased alphanumberic string ending with ".html"');
     }
 
     var client = this;
