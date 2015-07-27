@@ -11,19 +11,19 @@ var mkdirpSync = function(path) {
     }
 }
 
-exports.command = function(filename, callback) {
-	if (filename && typeof filename !== 'string') {
+exports.command = function(fileName, callback) {
+    if (fileName && typeof fileName !== 'string') {
         throw new Error('htmlCapture expects first parameter to be string; ' + typeof (fileName) + ' given');
     }
 
-	var client = this;
-	var filePath = "tests/fixtures/";
-	var messages = {
-	        success: 'Wrote HTML fixture to ' + filePath + fileName + ' after ',
-	        failure: 'Failed to write HTML fixture after '
-	    };
+    var client = this;
+    var filePath = "tests/fixtures/";
+    var messages = {
+            success: 'Wrote HTML fixture to ' + filePath + fileName + ' after ',
+            failure: 'Failed to write HTML fixture after '
+        };
 
-	client.source(function (result){
+    client.source(function (result){
         // Source will be stored in result.value. IE:
         // console.log(result.value);
 
@@ -38,4 +38,5 @@ exports.command = function(filename, callback) {
                console.log("Successful Write to " + filePath);
              }
         });
-    })
+    });
+};
