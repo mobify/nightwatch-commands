@@ -16,10 +16,17 @@ exports.command = function(fileName, callback) {
         throw new Error('htmlCapture expects first parameter to be string; ' + typeof (fileName) + ' given');
     }
 
+    var htmlCheck = /^[0-9a-zA-Z]\.html\b/;
+
+    if (htmlCheck.test(fileName)){
+        throw new Error('htmlCapture expects first parameter to be camelCased string ending with ".html"');
+    }
+
     var client = this;
     var filePath = "tests/fixtures/";
+    var fileLocation = filePath + fileName;
     var messages = {
-            success: 'Wrote HTML fixture to ' + filePath + fileName + ' after ',
+            success: 'Wrote HTML fixture to ' + fileLocation + ' after ',
             failure: 'Failed to write HTML fixture after '
         };
 
@@ -31,11 +38,11 @@ exports.command = function(fileName, callback) {
         mkdirpSync(filePath);
 
         // Now save result.value to "../../fixtures/contact.html" in order to update the fixture.
-        fs.writeFile(filePath + fileName, result.value, function(error) {
+        fs.writeFile(fileLocation, result.value, function(error) {
              if (error) {
                console.error("write error:  " + error.message);
              } else {
-               console.log("Successful Write to " + filePath);
+               console.log("Successful Write to " + fileLocation);
              }
         });
     });
