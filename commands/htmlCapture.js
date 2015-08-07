@@ -18,7 +18,7 @@ exports.command = function(fileName, callback) {
     var htmlCheck = /^\w+\.html$/;
 
     if (!htmlCheck.test(fileName)){
-        throw new Error('htmlCapture expects first parameter to be camelCased alphanumberic string ending with ".html"');
+        throw new Error('htmlCapture expects first parameter to be camelCased alphanumeric string ending with ".html"');
     }
 
     var client = this;
