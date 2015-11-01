@@ -61,7 +61,7 @@ exports.command = function(url, callback) {
 
     var params = qs.stringify({'url': url, 'site_folder': bundleUrl});
 
-    return browser.url('http://preview.mobify.com?' + params)
+    return browser.url('https://preview.mobify.com?' + params)
         .waitForElementPresent('#authorize', 10000, function() {
             this.click('#authorize', function() {
                 browser.waitUntilMobified(10000, function(result) {
