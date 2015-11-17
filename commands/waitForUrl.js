@@ -57,15 +57,15 @@ WaitForUrl.prototype.check = function() {
 
     this.protocol.url(function(result) {
         var now = new Date().getTime();
-
-        if (result.status === 0 && result.value !== self.url) {
+        
+        if (result.status === 0 && result.value === self.url) {
             setTimeout(function() {
                 var msg = self.messages.success + (now - self.startTimer) + ' milliseconds.';
                 self.cb.call(self.client.api, result.value);
                 self.client.assertion(true, !!result.value, false, msg, true);
                 return self.emit('complete');
             }, self.timeout);
-        } else if (now - self.startTimer < self.ms && result.value == self.url) {
+        } else if (now - self.startTimer < self.ms) {
             setTimeout(function() {
                 self.check();
             }, 500);
