@@ -66,7 +66,7 @@ exports.command = function(url, callback) {
             });
         }
 
-        var bundleUrl = site.bundleUrl || 'http://localhost:8080';
+        var bundleUrl = site.bundleUrl || 'https://localhost:8443/adaptive.js';
 
         var params = qs.stringify({'url': url, 'site_folder': bundleUrl});
 
