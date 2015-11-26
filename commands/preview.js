@@ -1,10 +1,11 @@
 /**
  * Preview will use preview.mobify.com to open a website and allow you to preview
  * a given bundle. The bundle and base URL will need to be set in the the
- * `tests/system/site.json` file. If this file does not exist, 
- * Additionally, you can pass a URL as an
+ * `tests/system/site.json` file. Additionally, you can pass a URL as an
  * argument when you call preview(). Upon completion, waitUntilMobified
  * is called, to be sure that the adaptation is complete.
+*
+ * If `site.json` does not exist, this command will just go to the specified URL. 
  *
  * ```
  *    this.demoTest = function (client) {
@@ -25,22 +26,22 @@
  * @api assertions
  */
 
-
 var path = require('path');
+
 try {
     var site = require(path.join(path.resolve('./'), '/tests/system/site.json'));
 } catch (e) {
     if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Site.json does not exist, so .preview() is not available.');
+        console.log('Not using optional site.json...');
     }
 }
 var qs = require('querystring');
 
-if (site) { 
-    site = site.profiles[site.activeProfile];
+exports.command = function(url, callback) {
+    var browser = this;
 
-    exports.command = function(url, callback) {
-        var browser = this;
+    if (site) { 
+        site = site.profiles[site.activeProfile];
 
         if (typeof url === 'function') {
             callback = url;
@@ -48,7 +49,7 @@ if (site) {
         }
 
         // First checks for the URL, otherwise uses the site.siteURL, then makes sure
-        // that there is an http prefix. The preveiw function doesn't need this, but
+        // that there is an http prefix. The preview function doesn't need this, but
         // the browser.get() method does.
         url = url || site.siteUrl;
 
@@ -79,5 +80,11 @@ if (site) {
                     });
                 });
             });
-    };
-}
+    } else {
+        return browser.get(url, function(result) {
+            if (typeof callback === 'function') {
+                callback.call(browser, result);
+            }
+        });
+    }
+};
