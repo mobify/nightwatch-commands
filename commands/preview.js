@@ -81,7 +81,7 @@ exports.command = function(url, callback) {
                 });
             });
     } else {
-        return browser.get(url, function(result) {
+        return browser.url(url, function(result) {
             if (typeof callback === 'function') {
                 callback.call(browser, result);
             }
