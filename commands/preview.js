@@ -29,7 +29,7 @@
 var path = require('path');
 
 try {
-    var site = require(path.join(path.resolve('./'), '/tests/system/site.json'));
+    var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.json'));
 } catch (e) {
     if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
         console.log('Not using optional site.json...');
@@ -40,8 +40,8 @@ var qs = require('querystring');
 exports.command = function(url, callback) {
     var browser = this;
 
-    if (site) { 
-        site = site.profiles[site.activeProfile];
+    if (siteConfig) { 
+        var site = siteConfig.profiles[siteConfig.activeProfile];
 
         if (typeof url === 'function') {
             callback = url;
