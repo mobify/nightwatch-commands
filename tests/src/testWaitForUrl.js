@@ -18,7 +18,7 @@ module.exports = {
     testFailure: function(test) {
         var client = this.client.api;
         client.waitForUrl('http://localhost2/', 600, 0, function callback(result) {
-            test.equal(result, 'http://localhost/');
+            test.equal(result, false);
             test.done();
         });
     },
