@@ -44,7 +44,7 @@ exports.command = function(fileName, callback) {
             // If it doesn't exist, create a path to "tests/fixtures/".
             mkdirpSync(filePath);
 
-            // Now save result.value to "../../fixtures/contact.html" in order to update the fixture.
+            // Now save decoded HTML to the specified path in order to update the fixture.
             fs.writeFile(fileLocation, decodedHtml.value, function(error) {
                  if (error) {
                    console.error("write error:  " + error.message);
