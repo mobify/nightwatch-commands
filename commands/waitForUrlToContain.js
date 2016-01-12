@@ -44,7 +44,7 @@ WaitForUrlToContain.prototype.command = function(url, milliseconds, timeout, mes
     this.startTimer = new Date().getTime();
     this.cb = callback || function() {
     };
-    this.ms = milliseconds || 1000;
+    this.ms = milliseconds || 10000;
     this.timeout = timeout;
     this.url = url;
     this.messages = messages;
