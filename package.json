@@ -19,7 +19,7 @@
   },
   "scripts": {
     "install": "node selenium/installation/install.js",
-    "test": "node ./tests/run_tests.js"
+    "test": "grunt lint && node ./tests/run_tests.js"
   },
   "homepage": "https://github.com/mobify/nightwatch-commands",
   "dependencies": {
