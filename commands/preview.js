@@ -5,7 +5,7 @@
  * argument when you call preview(). Upon completion, waitUntilMobified
  * is called, to be sure that the adaptation is complete.
 *
- * If `site.json` does not exist, this command will just go to the specified URL. 
+ * If `site.json` does not exist, this command will just go to the specified URL.
  *
  * ```
  *    this.demoTest = function (client) {
@@ -40,7 +40,7 @@ var qs = require('querystring');
 exports.command = function(url, callback) {
     var browser = this;
 
-    if (siteConfig) { 
+    if (siteConfig) {
         var site = siteConfig.profiles[siteConfig.activeProfile];
 
         if (typeof url === 'function') {

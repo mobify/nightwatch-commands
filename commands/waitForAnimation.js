@@ -16,9 +16,9 @@ var events = require('events');
  * @api commands
  */
 
-function WaitForAnimation() {
+var WaitForAnimation = function() {
     events.EventEmitter.call(this);
-}
+};
 
 util.inherits(WaitForAnimation, events.EventEmitter);
 

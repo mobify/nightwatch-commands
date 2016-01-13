@@ -18,12 +18,12 @@
 var util = require('util'),
     events = require('events');
 
-function Assertion() {
+var Assertion = function() {
     events.EventEmitter.call(this);
     this.cb = null;
     this.abortOnFailure = true;
     this.expected = null;
-}
+};
 
 util.inherits(Assertion, events.EventEmitter);
 
