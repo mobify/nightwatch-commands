@@ -1,0 +1,19 @@
+Pending Release
+    - Update JS linting to current standards (grunt-eslint ^17.0.0 & mobify-code-style ^2.3.6)
+1.4.0
+    - Introduces the command `waitForUrl`
+1.3.2
+    - Fixes a bug introduced in 1.3.1 with the refactoring of the preview command. The bug affected tests that used a key other than before/beforeEach to refer to the set up steps of a test, and in which preview was called more than once.
+1.3.1
+    - Make site.json optional
+1.3.0
+    - Update Selenium and Chrome Drivers (2.48.2 & 2.20)
+1.2.0
+    - htmlCapture command to get/update fixtures
+1.1.1
+    - Downgrade Chromedriver to 2.12
+1.1.0
+    - Bumps Selenium server to 2.45
+    - Bumps Chromedriver to 2.15
+1.0.0
+    - Reformatting and initial v1 release
