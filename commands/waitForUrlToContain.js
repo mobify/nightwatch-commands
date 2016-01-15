@@ -1,14 +1,14 @@
 var util = require('util'),
     events = require('events');
 
-function WaitForUrlToContain() {
+var WaitForUrlToContain = function() {
     events.EventEmitter.call(this);
     this.startTimer = null;
     this.cb = null;
     this.ms = null;
     this.selector = null;
     this.protocol = require('nightwatch/lib/api/protocol.js')(this.client);
-}
+};
 
 util.inherits(WaitForUrlToContain, events.EventEmitter);
 
