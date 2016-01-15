@@ -18,12 +18,12 @@ var async = require('async'),
     util = require('util'),
     events = require('events');
 
-function Assertion() {
+var Assertion = function() {
     events.EventEmitter.call(this);
     this.cb = null;
     this.abortOnFailure = true;
     this.selector = null;
-}
+};
 
 util.inherits(Assertion, events.EventEmitter);
 
@@ -51,7 +51,7 @@ Assertion.prototype.checkElements = function() {
     var found = [];
     var selectors = this.selectors;
 
-    function checkElement(selector, cb) {
+    var checkElement = function(selector, cb) {
         self.api.element.call(self, self.client.locateStrategy, selector, function(result) {
             var value;
 
@@ -67,9 +67,9 @@ Assertion.prototype.checkElements = function() {
 
             cb();
         });
-    }
+    };
 
-    function returnResults(err) {
+    var returnResults = function(err) {
         var result = missing.length;
         var msg, passed;
 
@@ -87,7 +87,7 @@ Assertion.prototype.checkElements = function() {
         self.client.assertion(passed, result, 0, msg, false);
         self.cb(result);
         self.emit('complete');
-    }
+    };
 
     async.each(selectors, checkElement, returnResults);
 };

@@ -1,6 +1,6 @@
 
 module.exports = {
-    setUp: function (callback) {
+    setUp: function(callback) {
         callback();
     },
 
