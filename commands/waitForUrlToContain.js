@@ -14,10 +14,10 @@ util.inherits(WaitForUrlToContain, events.EventEmitter);
 
 /**
  * Waiting for url expected
- * @param  {[type]} url [url expected]
- * @param  {[type]} milliseconds [time for close assert]
- * @param  {[type]} timeout [time verify]
- * @param  {[type]} messages [message output]
+ * @param  {string} url [url expected]
+ * @param  {number} milliseconds [time for close assert]
+ * @param  {number} timeout [time verify]
+ * @param  {Object} messages [message output]
  * @param  {Function} callback [callback]
  * @return {[type]} [client]
  */
