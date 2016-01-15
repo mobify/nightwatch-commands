@@ -1,14 +1,14 @@
 var util = require('util'),
     events = require('events');
 
-function WaitForUrl() {
+var WaitForUrl = function() {
     events.EventEmitter.call(this);
     this.startTimer = null;
     this.cb = null;
     this.ms = null;
     this.selector = null;
     this.protocol = require('nightwatch/lib/api/protocol.js')(this.client);
-}
+};
 
 util.inherits(WaitForUrl, events.EventEmitter);
 
@@ -57,7 +57,7 @@ WaitForUrl.prototype.check = function() {
 
     this.protocol.url(function(result) {
         var now = new Date().getTime();
-        
+
         if (result.status === 0 && result.value === self.url) {
             setTimeout(function() {
                 var msg = self.messages.success + (now - self.startTimer) + ' milliseconds.';
