@@ -1,4 +1,4 @@
-Pending Release:
+Pending Release
     - Follow company practices for tools and gitflow
     - Have CircleCI lint our source code (TODO: tests to be fixed later)
     - Update JS linting to current standards (grunt-eslint ^17.0.0 & mobify-code-style ^2.3.6)
