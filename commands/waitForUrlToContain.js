@@ -14,9 +14,9 @@ util.inherits(WaitForUrlToContain, events.EventEmitter);
 
 /**
  * Waiting for url expected
- * @param  {string} url [url expected]
- * @param  {number} milliseconds [time for close assert]
- * @param  {number} timeout [time verify]
+ * @param  {string} url [url expected to contain]
+ * @param  {number} milliseconds [total time until command times out]
+ * @param  {number} timeout [time to wait before command starts polling the URL]
  * @param  {Object} messages [message output]
  * @param  {Function} callback [callback]
  * @return {[type]} [client]
