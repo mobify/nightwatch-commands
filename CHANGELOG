@@ -2,6 +2,7 @@ Pending Release
     - Follow company practices for tools and gitflow
     - Have CircleCI lint our source code (TODO: tests to be fixed later)
     - Update JS linting to current standards (grunt-eslint ^17.0.0 & mobify-code-style ^2.3.6)
+    - Introduces the command `waitForUrlToContain`
 1.4.0
     - Introduces the command `waitForUrl`
 1.3.2
