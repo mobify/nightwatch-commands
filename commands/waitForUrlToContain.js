@@ -1,7 +1,7 @@
 var util = require('util'),
     events = require('events');
 
-var WaitForUrl = function() {
+var WaitForUrlToContain = function() {
     events.EventEmitter.call(this);
     this.startTimer = null;
     this.cb = null;
@@ -10,18 +10,18 @@ var WaitForUrl = function() {
     this.protocol = require('nightwatch/lib/api/protocol.js')(this.client);
 };
 
-util.inherits(WaitForUrl, events.EventEmitter);
+util.inherits(WaitForUrlToContain, events.EventEmitter);
 
 /**
  * Waiting for url expected
- * @param  {[type]} url [url expected]
- * @param  {[type]} milliseconds [time for close assert]
- * @param  {[type]} timeout [time verify]
- * @param  {[type]} messages [message output]
+ * @param  {string} url [url expected to contain]
+ * @param  {number} milliseconds [total time until command times out]
+ * @param  {number} timeout [time to wait before command starts polling the URL]
+ * @param  {Object} messages [message output]
  * @param  {Function} callback [callback]
  * @return {[type]} [client]
  */
-WaitForUrl.prototype.command = function(url, milliseconds, timeout, messages, callback) {
+WaitForUrlToContain.prototype.command = function(url, milliseconds, timeout, messages, callback) {
 
     if (milliseconds && typeof milliseconds !== 'number') {
         throw new Error('waitForCondition expects second parameter to be number; ' + typeof (milliseconds) + ' given');
@@ -44,7 +44,7 @@ WaitForUrl.prototype.command = function(url, milliseconds, timeout, messages, ca
     this.startTimer = new Date().getTime();
     this.cb = callback || function() {
     };
-    this.ms = milliseconds || 1000;
+    this.ms = milliseconds || 10000;
     this.timeout = timeout;
     this.url = url;
     this.messages = messages;
@@ -52,13 +52,13 @@ WaitForUrl.prototype.command = function(url, milliseconds, timeout, messages, ca
     return this;
 };
 
-WaitForUrl.prototype.check = function() {
+WaitForUrlToContain.prototype.check = function() {
     var self = this;
 
     this.protocol.url(function(result) {
         var now = new Date().getTime();
 
-        if (result.status === 0 && result.value === self.url) {
+        if (result.status === 0 && (result.value.indexOf(self.url) > -1)) {
             setTimeout(function() {
                 var msg = self.messages.success + (now - self.startTimer) + ' milliseconds.';
                 self.cb.call(self.client.api, result.value);
@@ -78,4 +78,4 @@ WaitForUrl.prototype.check = function() {
     });
 };
 
-module.exports = WaitForUrl;
+module.exports = WaitForUrlToContain;

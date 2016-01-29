@@ -1,39 +1,31 @@
 module.exports = function(grunt) {
     var targets = [
-        'Gruntfile.js',
-        'assertions/**/*.js',
-        'commands/**/*.js',
-        'tests/src/*.js',
-        '!tests/nightwatch.js',
-        '!tests/run_tests.js',
-        '!tests/node_modules/**'
+        '*.js',
+        '**/*.js',
+        '!node_modules/**',
+        '!tests/node_modules/**',
+        '!selenium/**'
     ];
 
-    var excludes = [
-
-    ];
-
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-jscs-checker');
+    grunt.loadNpmTasks('grunt-eslint');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        jshint: {
-            all: {
-                src: grunt.option('file') || targets,
+        eslint: {
+            dev: {
+                src: targets,
                 options: {
-                    force: true,
-                    ignores: excludes,
-                    jshintrc: 'node_modules/mobify-code-style/javascript/.jshintrc'
+                    reset: true,
+                    config: require.resolve('mobify-code-style/javascript/.eslintrc')
+                }
+            },
+            prod: {
+                src: targets,
+                options: {
+                    reset: true,
+                    config: require.resolve('mobify-code-style/javascript/.eslintrc-prod')
                 }
             }
-        },
-        jscs: {
-            options: {
-                config: 'node_modules/mobify-code-style/javascript/.jscsrc',
-                excludeFiles: excludes
-            },
-            src: targets
         }
     });
 
@@ -50,5 +42,5 @@ module.exports = function(grunt) {
         });
     });
 
-    grunt.registerTask('lint', ['jshint:all', 'jscs:src']);
+    grunt.registerTask('lint', ['eslint:prod']);
 };

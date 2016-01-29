@@ -59,7 +59,7 @@ module.exports = {
             assertion: function(passed, result, expected, msg, abortOnFailure) {
                 test.equals(passed, false);
                 test.equals(result, null);
-                test.equals(expected(), 0);
+                test.equals(expected, 0);
                 test.equals(msg, 'Testing if the count for the element <.notfound> is 0. ');
                 test.equals(abortOnFailure, true);
                 test.done();
