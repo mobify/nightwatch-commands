@@ -1,10 +1,10 @@
 module.exports = function(grunt) {
     var targets = [
-        'Gruntfile.js',
-        'assertions/**/*.js',
-        'commands/**/*.js',
-        'tests/**/*.js',
-        '!tests/node_modules/**'
+        '*.js',
+        '**/*.js',
+        '!node_modules/**',
+        '!tests/node_modules/**',
+        '!selenium/**'
     ];
 
     grunt.loadNpmTasks('grunt-eslint');
