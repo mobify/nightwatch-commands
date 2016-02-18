@@ -84,7 +84,7 @@ this.demoTest = function (client) {
 
 #### get(url, callback)
 
-The `get` command combines the `url` and `waitUntilMobified` functions. This command uses the `browser.execute` function to run code within the client browser. It then waits for the `Mobify` object to be present on the page
+The `get` command combines the `url` and `waitUntilMobified` functions. This command uses the `browser.execute` function to run code within the client browser. It then waits for the `Mobify`or `Adaptive` object to be present on the page
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
