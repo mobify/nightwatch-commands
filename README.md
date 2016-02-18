@@ -21,7 +21,7 @@ Linting may be run with the `grunt lint` command. Code is also linted automatica
 The `elementsCount` assertion checks if the given selector is present the number of times that is expected for that selector to appear.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 selector | String | The CSS/Xpath selector to locate the element.
 expected | Number | The expected number of times for the attribute to appear.
 message | String | _optional_ The message to output.
@@ -38,7 +38,7 @@ this.demoTest = function (browser) {
 The `elementsPresent` assertion checks if the given selectors are present. It returns a list of the missing selectors.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 selector | String | The CSS/Xpath selector to locate the element.
 message | String | _optional_ The message to output.
 callback | Function | _optional_ A function to call after the current command finishes execution.
@@ -54,7 +54,7 @@ this.demoTest = function (browser) {
 The `elementsVisible` assertion checks if one or more selectors are visible. It returns a list of one or more selectors that are not visible on the page.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 selectors | String | The CSS/Xpath selector to locate the element.
 callback | Function | _optional_ A function to call after the current command finishes execution. 
 
@@ -69,7 +69,7 @@ this.demoTest = function (browser) {
 The `templateName` assertion checks if the given template name is correct.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 expected | String | The expected value of the attribute to check.
 message | String | _optional_ A log message to display in the output. If the parameter is not specified, a default message is displayed.
 callback | Function | _optional_ A function to call after the current command finishes execution. 
@@ -87,7 +87,7 @@ this.demoTest = function (client) {
 The `get` command combines the `url` and `waitUntilMobified` functions. This command uses the `browser.execute` function to run code within the client browser. It then waits for the `Mobify` object to be present on the page
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 url | String | The URL to load
 callback | Function | _optional_ A function to call after the current command finishes execution. 
 
@@ -104,7 +104,7 @@ The `getMobifyEvaluatedData` command uses the `waitForCondition` method to retri
 Input 
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 callback | Function | _optional_ A function to call after the current command finishes execution. 
 
 Output
@@ -124,7 +124,7 @@ this.demoTest = function (browser) {
 The `htmlCapture` command saves desktop HTML to `tests/system/integration/fixtures`, for use in integration tests. This command should be run using an environment with a desktop user agent. 
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 fileName | String | camelCased alphanumeric string ending with ".html", representing the name of the fixture
 callback | Function | _optional_ A function to call after the current command finishes execution. 
 
@@ -139,7 +139,7 @@ this.demoTest = function (browser) {
 The `log` command prints a message to the console. Use this command to add messages to test output.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 message | String | The message to log on the console.
 callback | Function | _optional_ A function to call after the current command finishes execution. 
 
@@ -154,7 +154,7 @@ this.demoTest = function (browser) {
 The `navigate` command initiates a `click` command on the supplied selector link, navigates to the URL, and then it initiates the `waitUntilMobified` function before it continues the chain of tests.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 selector | String | The CSS selector to click on to navigate to the new URL.
 callback | Function | _optional_ A function to call after the current command finishes execution. 
 
@@ -171,7 +171,7 @@ The `preview` command uses http://preview.mobify.com to open a website to previe
 If the project does not have a `tests/system/site.json` file, this command is equivalent to the `url` protocol command. 
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 url | String | _optional_ The URL to preview.
 callback | Function | _optional_ A function to call after the current command finishes execution. 
 
@@ -190,7 +190,7 @@ this.demoTest = function (browser) {
 The `trigger` command simulates a specified event type on the supplied DOM element specified by the selector parameter.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 selector | String | The CSS/Xpath selector to locate the element.
 type | String | The specified event type, for example `click` in the enabled JSON Wire Protocols.
 callback | Function | _optional_ A function to call after the current command finishes execution. 
@@ -206,7 +206,7 @@ this.demoTest = function (browser) {
 The `triggerTouch` command simulates a specified touch type event on the supplied DOM element. Use this command when Selenium's `click` does not register.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 selector | String | The CSS/Xpath selector to locate the element.
 type | String | The specified event type, for example `click` in the enabled JSON Wire Protocols.
 callback | Function | _optional_ A function to call after the current command finishes execution.  
@@ -222,7 +222,7 @@ this.demoTest = function (browser) {
 The `waitForAjaxCompleted` command uses the `waitForCondition` function to execute code within the client browser. The command checks the value of `jQuery.active` to ensure that the number of active connections is 0.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 callback | Function | _optional_ A function to call after the current command finishes execution.  
 
 ```
@@ -236,7 +236,7 @@ this.demoTest = function (browser) {
 The `waitForAnimation` command suspends the test for the given time in milliseconds while it waits for animation to complete.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 milliSeconds | Number | The number of millliseconds to wait. 
 callback | Function | _optional_ A function to call after the current command finishes execution.  
 
@@ -251,7 +251,7 @@ this.demoTest = function (browser) {
 The `waitForCondition` command receives a condition to check for, waits for a maximum time before timing out, and polls at a specified time interval. The condition returns either as a success or a timeout.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 condition | Function | The condition to check against.
 milliSeconds | Number | _optional_ The number of milliseconds to poll before timeout.
 timeout	| Number | _optional_ The number of milliseconds between each poll.
@@ -273,7 +273,7 @@ this.demoTest = function (browser) {
 The `waitForUrl` command waits until the page URL is equal to the specified `url`.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 url | String | Expected URL
 milliseconds | Number | _optional_ The number of milliseconds to poll before timeout.
 timeout	| Number | _optional_ The number of milliseconds between each poll.
@@ -291,7 +291,7 @@ this.demoTest = function (browser) {
 The `waitForUrlToContain` command waits until the page URL contains the specified `url`.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 url | String | A partial URL to match against. 
 milliSeconds | Number | _optional_ The number of milliseconds to poll before timeout.
 timeout	| Number | _optional_ The number of milliseconds between each poll.
@@ -309,7 +309,7 @@ this.demoTest = function (browser) {
 The `waitUntilMobified` command will use the `waitForCondition` command to poll for the Mobify or Adaptive object on the page to ensure that the adaptation is complete. Use this command to browse to a page or if the page reloads.
 
 Parameter Name | Parameter Type | Description
---- | --- | ---
+-------------  | -------------- | -----------
 milliSeconds | Number | _optional_ The number of milliseconds to poll before timeout.
 If not specified, the default timeout is 10,000 milliseconds.
 callback | Function | _optional_ A function to call after the current command finishes execution.  
