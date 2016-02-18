@@ -15,7 +15,6 @@ JavaScript in this tool is linted with [ESLint](http://eslint.org/) according to
 Linting may be run with the `grunt lint` command. Code is also linted automatically on [CircleCI](https://circleci.com/).
 
 ## Assertions
-=============
 
 #### elementsCount(selector, expected, message, callback)
 
@@ -36,7 +35,7 @@ this.demoTest = function (browser) {
 
 #### elementsPresent(selector, message, callback)
 
-The `elementsCount` assertion checks if the given selector is present the number of times that is expected for that selector to appear.
+The `elementsPresent` assertion checks if the given selectors are present. It returns a list of the missing selectors.
 
 Parameter Name | Parameter Type | Description
 --- | --- | ---
