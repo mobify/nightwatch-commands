@@ -121,7 +121,7 @@ this.demoTest = function (browser) {
 
 #### htmlCapture(message, callback)
 
-The `htmlCapture` command saves desktop HTML to `tests/system/integration/fixtures`, for use in integration tests. This command should be run using an environment with a desktop user agent. 
+`htmlCapture` is a helper command that saves HTML to `tests/system/integration/fixtures`. This command was designed to collect and save HTML files for use in integration tests. This command is intended to be run using a Nightwatch environment with a desktop user agent, however, it can still be used to capture any HTML as required.  
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
