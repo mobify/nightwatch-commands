@@ -136,7 +136,7 @@ this.demoTest = function (browser) {
 
 #### log(message, callback)
 
-The `log` command prints a message to the console. Use this command to add messages to test output.
+The `log` command prints a message to the console. Use this command to output messages in a test.
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
