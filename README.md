@@ -102,11 +102,13 @@ this.demoTest = function (browser) {
 The `getMobifyEvaluatedData` command uses the `waitForCondition` method to retrieve the `Mobify.evaluatedData` from the client browser.
 
 Input 
+
 Parameter Name | Parameter Type | Description
 --- | --- | ---
 callback | Function | _optional_ A function to call after the current command finishes execution. 
 
 Output
+
 Parameter Name | Description
 --- | --- | ---
 Object | Returns the client object after `waitUntilMobified` executes on it with the specified parameters.
@@ -195,5 +197,72 @@ callback | Function | _optional_ A function to call after the current command fi
 ```
 this.demoTest = function (browser) {
     browser.triggerTouch('.myLink', click);
+};
+```
+
+#### waitForAjaxCompleted(callback)
+
+The `waitForAjaxCompleted` command uses the `waitForCondition` function to execute code within the client browser. The command checks the value of `jQuery.active` to ensure that the number of active connections is 0.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+callback | Function | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    browser.waitForAjaxCompleted();
+};
+```
+
+#### waitForAnimation(milliSeconds, callback)
+
+The `waitForAnimation` command suspends the test for the given time in milliseconds while it waits for animation to complete.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+milliSeconds | Number | The number of millliseconds to wait. 
+callback | Function | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    browser.waitForAnimation();
+};
+```
+
+#### waitForCondition(condition, milliSeconds, timeout, message, callback)
+
+The `waitForCondition` command receives a condition to check for, waits for a maximum time before timing out, and polls at a specified time interval. The condition returns either as a success or a timeout.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+condition | Function | The condition to check against.
+milliSeconds | Number | _optional_ The number of milliseconds to poll before timeout.
+timeout	| Number | _optional_ The number of milliseconds between each poll.
+message | String | _optional_ The message to output.
+callback | Function | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    return browser.waitForCondition('return $.active;', 8000, function(result) {
+        if (typeof callback === 'function') {
+           callback.call(browser, result);
+        }
+    });
+};
+```
+
+#### waitUntilMobified(milliSeconds, callback)
+
+The `waitUntilMobified` command will use the `waitForCondition` command to poll for the Mobify or Adaptive object on the page to ensure that the adaptation is complete. Use this command to browse to a page or if the page reloads.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+milliSeconds | Number | _optional_ The number of milliseconds to poll before timeout.
+If not specified, the default timeout is 10,000 milliseconds.
+callback | Function | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    browser.waitUntilMobified();
 };
 ```
