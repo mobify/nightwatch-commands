@@ -7,9 +7,9 @@ Reviewers: @ellenmobify @marlowpayne @mobify-derrick
 - (change2)
 
 ## Todos:
-- [] Passed linting check (run `grunt lint`)
-- [] Updated README
-- [] Updated CHANGELOG
+- [ ] Passed linting check (run `grunt lint`)
+- [ ] Updated README
+- [ ] Updated CHANGELOG
 
 ### Feedback:
 _none so far_
