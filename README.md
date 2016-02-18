@@ -119,6 +119,21 @@ this.demoTest = function (browser) {
 };
 ```
 
+#### htmlCapture(message, callback)
+
+The `htmlCapture` command saves desktop HTML to `tests/system/integration/fixtures`, for use in integration tests. This command should be run using an environment with a desktop user agent. 
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+fileName | String | camelCased alphanumeric string ending with ".html", representing the name of the fixture
+callback | Function | _optional_ A function to call after the current command finishes execution. 
+
+```
+this.demoTest = function (browser) {
+    browser.htmlCapture('cart.html');
+};
+```
+
 #### log(message, callback)
 
 The `log` command prints a message to the console. Use this command to add messages to test output.
@@ -248,6 +263,42 @@ this.demoTest = function (browser) {
            callback.call(browser, result);
         }
     });
+};
+```
+
+#### waitForUrl(url, milliseconds, timeout, messages, callback)
+
+The `waitForUrl` command waits until the page URL is equal to the specified `url`.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+url | String | Expected URL
+milliseconds | Number | _optional_ The number of milliseconds to poll before timeout.
+timeout	| Number | _optional_ The number of milliseconds between each poll.
+message | String | _optional_ The message to output.
+callback | Function | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    browser.waitForUrl('http://www.google.ca/');
+};
+```
+
+#### waitForUrlToContain(url, milliseconds, timeout, messages, callback)
+
+The `waitForUrlToContain` command waits until the page URL contains the specified `url`.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+url | String | A partial URL to match against. 
+milliSeconds | Number | _optional_ The number of milliseconds to poll before timeout.
+timeout	| Number | _optional_ The number of milliseconds between each poll.
+message | String | _optional_ The message to output.
+callback | Function | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    browser.waitForUrlToContain('google');
 };
 ```
 
