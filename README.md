@@ -81,4 +81,119 @@ this.demoTest = function (client) {
 ```
 
 ## Commands
-===
+
+#### get(url, callback)
+
+The `get` command combines the `url` and `waitUntilMobified` functions. This command uses the `browser.execute` function to run code within the client browser. It then waits for the `Mobify` object to be present on the page
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+url | String | The URL to load
+callback | Function | _optional_ A function to call after the current command finishes execution. 
+
+```
+this.demoTest = function (browser) {
+    browser.get('http://www.test.com');
+};
+```
+
+#### getMobifyEvaluatedData(callback)
+
+The `getMobifyEvaluatedData` command uses the `waitForCondition` method to retrieve the `Mobify.evaluatedData` from the client browser.
+
+Input 
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+callback | Function | _optional_ A function to call after the current command finishes execution. 
+
+Output
+Parameter Name | Description
+--- | --- | ---
+Object | Returns the client object after `waitUntilMobified` executes on it with the specified parameters.
+
+```
+this.demoTest = function (browser) {
+    browser.getMobifyEvaluatedData();
+};
+```
+
+#### log(message, callback)
+
+The `log` command prints a message to the console. Use this command to add messages to test output.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+message | String | The message to log on the console.
+callback | Function | _optional_ A function to call after the current command finishes execution. 
+
+```
+this.demoTest = function (browser) {
+    browser.log('Testing submitting form');
+};
+```
+
+#### navigate(selector, callback)
+
+The `navigate` command initiates a `click` command on the supplied selector link, navigates to the URL, and then it initiates the `waitUntilMobified` function before it continues the chain of tests.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+selector | String | The CSS selector to click on to navigate to the new URL.
+callback | Function | _optional_ A function to call after the current command finishes execution. 
+
+```
+this.demoTest = function (browser) {
+    browser.navigate('.myLink');
+};
+```
+
+#### preview(url, callback)
+
+The `preview` command uses http://preview.mobify.com to open a website to preview a given bundle. The bundle and the base URL need to be set in the `tests/system/site.json` file. Note that if the "production" flag is set in `site.json`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+url | String | _optional_ The URL to preview.
+callback | Function | _optional_ A function to call after the current command finishes execution. 
+
+```
+this.demoTest = function (browser) {
+    browser.preview();
+};
+
+this.demoTest = function (browser) {
+    browser.preview('http://my-awesome-project.com');
+};
+```
+
+#### trigger(selector, type, callback)
+
+The `trigger` command simulates a specified event type on the supplied DOM element specified by the selector parameter.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+selector | String | The CSS/Xpath selector to locate the element.
+type | String | The specified event type, for example `click` in the enabled JSON Wire Protocols.
+callback | Function | _optional_ A function to call after the current command finishes execution. 
+
+```
+this.demoTest = function (browser) {
+    browser.trigger('.myLink', click);
+};
+```
+
+#### triggerTouch(selector, type, callback)
+
+The `triggerTouch` command simulates a specified touch type event on the supplied DOM element. Use this command when Selenium's `click` does not register.
+
+Parameter Name | Parameter Type | Description
+--- | --- | ---
+selector | String | The CSS/Xpath selector to locate the element.
+type | String | The specified event type, for example `click` in the enabled JSON Wire Protocols.
+callback | Function | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    browser.triggerTouch('.myLink', click);
+};
+```
