@@ -9,9 +9,14 @@ Reviewers: @ellenmobify @marlowpayne @mobify-derrick
 ## Todos:
 - [] Passed linting check (run `grunt lint`)
 - [] Updated README
+- [] Updated CHANGELOG
 
 ### Feedback:
 _none so far_
 
 ## How To Test
-- (note1)
+- Checkout this branch
+- `npm install`
+- `npm link`
+- `grunt lint`
+- (notes)
