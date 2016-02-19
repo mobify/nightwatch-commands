@@ -1,5 +1,6 @@
 1.6.0
     - Update `preview` command to accept an optional `site.js`.
+    - README now contains the latest documentation
 1.5.0
     - Follow company practices for tools and gitflow
     - Have CircleCI lint our source code (TODO: tests to be fixed later)
