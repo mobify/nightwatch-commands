@@ -1,76 +1,79 @@
 {
-  "port" : 10195,
-  "mocks" : [
-    {
-      "url" : "/wd/hub/session",
-      "postdata" : "{\"desiredCapabilities\":{\"browserName\":\"firefox\",\"javascriptEnabled\":true,\"acceptSslCerts\":true,\"platform\":\"ANY\"},\"sessionId\":null}",
-      "response" : "{\"status\": 0, \"sessionId\": \"1352110219202\", \"value\": { \"javascriptEnabled\": true, \"browserName\": \"firefox\"}, \"state\": null}",
-      "responseHeaders" : {
-      },
-      "statusCode" : 200,
-      "method": "POST"
-    },
-    {
+    "port": 10195,
+    "mocks": [{
+        "url": "/wd/hub/session",
+        "postdata": "",
+        "response": "{\"status\": 0, \"sessionId\": \"1352110219202\", \"value\": { \"javascriptEnabled\": true, \"browserName\": \"firefox\", \"version\": \"TEST\", \"platform\": \"TEST\"}, \"state\": null}",
+        "responseHeaders": {},
+        "statusCode": 201,
+        "method": "POST"
+    }, {
       "url" : "/wd/hub/session/1352110219202",
-      "method": "DELETE"
-    },
-    {
+      "postdata" : "",
+      "response" : "{\"status\":0,\"value\":true}"
+    }, {
+      "url" : "/wd/hub/session/1352110219202",
+      "postdata" : "",
+      "response" : "{\"status\":0,\"value\":false}"
+    }, {
+      "url" : "/wd/hub/session/1352110219202",
+      "method": "DELETE",
+      "postdata" : "",
+      "response" : "{\"status\":0,\"value\":false}"
+    }, {
       "url" : "/wd/hub/session/1352110219202/url",
+      "method": "GET",
+      "postdata" : ""
+    }, {
+      "url" : "/wd/hub/session/1352110219202/url",
+      "method": "POST",
       "postdata" : "{\"url\":\"http://localhost\"}"
-    },
-    {
-      "url" : "/wd/hub/test",
-      "response" : "{\"status\":0}"
-    },
-    {
-      "url" : "/wd/hub/test_error",
-      "response" : "{\"status\":7,\"value\":{\"screen\":\"screenshot_data\"}}",
-      "statusCode" : 500
-    },
-    {
-      "url" : "/wd/hub/session/1352110219202/element",
-      "postdata" : "{\"using\":\"css selector\",\"value\":\"body\"}",
-      "response" : "{\"sessionId\":\"1352110219202\",\"status\":0,\"value\":{\"ELEMENT\":\"0\"},\"class\":\"org.openqa.selenium.remote.Response\",\"hCode\":604376696}"
-    },
-    {
-      "url" : "/wd/hub/session/1352110219202/element",
-      "postdata" : "{\"using\":\"css selector\",\"value\":\"#weblogin\"}",
-      "response" : "{\"sessionId\":\"1352110219202\",\"status\":0,\"value\":{\"ELEMENT\":\"0\"},\"class\":\"org.openqa.selenium.remote.Response\",\"hCode\":604376696}"
-    },
-    {
-      "url" : "/wd/hub/session/1352110219202/buttondown",
-      "postdata" : "{\"button\":0}",
-      "response" : "{\"sessionId\":\"1352110219202\",\"status\":0,\"class\":\"org.openqa.selenium.remote.Response\",\"hCode\":604376696}"
-    },
-    {
+    }, {
+      "url" : "/wd/hub/session/null/url",
+      "method": "GET",
+      "postdata" : ""
+    }, {
       "url" : "/wd/hub/session/1352110219202/execute",
       "postdata" : "{\"script\":\"return true;\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":true}"
-    },
-    {
+    }, {
+      "url" : "/wd/hub/session/1352110219202/execute",
+      "postdata" : "{\"script\":\"return false\",\"args\":[]}",
+      "response" : "{\"status\":0,\"value\":false}"
+    }, {
       "url" : "/wd/hub/session/1352110219202/execute",
       "postdata" : "{\"script\":\"return Mobify.evaluatedData;\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":true}"
-    },
-    {
-      "url" : "/wd/hub/session/1352110219202/execute",
-      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function (sel, t) {        var event = new MouseEvent(t || 'click', {            'view': window,            'bubbles': true,            'cancelable': true        });        var el = document.querySelector(sel);        el.dispatchEvent(event);        return true;    }.apply(window, passedArgs);\",\"args\":[\".clickMe\",null]}",
+    }, {
+      "url" : "/wd/hub/session/null/execute",
+      "method": "POST",
+      "postdata": "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () {\\n        var framework = Mobify || Adaptive;\\n        return !!framework;\\n    }.apply(window, passedArgs);\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":true}"
-    },
-    {
+    }, {
       "url" : "/wd/hub/session/1352110219202/execute",
-      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function (sel, t) {        var event = new MouseEvent(t || 'click', {            'view': window,            'bubbles': true,            'cancelable': true        });        var el = document.querySelector(sel);        el.dispatchEvent(event);        return true;    }.apply(window, passedArgs);\",\"args\":[\".clickMe\",\"click\"]}",
+      "method": "POST",
+      "postdata": "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () {\\n        var framework = Mobify || Adaptive;\\n        return !!framework;\\n    }.apply(window, passedArgs);\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":true}"
-    },
-    {
+    }, {
       "url" : "/wd/hub/session/1352110219202/execute",
+      "method": "POST",
       "postdata": "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function (){        var framework = Mobify || Adaptive;        return !!framework;    }.apply(window, passedArgs);\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":true}"
-    },
-    {
+    }, {
+      "url" : "/wd/hub/session/1352110219202/execute",
+      "postdata": "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function () {\\n        var framework = Mobify || Adaptive;\\n        return framework ? framework.evaluatedData : null;\\n    }.apply(window, passedArgs);\",\"args\":[]}",
+      "response" : "{\"status\":0,\"value\":true}"
+    }, {
+      "url" : "/wd/hub/session/1352110219202/execute",
+      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function (sel, t) {\\n        var event = new MouseEvent(t || 'click', {\\n            'view': window,\\n            'bubbles': true,\\n            'cancelable': true\\n        });\\n        var el = document.querySelector(sel);\\n        el.dispatchEvent(event);\\n        return true;\\n    }.apply(window, passedArgs);\",\"args\":[\".clickMe\",\"click\"]}",
+      "response" : "{\"status\":0,\"value\":true}"
+    }, {
+      "url" : "/wd/hub/session/1352110219202/execute",
+      "postdata" : "{\"script\":\"var passedArgs = Array.prototype.slice.call(arguments,0); return function (sel, t) {\\n        var event = new MouseEvent(t || 'click', {\\n            'view': window,\\n            'bubbles': true,\\n            'cancelable': true\\n        });\\n        var el = document.querySelector(sel);\\n        el.dispatchEvent(event);\\n        return true;\\n    }.apply(window, passedArgs);\",\"args\":[\".clickMe\",null]}",
+      "response" : "{\"status\":0,\"value\":true}"
+    }, {
       "url" : "/wd/hub/session/1352110219202/execute",
       "postdata" : "{\"script\":\"return $.active;\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":0}"
-    }
-  ]
+    }]
 }
