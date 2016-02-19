@@ -166,9 +166,59 @@ this.demoTest = function (browser) {
 
 #### preview(url, callback)
 
-The `preview` command uses http://preview.mobify.com to open a website to preview a given bundle. The bundle and the base URL need to be set in the `tests/system/site.json` file. Note that if the "production" flag is set in `site.json`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
+The `preview` command uses http://preview.mobify.com to open a website to preview a given bundle. The bundle and the base URL need to be set in the `tests/system/site.json` or `tests/system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
 
-If the project does not have a `tests/system/site.json` file, this command is equivalent to the `url` protocol command. 
+Example site.json
+```
+{
+    "activeProfile": "production",
+    "profiles": {
+        "default": {
+            "bundleUrl": "http://localhost:8080/adaptive.js",
+            "siteUrl": "http://www.merlinspotions.com/"
+        },
+        "production": {
+            "bundleUrl": "",
+            "siteUrl": "http://www.merlinspotions.com/",
+            "production": true
+        }
+    }
+}
+```
+
+Example site.js
+```
+var Site = {
+    /*
+     activeProfile defines which environment to run tests against.
+     By default, builds on master branch run against production, without preview.
+     Builds on any other branch should use preview with local adaptive.js.
+
+     Change activeProfile whenever you need to override the default behaviour.
+    */
+    activeProfile: process.env.ACTIVE_PROFILE || 'default',
+
+    /*
+     Define new profiles as needed for different URLs, eg. staging, prod.
+    */
+    profiles: {
+        default: {
+            bundleUrl: 'http://localhost:8080/adaptive.js',
+            siteUrl: 'http://www.merlinspotions.com/'
+        },
+        production: {
+            bundleUrl: '',
+            siteUrl: 'http://www.merlinspotions.com',
+            production: true
+        }
+    }
+};
+
+module.exports = Site;
+
+```
+
+If the project does not have a `site.json` or `site.js` file, this command is equivalent to the `url` protocol command. 
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
