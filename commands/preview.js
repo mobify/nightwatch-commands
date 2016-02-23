@@ -32,9 +32,18 @@ try {
     var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.json'));
 } catch (e) {
     if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Not using optional site.json...');
+        console.log('Not using optional site.json. Looking for site.js...');
     }
 }
+
+try {
+    var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.js'));
+} catch (e) {
+    if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
+        console.log('Not using optional site.js.');
+    }
+}
+
 var qs = require('querystring');
 
 exports.command = function(url, callback) {
