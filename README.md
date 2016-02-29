@@ -14,6 +14,16 @@ JavaScript in this tool is linted with [ESLint](http://eslint.org/) according to
 
 Linting may be run with the `grunt lint` command. Code is also linted automatically on [CircleCI](https://circleci.com/).
 
+### Use
+In order for your project to be able to access these commands and assertions you need to include them in your projects nightwatch.js `settings.json` file.
+
+It should look something like this:
+
+```
+"custom_commands_path": "./node_modules/nightwatch-commands/commands",
+"custom_assertions_path": "./node_modules/nightwatch-commands/assertions"
+```
+
 ## Assertions
 
 #### elementsCount(selector, expected, message, callback)
@@ -25,7 +35,7 @@ Parameter Name | Parameter Type | Description
 selector       | String         | The CSS/Xpath selector to locate the element.
 expected       | Number         | The expected number of times for the attribute to appear.
 message        | String         | _optional_ The message to output.
-callback       | Function       | _optional_ A function to call after the current command finishes execution. 
+callback       | Function       | _optional_ A function to call after the current command finishes execution.
 
 ```
 this.demoTest = function (browser) {
@@ -41,7 +51,7 @@ Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
 selector       | String         | The CSS/Xpath selector to locate the element.
 message        | String         | _optional_ The message to output.
-callback       | Function       | _optional_ A function to call after the current command finishes execution. 
+callback       | Function       | _optional_ A function to call after the current command finishes execution.
 
 ```
 this.demoTest = function (browser) {
@@ -101,7 +111,7 @@ this.demoTest = function (browser) {
 
 The `getMobifyEvaluatedData` command uses the `waitForCondition` method to retrieve the `Mobify.evaluatedData` from the client browser.
 
-Input 
+Input
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
@@ -110,7 +120,7 @@ callback       | Function       | _optional_ A function to call after the curren
 Output
 
 Parameter Name | Description
--------------- | ----------- 
+-------------- | -----------
 Object         | Returns the client object after `waitUntilMobified` executes on it with the specified parameters.
 
 ```
@@ -218,7 +228,7 @@ module.exports = Site;
 
 ```
 
-If the project does not have a `site.json` or `site.js` file, this command is equivalent to the `url` protocol command. 
+If the project does not have a `site.json` or `site.js` file, this command is equivalent to the `url` protocol command.
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
@@ -287,7 +297,7 @@ The `waitForAnimation` command suspends the test for the given time in milliseco
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
-milliSeconds   | Number         | The number of millliseconds to wait. 
+milliSeconds   | Number         | The number of millliseconds to wait.
 callback       | Function       | _optional_ A function to call after the current command finishes execution.   
 
 ```
@@ -342,7 +352,7 @@ The `waitForUrlToContain` command waits until the page URL contains the specifie
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
-url            | String         | A partial URL to match against. 
+url            | String         | A partial URL to match against.
 milliSeconds   | Number         | _optional_ The number of milliseconds to poll before timeout.
 timeout        | Number         | _optional_ The number of milliseconds between each poll.
 message        | String         | _optional_ The message to output.
