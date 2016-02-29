@@ -1,6 +1,7 @@
 1.6.1
     - Update seleniumVersion to 2.52.0
     - Update chromeDriver version to 2.21
+    - Update README to include use section
 1.6.0
     - Update `preview` command to accept an optional `site.js`.
     - README now contains the latest documentation
