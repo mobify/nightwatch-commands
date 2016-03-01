@@ -29,6 +29,11 @@
       "method": "POST",
       "postdata" : "{\"url\":\"http://localhost\"}"
     }, {
+      "url" : "/wd/hub/session/1352110219202/url",
+      "method": "GET",
+      "postdata" : "",
+      "response" : "{\"value\":\"http://localhost/\",\"status\":0}"
+    }, {
       "url" : "/wd/hub/session/null/url",
       "method": "GET",
       "postdata" : ""
