@@ -40,7 +40,15 @@ try {
     var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.js'));
 } catch (e) {
     if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Not using optional site.js.');
+        console.log('Not using optional /tests/system/site.js.');
+    }
+}
+
+try {
+    var siteConfig = require(path.join(path.resolve('./'), '/system/site.js'));
+} catch (e) {
+    if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
+        console.log('Not using optional /system/site.js.');
     }
 }
 
