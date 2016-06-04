@@ -80,5 +80,10 @@
       "url" : "/wd/hub/session/1352110219202/execute",
       "postdata" : "{\"script\":\"return $.active;\",\"args\":[]}",
       "response" : "{\"status\":0,\"value\":0}"
+    }, {
+      "url" : "/wd/hub/session/1352110219202/contexts",
+      "method": "GET",
+      "postdata" : "",
+      "response" : "{\"status\":0,\"value\":[\"NATIVE\", \"WEBVIEW_1\", \"WEBVIEW_2\"]}"
     }]
 }
