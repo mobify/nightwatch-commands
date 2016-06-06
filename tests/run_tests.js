@@ -24,8 +24,14 @@ process.chdir(__dirname);
 try {
     var server = require('mockserver').init();
     server.on('listening', function() {
-        reporter.run(['src'], options, function() {
-            server.close();
+        reporter.run(['src'], options, function(err) {
+            setTimeout(function() {
+                server.close();
+            }, 100);
+
+            if (err) {
+                process.exit(1);
+            }
         });
     });
     //reporter.run(['src/commands'], options);
