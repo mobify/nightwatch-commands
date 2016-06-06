@@ -395,7 +395,7 @@ callback              | Function       | _optional_ A function to call after the
 ```
 this.demoTest = function (browser) {
     return browser.waitForContextsReady(5, 8000, function(result) {
-        // At this point, it is save to switch the context to either the NATIVE
+        // At this point, it is safe to switch the context to either the NATIVE
         // context or any of the WEBVIEW_* contexts.
     });
 };
