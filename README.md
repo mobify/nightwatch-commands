@@ -379,3 +379,24 @@ this.demoTest = function (browser) {
     browser.waitUntilMobified();
 };
 ```
+
+#### waitForContextsReady(expectedContextsCount, milliSeconds, timeout, message, callback)
+
+The `waitForContextsReady` command receives a number of expected contexts to check for, waits for a maximum time before timing out, and polls at a specified time interval. The condition returns either as a success or a timeout.
+
+Parameter Name        | Parameter Type | Description
+--------------------- | -------------- | -----------
+expectedContextsCount | Function       | The number of contexts to check for.
+milliSeconds          | Number         | _optional_ The number of milliseconds to poll before timeout.
+timeout	              | Number         | _optional_ The number of milliseconds between each poll.
+message               | String         | _optional_ The message to output.
+callback              | Function       | _optional_ A function to call after the current command finishes execution.   
+
+```
+this.demoTest = function (browser) {
+    return browser.waitForContextsReady(5, 8000, function(result) {
+        // At this point, it is safe to switch the context to either the NATIVE
+        // context or any of the WEBVIEW_* contexts.
+    });
+};
+```
