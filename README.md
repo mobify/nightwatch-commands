@@ -176,7 +176,7 @@ this.demoTest = function (browser) {
 
 #### preview(url, callback)
 
-The `preview` command uses http://preview.mobify.com to open a website to preview a given bundle. The bundle and the base URL need to be set in the `tests/system/site.json` or `tests/system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
+The `preview` command uses http://preview.mobify.com to open a website to preview a given bundle. The bundle and the base URL need to be set in the `tests/system/site.json`, `tests/system/site.js` or `system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
 
 Example site.json
 ```

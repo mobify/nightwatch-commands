@@ -1,3 +1,5 @@
+1.6.2
+    - Update `preview` command to accept `site.js` files under `/system/site.js`
 1.6.1
     - Update seleniumVersion to 2.52.0
     - Update chromeDriver version to 2.21
