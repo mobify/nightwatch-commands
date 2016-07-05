@@ -342,11 +342,7 @@ callback                | Function       | _optional_ A function to call after t
 
 ```
 this.demoTest = function (browser) {
-    return browser.waitForContextsReady(3, 8000, function(result) {
-        if (typeof callback === 'function') {
-           callback.call(browser, result);
-        }
-    });
+    browser.waitForContextsReady(3, 8000);
 };
 ```
 
