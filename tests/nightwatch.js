@@ -20,7 +20,9 @@ module.exports = {
 
         if (options) {
             for (var prop in options) {
-                opts[prop] = options[prop];
+                if (options.hasOwnProperty(prop)) {
+                    opts[prop] = options[prop];
+                }
             }
         }
 

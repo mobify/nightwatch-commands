@@ -4,8 +4,7 @@ module.exports = function(grunt) {
         '**/*.js',
         '!node_modules/**',
         '!tests/node_modules/**',
-        '!selenium/**',
-        '!tests/nightwatch.js'
+        '!selenium/**'
     ];
 
     grunt.loadNpmTasks('grunt-eslint');
