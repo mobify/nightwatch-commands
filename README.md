@@ -257,7 +257,7 @@ callback       | Function       | _optional_ A function to call after the curren
 
 ```
 this.demoTest = function (browser) {
-    browser.trigger('.myLink', click);
+    browser.trigger('.myLink', 'click');
 };
 ```
 
@@ -273,7 +273,7 @@ callback       | Function       | _optional_ A function to call after the curren
 
 ```
 this.demoTest = function (browser) {
-    browser.triggerTouch('.myLink', click);
+    browser.triggerTouch('.myLink', 'click');
 };
 ```
 
