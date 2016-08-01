@@ -1,3 +1,7 @@
+1.7.0
+    - Introduces 'waitForContextsReady' command.
+1.6.3
+    - Fixes a bug in `waitForAjaxCompleted` in cases where `$` is not bound to jQuery.
 1.6.2
     - Update `preview` command to accept `site.js` files under `/system/site.js`
 1.6.1

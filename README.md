@@ -328,6 +328,26 @@ this.demoTest = function (browser) {
 };
 ```
 
+#### waitForContextsReady(expectedContextsCount, milliseconds, timeout, messages, callback)
+
+The `waitForContextsReady` command receives a number of expected contexts to check for, waits for a maximum time before timing out, and polls at a specified time interval. Used with Appium when testing hybrid mobile web apps. See http://nightwatchjs.org/api/contexts.html
+
+Parameter Name          | Parameter Type | Description
+-------------           | -------------- | -----------
+expectedContextsCount   | Number         | The condition to check against.
+milliSeconds            | Number         | _optional_ The number of milliseconds to poll before timeout.
+timeout                 | Number         | _optional_ The number of milliseconds between each poll.
+message                 | String         | _optional_ The message to output.
+callback                | Function       | _optional_ A function to call after the current command finishes execution.   
+
+```
+this.demoTest = function (browser) {
+    browser.waitForContextsReady(3, 8000);
+    // At this point, it is safe to switch the context to either the NATIVE
+    // context or any of the WEBVIEW_* contexts.
+};
+```
+
 #### waitForUrl(url, milliseconds, timeout, messages, callback)
 
 The `waitForUrl` command waits until the page URL is equal to the specified `url`.

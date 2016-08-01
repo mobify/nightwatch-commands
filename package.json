@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-commands",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "A set of Mobify specific custom commands for Nightwatch.js",
   "repository": {
     "type": "git",
@@ -11,15 +11,16 @@
     "url": "https://github.com/mobify/nightwatch-commands/issues"
   },
   "devDependencies": {
-    "nightwatch": "0.8.6",
+    "nightwatch": "0.9.1",
     "nodeunit": "~0.8.4",
     "grunt": "0.4.5",
+    "grunt-cli": "~0.1.13",
     "grunt-eslint": "^17.0.0",
     "mobify-code-style": "^2.3.6"
   },
   "scripts": {
     "install": "node selenium/installation/install.js",
-    "test": "grunt lint"
+    "test": "./node_modules/.bin/grunt lint; ./node_modules/.bin/grunt test"
   },
   "homepage": "https://github.com/mobify/nightwatch-commands",
   "dependencies": {
