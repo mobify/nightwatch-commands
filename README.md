@@ -9,6 +9,8 @@ A set of Mobify specific custom commands for Nightwatch.js
 To begin, clone this repository. `cd` into your chosen folder, and run the following:
     `npm install`
 
+Selenium server and Chromedriver will also be downloaded into `/selenium`. 
+
 ### Linting
 JavaScript in this tool is linted with [ESLint](http://eslint.org/) according to our code [syntax and style standards](https://github.com/mobify/mobify-code-style) here at Mobify.
 
