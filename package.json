@@ -19,16 +19,12 @@
     "mobify-code-style": "^2.3.6"
   },
   "scripts": {
-    "install": "node selenium/installation/install.js",
+    "install": "node selenium/install.js",
     "test": "./node_modules/.bin/grunt lint; ./node_modules/.bin/grunt test"
   },
   "homepage": "https://github.com/mobify/nightwatch-commands",
   "dependencies": {
     "mkdirp": "^0.5.1",
-    "async": "^0.2.10",
-    "chalk": "^0.4.0",
-    "mkdirp": "^0.5.0",
-    "unzip": "^0.1.9",
-    "rimraf": "^2.2.8"
+    "selenium-download": "2.0.6"
   }
 }
