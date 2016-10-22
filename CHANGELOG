@@ -1,4 +1,4 @@
-1.8.0
+2.0.0
     - Use [selenium-download](https://github.com/groupon/selenium-download) to manage downloading of Selenium server and Chromedriver. This requires node 4+ and Chrome 54 or higher.
 1.7.0
     - Introduces 'waitForContextsReady' command.

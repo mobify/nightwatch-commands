@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-commands",
-  "version": "1.8.0",
+  "version": "2.0.0",
   "description": "A set of Mobify specific custom commands for Nightwatch.js",
   "repository": {
     "type": "git",
