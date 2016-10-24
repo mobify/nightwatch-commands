@@ -9,6 +9,8 @@ A set of Mobify specific custom commands for Nightwatch.js
 To begin, clone this repository. `cd` into your chosen folder, and run the following:
     `npm install`
 
+Selenium server and Chromedriver will also be downloaded into `/selenium`. 
+
 ### Linting
 JavaScript in this tool is linted with [ESLint](http://eslint.org/) according to our code [syntax and style standards](https://github.com/mobify/mobify-code-style) here at Mobify.
 
@@ -257,7 +259,7 @@ callback       | Function       | _optional_ A function to call after the curren
 
 ```
 this.demoTest = function (browser) {
-    browser.trigger('.myLink', click);
+    browser.trigger('.myLink', 'click');
 };
 ```
 
@@ -273,7 +275,7 @@ callback       | Function       | _optional_ A function to call after the curren
 
 ```
 this.demoTest = function (browser) {
-    browser.triggerTouch('.myLink', click);
+    browser.triggerTouch('.myLink', 'click');
 };
 ```
 
