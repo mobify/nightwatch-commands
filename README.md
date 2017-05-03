@@ -11,6 +11,8 @@ To begin, clone this repository. `cd` into your chosen folder, and run the follo
 
 Selenium server and Chromedriver will also be downloaded into `/selenium`. 
 
+Currently Using https://www.npmjs.com/package/selenium-download version: 2.0.10
+
 ### Linting
 JavaScript in this tool is linted with [ESLint](http://eslint.org/) according to our code [syntax and style standards](https://github.com/mobify/mobify-code-style) here at Mobify.
 
