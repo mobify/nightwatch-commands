@@ -1,3 +1,7 @@
+2.0.1
+    -Update [selenium-download](https://github.com/groupon/selenium-download) to 2.0.10
+        - selenium chromedriver 2.29
+        - selenium standalone server 3.4.0
 2.0.0
     - Use [selenium-download](https://github.com/groupon/selenium-download) to manage downloading of Selenium server and Chromedriver. 
     - BREAKING CHANGES
