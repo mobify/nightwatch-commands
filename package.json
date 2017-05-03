@@ -27,6 +27,6 @@
     "async": "0.2.10",
     "chalk": "0.4.0",
     "mkdirp": "0.5.1",
-    "selenium-download": "2.0.6"
+    "selenium-download": "2.0.10"
   }
 }
