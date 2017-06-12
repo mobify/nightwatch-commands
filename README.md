@@ -165,9 +165,9 @@ this.demoTest = function (browser) {
 };
 ```
 
-#### navigate(selector, callback)
+#### clickAndWaitUntilMobified(selector, callback)
 
-The `navigate` command initiates a `click` command on the supplied selector link, navigates to the URL, and then it initiates the `waitUntilMobified` function before it continues the chain of tests.
+The `clickAndWaitUntilMobified` command initiates a `click` command on the supplied selector link, navigates to the URL, and then it initiates the `waitUntilMobified` function before it continues the chain of tests.
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
@@ -176,7 +176,7 @@ callback       | Function       | _optional_ A function to call after the curren
 
 ```
 this.demoTest = function (browser) {
-    browser.navigate('.myLink');
+    browser.clickAndWaitUntilMobified('.myLink');
 };
 ```
 
@@ -264,6 +264,21 @@ callback       | Function       | _optional_ A function to call after the curren
 ```
 this.demoTest = function (browser) {
     browser.trigger('.myLink', 'click');
+};
+```
+
+#### triggerClick(selector, callback)
+
+The `triggerClick` command uses Javascript's click function on a given selector. Use this when the regular Selenium `.click` does not work. 
+
+Parameter Name | Parameter Type | Description
+-------------  | -------------- | -----------
+selector       | String         | The CSS/Xpath selector to locate the element.
+callback       | Function       | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    browser.triggerClick('.myLink');
 };
 ```
 
