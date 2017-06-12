@@ -1,6 +1,7 @@
 2.1.0
     - Adds a `triggerClick` command that uses JavaScript's click.
-    - Renames `navigate` to `clickAndWaitUntilMobified` to avoid colliding with a core Nightwatch command with the same name.
+    - Renames `navigate` to `clickAndWaitUntilMobified` to avoid colliding with a core Nightwatch command with the same name. Resolves https://github.com/mobify/nightwatch-commands/issues/74
+    - Warnings related to a missing `site.json` should no longer be output if not using the `.preview()` command. Resolves https://github.com/mobify/nightwatch-commands/issues/73
 2.0.1
     -Update [selenium-download](https://github.com/groupon/selenium-download) to 2.0.10
         - selenium chromedriver 2.29

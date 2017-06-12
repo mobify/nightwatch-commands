@@ -27,35 +27,34 @@
  */
 
 var path = require('path');
-
-try {
-    var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.json'));
-} catch (e) {
-    if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Not using optional site.json. Looking for site.js...');
-    }
-}
-
-try {
-    var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.js'));
-} catch (e) {
-    if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Not using optional /tests/system/site.js.');
-    }
-}
-
-try {
-    var siteConfig = require(path.join(path.resolve('./'), '/system/site.js'));
-} catch (e) {
-    if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Not using optional /system/site.js.');
-    }
-}
-
 var qs = require('querystring');
 
 exports.command = function(url, callback) {
     var browser = this;
+
+    try {
+        var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.json'));
+    } catch (e) {
+        if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
+            console.log('Not using optional site.json. Looking for site.js...');
+        }
+    }
+
+    try {
+        var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.js'));
+    } catch (e) {
+        if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
+            console.log('Not using optional /tests/system/site.js.');
+        }
+    }
+
+    try {
+        var siteConfig = require(path.join(path.resolve('./'), '/system/site.js'));
+    } catch (e) {
+        if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
+            console.log('Not using optional /system/site.js.');
+        }
+    }
 
     if (siteConfig) {
         var site = siteConfig.profiles[siteConfig.activeProfile];
