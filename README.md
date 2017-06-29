@@ -180,9 +180,11 @@ this.demoTest = function (browser) {
 };
 ```
 
-#### preview(url, callback)
+#### preview(url, bundle, isProduction, callback)
 
-The `preview` command uses http://preview.mobify.com to open a website to preview a given bundle. The bundle and the base URL need to be set in the `tests/system/site.json`, `tests/system/site.js` or `system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
+The `preview` command uses http://preview.mobify.com to open a website specified by `url` to preview a given bundle specified by `bundle`. If `isProduction` is true, the test skips the Preview step. 
+
+For legacy projects, the bundle and the base URL need to be set in the `tests/system/site.json`, `tests/system/site.js` or `system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
 
 Example site.json
 ```
@@ -238,10 +240,17 @@ If the project does not have a `site.json` or `site.js` file, this command is eq
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
-url            | String         | _optional_ The URL to preview.
+url            | String         | _optional_ The URL to preview, equivalent to the Site URL field. 
+bundle         | String         | _optional_ The bundle URL, equivalent to the Bundle Location field.
+isProduction   | boolean        | _optional_ true if the test should bypass Preview step and test with the published bundle, false if the test should use the specified bundle. Default is `false`.
 callback       | Function       | _optional_ A function to call after the current command finishes execution.  
 
 ```
+this.demoTest = function (client) {
+    browser.preview('https://www.merlinspotions.com', 'https://localhost:8443/loader.js', false);
+};
+
+// For legacy projects
 this.demoTest = function (browser) {
     browser.preview();
 };
