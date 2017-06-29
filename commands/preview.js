@@ -1,7 +1,8 @@
 /**
  * Preview will use preview.mobify.com to open a website and allow you to preview
- * a given bundle. The site URL and bundle URL should be passed in along with a 
- * production flag. Legacy projects use a `tests/system/site.js` file to set the site URL * and bundle URL. Upon completion, waitUntilMobified is called, to be sure that the 
+ * a given bundle. The site URL and bundle URL should be passed in along with a
+ * production flag. Legacy projects use a `tests/system/site.js` file to set the site URL
+ * and bundle URL. Upon completion, waitUntilMobified is called, to be sure that the
  * adaptation is complete.
 *
  * Usage:
@@ -10,7 +11,7 @@
  *      browser.preview('https://www.merlinspotions.com', 'https://localhost:8443/loader.js', false);
  *    };
  * ```
- * 
+ *
  * With a site.js file (deprecated):
  *
  * ```
@@ -18,7 +19,7 @@
  *      browser.preview();
  *    };
  * ```
- * Or with a site.js file and a URL (deprecated): 
+ * Or with a site.js file and a URL (deprecated):
  * ```
  *    this.demoTest = function (client) {
  *      browser.preview('http://my-awesome-project.com');
@@ -65,7 +66,7 @@ var readSiteConfig = function() {
     if (siteConfig) {
         site = siteConfig.profiles[siteConfig.activeProfile];
     } else {
-        throw new Error('Usage: browser.preview(url, bundle, isProduction, callback), or create a tests/system/site.js file')
+        throw new Error('Usage: browser.preview(url, bundle, isProduction, callback), or create a tests/system/site.js file');
     }
 
 };
@@ -82,9 +83,10 @@ exports.command = function(url, bundle, isProduction, callback) {
         }
         readSiteConfig();
     } else {
-        site = new Object();
-        site.siteUrl = url;
-        site.bundleUrl = bundle;
+        site = {
+            siteUrl: url,
+            bundleUrl: bundle
+        };
         if (typeof isProduction === 'function') {
             callback = isProduction;
             isProduction = '';
