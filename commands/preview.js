@@ -64,6 +64,8 @@ var readSiteConfig = function() {
 
     if (siteConfig) {
         site = siteConfig.profiles[siteConfig.activeProfile];
+    } else {
+        throw new Error('Usage: browser.preview(url, bundle, isProduction, callback), or create a tests/system/site.js file')
     }
 
 };
