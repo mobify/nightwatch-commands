@@ -184,7 +184,7 @@ this.demoTest = function (browser) {
 
 The `preview` command uses http://preview.mobify.com to open a website specified by `url` to preview a given bundle specified by `bundle`. If `isProduction` is true, the test skips the Preview step. 
 
-For legacy projects, the bundle and the base URL need to be set in the `tests/system/site.json`, `tests/system/site.js` or `system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
+For legacy projects, the bundle and the site URL need to be set in the `tests/system/site.json`, `tests/system/site.js` or `system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
 
 Example site.json
 ```
@@ -250,11 +250,12 @@ this.demoTest = function (client) {
     browser.preview('https://www.merlinspotions.com', 'https://localhost:8443/loader.js', false);
 };
 
-// For legacy projects
+// For legacy projects with a site.js file
 this.demoTest = function (browser) {
     browser.preview();
 };
 
+// For legacy projects with a site.js file
 this.demoTest = function (browser) {
     browser.preview('http://my-awesome-project.com');
 };
