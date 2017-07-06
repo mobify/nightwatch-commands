@@ -180,84 +180,19 @@ this.demoTest = function (browser) {
 };
 ```
 
-#### preview(url, bundle, isProduction, callback)
+#### preview(url, bundle, callback)
 
-The `preview` command uses http://preview.mobify.com to open a website specified by `url` to preview a given bundle specified by `bundle`. If `isProduction` is true, the test skips the Preview step. 
-
-For legacy projects, the bundle and the site URL need to be set in the `tests/system/site.json`, `tests/system/site.js` or `system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
-
-Example site.json
-```
-{
-    "activeProfile": "production",
-    "profiles": {
-        "default": {
-            "bundleUrl": "http://localhost:8080/adaptive.js",
-            "siteUrl": "http://www.merlinspotions.com/"
-        },
-        "production": {
-            "bundleUrl": "",
-            "siteUrl": "http://www.merlinspotions.com/",
-            "production": true
-        }
-    }
-}
-```
-
-Example site.js
-```
-var Site = {
-    /*
-     activeProfile defines which environment to run tests against.
-     By default, builds on master branch run against production, without preview.
-     Builds on any other branch should use preview with local adaptive.js.
-
-     Change activeProfile whenever you need to override the default behaviour.
-    */
-    activeProfile: process.env.ACTIVE_PROFILE || 'default',
-
-    /*
-     Define new profiles as needed for different URLs, eg. staging, prod.
-    */
-    profiles: {
-        default: {
-            bundleUrl: 'http://localhost:8080/adaptive.js',
-            siteUrl: 'http://www.merlinspotions.com/'
-        },
-        production: {
-            bundleUrl: '',
-            siteUrl: 'http://www.merlinspotions.com',
-            production: true
-        }
-    }
-};
-
-module.exports = Site;
-
-```
-
-If the project does not have a `site.json` or `site.js` file, this command is equivalent to the `url` protocol command.
+The `preview` command uses http://preview.mobify.com to open a website specified by `url` to preview a given bundle specified by `bundle`. 
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
-url            | String         | _optional_ The URL to preview, equivalent to the Site URL field. 
-bundle         | String         | _optional_ The bundle URL, equivalent to the Bundle Location field.
-isProduction   | boolean        | _optional_ true if the test should bypass Preview step and test with the published bundle, false if the test should use the specified bundle. Default is `false`.
+url            | String         | The URL to preview, equivalent to the Site URL field. 
+bundle         | String         | The bundle URL, equivalent to the Bundle Location field.
 callback       | Function       | _optional_ A function to call after the current command finishes execution.  
 
 ```
 this.demoTest = function (client) {
-    browser.preview('https://www.merlinspotions.com', 'https://localhost:8443/loader.js', false);
-};
-
-// For legacy projects with a site.js file
-this.demoTest = function (browser) {
-    browser.preview();
-};
-
-// For legacy projects with a site.js file
-this.demoTest = function (browser) {
-    browser.preview('http://my-awesome-project.com');
+    browser.preview('https://www.merlinspotions.com', 'https://localhost:8443/loader.js', );
 };
 ```
 
