@@ -22,7 +22,7 @@ var qs = require('querystring');
 exports.command = function(url, bundle, callback) {
     var browser = this;
 
-    if (arguments.length < 2) { 
+    if (arguments.length < 2) {
         throw new Error('Usage: browser.preview(url, bundle, callback)');
     }
 
