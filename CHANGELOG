@@ -1,3 +1,5 @@
+3.0.0
+    - A **breaking change** to the `.preview()` command to make it more explicit. `.preview(url, bundle, callback)` essentially replaces the role of `site.js`.
 2.1.0
     - Adds a `triggerClick` command that uses JavaScript's click.
     - Renames `navigate` to `clickAndWaitUntilMobified` to avoid colliding with a core Nightwatch command with the same name. Resolves https://github.com/mobify/nightwatch-commands/issues/74
