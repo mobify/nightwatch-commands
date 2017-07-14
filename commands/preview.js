@@ -28,7 +28,7 @@ exports.command = function(url, bundle, callback) {
 
     if (typeof bundle === 'function') {
         callback = bundle;
-        bundle = '';
+        bundle = null;
     }
 
     var bundleUrl = bundle || 'https://localhost:8443/loader.js';

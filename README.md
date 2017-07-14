@@ -187,7 +187,7 @@ The `preview` command uses http://preview.mobify.com to open a website specified
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
 url            | String         | The URL to preview, equivalent to the Site URL field. 
-bundle         | String         | The bundle URL, equivalent to the Bundle Location field.
+bundle         | String         | _optional_ The bundle URL, equivalent to the Bundle Location field. Default is `https://localhost:8443/loader.js`
 callback       | Function       | _optional_ A function to call after the current command finishes execution.  
 
 ```
