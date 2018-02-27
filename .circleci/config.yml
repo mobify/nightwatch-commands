@@ -1,0 +1,28 @@
+version: 2
+executorType: docker
+containerInfo:
+  - image: node:8.9.4
+
+jobs:
+  build:
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+
+  unit-test:
+    steps:
+      - run:
+          name: Run unit tests
+          command: npm test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - unit-test:
+          requires:
+              - build
+
