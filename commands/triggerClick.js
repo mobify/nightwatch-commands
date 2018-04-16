@@ -1,13 +1,13 @@
 exports.command = function(selector, callback) {
-    var client = this;
+    const client = this
     /*
     / Use Javascript's click when Selenium's does not register.
     */
-    client.execute('document.querySelector("' + selector + '").click();', function(result) {
+    client.execute(`document.querySelector("${selector}").click();`, (result) => {
         if (typeof callback === 'function') {
-            callback.call(client, result);
+            callback.call(client, result)
         }
-    });
+    })
 
-    return this;
-};
+    return this
+}
