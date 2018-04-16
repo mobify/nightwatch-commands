@@ -11,6 +11,10 @@
     "url": "https://github.com/mobify/nightwatch-commands/issues"
   },
   "devDependencies": {
+    "eslint": "3.19.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "6.10.3",
     "nightwatch": "0.9.8",
     "nodeunit": "0.8.4",
     "grunt": "0.4.5",
@@ -20,7 +24,9 @@
   },
   "scripts": {
     "install": "node selenium/install.js",
-    "test": "./node_modules/.bin/grunt lint; ./node_modules/.bin/grunt test"
+    "test": "./node_modules/.bin/grunt lint; ./node_modules/.bin/grunt test",
+    "lint": "npm run lint:js",
+    "lint:js": "eslint '**/*.{js,jsx}'"
   },
   "homepage": "https://github.com/mobify/nightwatch-commands",
   "dependencies": {
