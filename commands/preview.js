@@ -31,9 +31,7 @@ exports.command = function(url, bundle = 'https://localhost:8443/loader.js', cal
         bundle = null
     }
 
-    const bundleUrl = bundle || 'https://localhost:8443/loader.js'
-
-    const params = qs.stringify({url, site_folder: bundleUrl})
+    const params = qs.stringify({url, site_folder: bundle})
 
     return browser
         .url(`https://preview.mobify.com?${params}`)
