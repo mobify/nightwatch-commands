@@ -165,9 +165,9 @@ this.demoTest = function (browser) {
 };
 ```
 
-#### navigate(selector, callback)
+#### clickAndWaitUntilMobified(selector, callback)
 
-The `navigate` command initiates a `click` command on the supplied selector link, navigates to the URL, and then it initiates the `waitUntilMobified` function before it continues the chain of tests.
+The `clickAndWaitUntilMobified` command initiates a `click` command on the supplied selector link, navigates to the URL, and then it initiates the `waitUntilMobified` function before it continues the chain of tests.
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
@@ -176,78 +176,23 @@ callback       | Function       | _optional_ A function to call after the curren
 
 ```
 this.demoTest = function (browser) {
-    browser.navigate('.myLink');
+    browser.clickAndWaitUntilMobified('.myLink');
 };
 ```
 
-#### preview(url, callback)
+#### preview(url, bundle, callback)
 
-The `preview` command uses http://preview.mobify.com to open a website to preview a given bundle. The bundle and the base URL need to be set in the `tests/system/site.json`, `tests/system/site.js` or `system/site.js` file. Note that if the "production" flag is set in the `activeProfile` in `site.json` or `site.js`, the bundle URL will be ignored. Pass in an optional URL as an argument to this command. Upon completion, `waitUntilMobified` is called to ensure that the mobile site adaptation is complete.
-
-Example site.json
-```
-{
-    "activeProfile": "production",
-    "profiles": {
-        "default": {
-            "bundleUrl": "http://localhost:8080/adaptive.js",
-            "siteUrl": "http://www.merlinspotions.com/"
-        },
-        "production": {
-            "bundleUrl": "",
-            "siteUrl": "http://www.merlinspotions.com/",
-            "production": true
-        }
-    }
-}
-```
-
-Example site.js
-```
-var Site = {
-    /*
-     activeProfile defines which environment to run tests against.
-     By default, builds on master branch run against production, without preview.
-     Builds on any other branch should use preview with local adaptive.js.
-
-     Change activeProfile whenever you need to override the default behaviour.
-    */
-    activeProfile: process.env.ACTIVE_PROFILE || 'default',
-
-    /*
-     Define new profiles as needed for different URLs, eg. staging, prod.
-    */
-    profiles: {
-        default: {
-            bundleUrl: 'http://localhost:8080/adaptive.js',
-            siteUrl: 'http://www.merlinspotions.com/'
-        },
-        production: {
-            bundleUrl: '',
-            siteUrl: 'http://www.merlinspotions.com',
-            production: true
-        }
-    }
-};
-
-module.exports = Site;
-
-```
-
-If the project does not have a `site.json` or `site.js` file, this command is equivalent to the `url` protocol command.
+The `preview` command uses http://preview.mobify.com to open a website specified by `url` to preview a given bundle specified by `bundle`. 
 
 Parameter Name | Parameter Type | Description
 -------------  | -------------- | -----------
-url            | String         | _optional_ The URL to preview.
+url            | String         | The URL to preview, equivalent to the Site URL field. 
+bundle         | String         | _optional_ The bundle URL, equivalent to the Bundle Location field. Default is `https://localhost:8443/loader.js`
 callback       | Function       | _optional_ A function to call after the current command finishes execution.  
 
 ```
-this.demoTest = function (browser) {
-    browser.preview();
-};
-
-this.demoTest = function (browser) {
-    browser.preview('http://my-awesome-project.com');
+this.demoTest = function (client) {
+    browser.preview('https://www.merlinspotions.com', 'https://localhost:8443/loader.js', );
 };
 ```
 
@@ -264,6 +209,21 @@ callback       | Function       | _optional_ A function to call after the curren
 ```
 this.demoTest = function (browser) {
     browser.trigger('.myLink', 'click');
+};
+```
+
+#### triggerClick(selector, callback)
+
+The `triggerClick` command uses Javascript's click function on a given selector. Use this when the regular Selenium `.click` does not work. 
+
+Parameter Name | Parameter Type | Description
+-------------  | -------------- | -----------
+selector       | String         | The CSS/Xpath selector to locate the element.
+callback       | Function       | _optional_ A function to call after the current command finishes execution.  
+
+```
+this.demoTest = function (browser) {
+    browser.triggerClick('.myLink');
 };
 ```
 

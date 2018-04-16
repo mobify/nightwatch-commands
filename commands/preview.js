@@ -1,107 +1,48 @@
 /**
  * Preview will use preview.mobify.com to open a website and allow you to preview
- * a given bundle. The bundle and base URL will need to be set in the the
- * `tests/system/site.json` file. Additionally, you can pass a URL as an
- * argument when you call preview(). Upon completion, waitUntilMobified
- * is called, to be sure that the adaptation is complete.
+ * a given bundle. The site URL and bundle URL should be passed in. Upon completion, waitUntilMobified is called, to be sure that the
+ * adaptation is complete.
 *
- * If `site.json` does not exist, this command will just go to the specified URL.
- *
+ * Usage:
  * ```
  *    this.demoTest = function (client) {
- *      browser.preview();
- *    };
- * ```
- * or with a URL
- *
- * ```
- *    this.demoTest = function (client) {
- *      browser.preview('http://my-awesome-project.com');
+ *      browser.preview('https://www.merlinspotions.com', 'https://localhost:8443/loader.js');
  *    };
  * ```
  *
- * @method attributeEquals
- * @param {string} [URL] (optional) The URL to be previewed.
- * @param {function} callback The function to be called on completion.
- * @api assertions
+ * @method preview
+ * @param {string} [url] Corresponds to the Site URL field on https://preview.mobify.com
+ * @param {string} [bundle] Corresponds to the Bundle Location field on https://preview.mobify.com
+ * @param {function} [callback] Optional callback function to be called when the command finishes.
+ * @api commands
  */
-
-var path = require('path');
-
-try {
-    var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.json'));
-} catch (e) {
-    if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Not using optional site.json. Looking for site.js...');
-    }
-}
-
-try {
-    var siteConfig = require(path.join(path.resolve('./'), '/tests/system/site.js'));
-} catch (e) {
-    if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Not using optional /tests/system/site.js.');
-    }
-}
-
-try {
-    var siteConfig = require(path.join(path.resolve('./'), '/system/site.js'));
-} catch (e) {
-    if (e instanceof Error && e.code === 'MODULE_NOT_FOUND') {
-        console.log('Not using optional /system/site.js.');
-    }
-}
 
 var qs = require('querystring');
 
-exports.command = function(url, callback) {
+exports.command = function(url, bundle, callback) {
     var browser = this;
 
-    if (siteConfig) {
-        var site = siteConfig.profiles[siteConfig.activeProfile];
+    if (arguments.length < 2) {
+        throw new Error('Usage: browser.preview(url, bundle, callback)');
+    }
 
-        if (typeof url === 'function') {
-            callback = url;
-            url = site.siteUrl;
-        }
+    if (typeof bundle === 'function') {
+        callback = bundle;
+        bundle = null;
+    }
 
-        // First checks for the URL, otherwise uses the site.siteURL, then makes sure
-        // that there is an http prefix. The preview function doesn't need this, but
-        // the browser.get() method does.
-        url = url || site.siteUrl;
+    var bundleUrl = bundle || 'https://localhost:8443/loader.js';
 
-        if (!url.match(/^http/)) {
-            throw new Error('Site URL must be correctly formatted');
-        }
+    var params = qs.stringify({'url': url, 'site_folder': bundleUrl});
 
-        // If the production flag is set, just runs a `get()` on the URL.
-        if (site.production) {
-            return browser.get(url, function(result) {
-                if (typeof callback === 'function') {
-                    callback.call(browser, result);
-                }
-            });
-        }
-
-        var bundleUrl = site.bundleUrl || 'https://localhost:8443/adaptive.js';
-
-        var params = qs.stringify({'url': url, 'site_folder': bundleUrl});
-
-        return browser.url('https://preview.mobify.com?' + params)
-            .waitForElementPresent('#authorize', 10000, function() {
-                this.click('#authorize', function() {
-                    browser.waitUntilMobified(10000, function(result) {
-                        if (typeof callback === 'function') {
-                            callback.call(browser, result);
-                        }
-                    });
+    return browser.url('https://preview.mobify.com?' + params)
+        .waitForElementPresent('#authorize', 10000, function() {
+            this.click('#authorize', function() {
+                browser.waitUntilMobified(10000, function(result) {
+                    if (typeof callback === 'function') {
+                        callback.call(browser, result);
+                    }
                 });
             });
-    } else {
-        return browser.url(url, function(result) {
-            if (typeof callback === 'function') {
-                callback.call(browser, result);
-            }
         });
-    }
 };
