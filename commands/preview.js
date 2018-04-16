@@ -17,32 +17,33 @@
  * @api commands
  */
 
-var qs = require('querystring');
+import qs from 'querystring'
 
-exports.command = function(url, bundle, callback) {
-    var browser = this;
+exports.command = function(url, bundle = 'https://localhost:8443/loader.js', callback) {
+    const browser = this
 
     if (arguments.length < 2) {
-        throw new Error('Usage: browser.preview(url, bundle, callback)');
+        throw new Error('Usage: browser.preview(url, bundle, callback)')
     }
 
     if (typeof bundle === 'function') {
-        callback = bundle;
-        bundle = null;
+        callback = bundle
+        bundle = null
     }
 
-    var bundleUrl = bundle || 'https://localhost:8443/loader.js';
+    const bundleUrl = bundle || 'https://localhost:8443/loader.js'
 
-    var params = qs.stringify({'url': url, 'site_folder': bundleUrl});
+    const params = qs.stringify({url, site_folder: bundleUrl})
 
-    return browser.url('https://preview.mobify.com?' + params)
+    return browser
+        .url(`https://preview.mobify.com?${params}`)
         .waitForElementPresent('#authorize', 10000, function() {
-            this.click('#authorize', function() {
-                browser.waitUntilMobified(10000, function(result) {
+            this.click('#authorize', () => {
+                browser.waitUntilMobified(10000, (result) => {
                     if (typeof callback === 'function') {
-                        callback.call(browser, result);
+                        callback.call(browser, result)
                     }
-                });
-            });
-        });
-};
+                })
+            })
+        })
+}
