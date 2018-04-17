@@ -19,7 +19,7 @@
 
 import qs from 'querystring'
 
-exports.command = function(url, bundle = 'https://localhost:8443/loader.js', callback) {
+export const command = function(url, bundle = 'https://localhost:8443/loader.js', callback) {
     const browser = this
 
     if (arguments.length < 2) {

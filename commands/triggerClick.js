@@ -1,4 +1,4 @@
-exports.command = function(selector, callback) {
+export const command = function(selector, callback) {
     const client = this
     /*
     / Use Javascript's click when Selenium's does not register.
